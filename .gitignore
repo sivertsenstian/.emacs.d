@@ -1,0 +1,8 @@
+.cache/
+auto-save-list/
+straight/
+*.cache
+*.eld
+*.el~
+recentf
+recentf~
