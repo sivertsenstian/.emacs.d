@@ -6,6 +6,7 @@
  :init
  (global-evil-leader-mode)
  :config
+ (setq evil-leader/in-all-states t)
  (evil-leader/set-leader "<SPC>"))
 
 (use-package evil

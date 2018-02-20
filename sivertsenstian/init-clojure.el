@@ -4,15 +4,17 @@
 ;;----------------------------------------------------------------------------
 (use-package clojure-mode
  :straight t
+  :mode "\\.clj$"
+  :mode ("\\.cljs$" . clojurescript-mode)
  :config
- (map!
-  (:leader
-   (:desc "major" :prefix "m"
-    (:desc "eval" :prefix "e"
-      :desc "eval sexp"     :nv "e" #'cider-eval-last-sexp
-      :desc "eval func"     :nv "f" #'cider-eval-defun-at-point
-      :desc "macroexpand"   :nv "m" #'cider-macroexpand-1)
-     :desc "cider jack-in" :nv "'"  #'cider-jack-in ))))
+ (map! :map clojure-mode-map
+  (:localleader
+     :nv "e" #'cider-eval-last-sexp
+     :nv "f" #'cider-eval-defun-at-point
+     :n  "j" #'cider-find-var
+     :n  "d" #'cider-doc
+     :nv "m" #'cider-macroexpand-1)
+     :nv "'"  #'cider-jack-in))
 
 (use-package cider
  :after clojure-mode
@@ -24,13 +26,11 @@
  (rainbow-delimiters-mode))
 
 (use-package paredit
- :after clojure-mode
  :straight t
  :config
  (autoload 'enable-paredit-mode "paredit"))
 
 (use-package smartparens
-:after clojure-mode
 :straight t
 :config
 (smartparens-global-strict-mode)

@@ -10,6 +10,7 @@
 (set-frame-font "Source Code Pro" nil t)
 (electric-indent-mode +1)
 (fringe-mode '(8 . 2))
+(display-time-mode)
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -70,7 +71,8 @@
 (use-package smart-mode-line
 :straight t
 :config
-(setq sml/no-confirm-load-theme t)
+(setq sml/no-confirm-load-theme t
+      sml/shorten-modes t)
 (sml/setup))
 
 ;; export

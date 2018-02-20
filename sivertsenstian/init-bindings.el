@@ -50,8 +50,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key evil-insert-state-map (kbd "Ø") (simulate-key-press "{"))
 (define-key evil-insert-state-map (kbd "Æ") (simulate-key-press "}"))
 
-(define-key evil-motion-state-map (kbd ",") (simulate-key-press "SPC m"))
-(define-key evil-insert-state-map (kbd ",") (simulate-key-press "SPC m"))
 ;; KEYBINDINGS
 (map! [remap evil-jump-to-tag] #'projectile-find-tag
       [remap find-tag]         #'projectile-find-tag
