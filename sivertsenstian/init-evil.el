@@ -24,6 +24,27 @@
   :config
   (global-evil-surround-mode 1))
 
+(use-package evil-exchange
+  :after evil
+  :straight t)
+
+(use-package evil-commentary
+  :after evil
+  :straight t
+  :config
+  (evil-commentary-mode))
+
+(use-package evil-snipe
+  :after evil
+  :straight t
+  :config
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1))
+
+(use-package evil-indent-plus
+  :after evil
+  :straight t)
+
 (use-package evil-escape
   :after evil
   :straight t

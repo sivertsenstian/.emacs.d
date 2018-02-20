@@ -9,7 +9,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Source Code Pro" nil t)
 (electric-indent-mode +1)
-(fringe-mode 4)
+(fringe-mode '(8 . 2))
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -42,6 +42,9 @@
  (global-hl-todo-mode t))
 
 (use-package all-the-icons
+ :straight t)
+
+(use-package nav-flash
  :straight t)
 
 (use-package neotree

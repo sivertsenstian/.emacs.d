@@ -22,10 +22,5 @@
  :after browse-kill-ring
  :straight t)
 
-(use-package icicles
- :straight t
- :config
- (icy-mode 1))
-
 ;; export
 (provide 'init-syntax)

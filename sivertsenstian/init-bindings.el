@@ -21,6 +21,25 @@ KEY must be given in `kbd' notation."
      (setq prefix-arg current-prefix-arg)
      (setq unread-command-events (listify-key-sequence (read-kbd-macro ,key)))))
 
+  ;; esc quits
+  (defun minibuffer-keyboard-quit ()
+    "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+    (interactive)
+    (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (global-set-key [escape] 'evil-exit-emacs-state);; slack
+
 (define-key evil-motion-state-map (kbd "ø") (simulate-key-press "["))
 (define-key evil-motion-state-map (kbd "æ") (simulate-key-press "]"))
 (define-key evil-motion-state-map (kbd "Ø") (simulate-key-press "{"))
@@ -52,7 +71,8 @@ KEY must be given in `kbd' notation."
       "M--"       #'text-scale-decrease
 
       ;; --- Indentation ----------------------------------
-      :ne "M-q" #'prog-indent-sexp
+      :ne "M-q" #'prog-indent-sexp ;;indent-pp-sexp
+			:ne "C-M-q" #'indent-pp-sexp
 
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
@@ -81,13 +101,16 @@ KEY must be given in `kbd' notation."
 	;; Most commonly used
 	:desc "Find file in project"    :n "SPC" #'projectile-find-file
 	:desc "Switch buffer"           :n "TAB" (λ! (switch-to-buffer (other-buffer (current-buffer) 1)))
-	:desc "Browse files"            :n "."   #'evil-ex
-	:desc "Eval expression"         :n ","   #'execute-extended-command
-	:desc "Blink cursor line"       :n "DEL" #'nav-flash-show
+  :desc "Ex command"              :nv ";"  #'execute-extended-command
+  :desc "M-x"                     :nv ":"  #'evil-ex
+	:desc "Browse files"            :n "."   #'find-file
+	:desc "Eval expression"         :n ","   #'switch-to-buffer
+	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to bookmark"        :n "RET" #'bookmark-jump
 	:desc "search"                  :n "/"   #'counsel-ag
-	:desc "search symbol"           :nv "*"  #'counsel-ag-thing-at-point
+	:desc "search symbol"           :n "*"  #'counsel-ag-thing-at-point
 	:desc "window"                  :n "w"  evil-window-map
+  :desc "Jump to bookmark"        :n "RET" #'bookmark-jump
 
 	(:desc "paredit"     :prefix "k"
 	  :desc "Slurp sexp forward"   :nv "s" #'paredit-forward-slurp-sexp
@@ -245,7 +268,7 @@ KEY must be given in `kbd' notation."
 
       ;; --- Plugin bindings ------------------------------
       ;; company-mode (vim-like omnicompletion)
-      ;; :i "TAB"    #'+company/complete
+      :i "TAB"    #'+company/complete
       :i "C-SPC"  #'+company/complete
    (:after company
 	(:map company-active-map
@@ -292,35 +315,27 @@ KEY must be given in `kbd' notation."
 	  "C-k"     #'evil-window-up
 	  "C-l"     #'evil-window-right
 	  "w"       #'ace-window
-		"_"				#'ace-maximize-window
-	  ;; Swapping windows
-	  "H"       #'+evil/window-move-left
-	  "J"       #'+evil/window-move-down
-	  "K"       #'+evil/window-move-up
-	  "L"       #'+evil/window-move-right
-	  "C-S-w"   #'ace-swap-window
-	  ;; Window undo/redo
-	  "u"       #'winner-undo
-	  "C-u"     #'winner-undo
-	  "C-r"     #'winner-redo
+		"_"				#'ace-delete-other-windows
+	  "s"       #'ace-swap-window
 	  ;; Delete window
-	  "C-C"     #'ace-delete-window))
+	  "d"     #'ace-delete-window))
 
       ;; evil-commentary
       :n  "gc"  #'evil-commentary
-
       ;; evil-exchange
       :n  "gx"  #'evil-exchange
 
       ;; evil-matchit
-      :nv [tab]   #'indent-for-tab-command
+			:nv [tab]   #'indent-for-tab-command
 			:nv [S-tab] #'evil-jump-item
 			:nv "S"     #'browse-kill-ring
       ;; evil-magit
       (:after evil-magit
-	:map (magit-status-mode-map magit-revision-mode-map)
-	:n "C-j" nil
-	:n "C-k" nil)
+				:map (magit-status-mode-map magit-revision-mode-map)
+				:n [tab] #'magit-section-toggle
+				:n "C-j" nil
+				:n "C-k" nil)
+
       ;; evil-multiedit
       :v  "R"     #'evil-multiedit-match-all
       :n  "M-d"   #'evil-multiedit-match-symbol-and-next
@@ -490,8 +505,8 @@ KEY must be given in `kbd' notation."
 	[S-iso-lefttab] [backtab]
 	(:unless window-system "TAB" [tab])) ; Fix TAB in terminal
       ;; textmate-esque newline insertion
-      :i [M-return]     #'evil-open-below
-      :i [S-M-return]   #'evil-open-above
+      :ni [M-return]     #'evil-open-below
+      :ni [S-M-return]   #'evil-open-above
       ;; textmate-esque deletion
       :i [backspace]    #'delete-backward-char
       ;; Emacsien motions for insert mode
@@ -499,17 +514,17 @@ KEY must be given in `kbd' notation."
       :i "C-f" #'forward-word
 
       ;; Restore common editing keys (and ESC) in minibuffer
-      (:map (minibuffer-local-map
-	         minibuffer-local-ns-map
-	         minibuffer-local-completion-map
-	         minibuffer-local-must-match-map
-	         minibuffer-local-isearch-map
-	         read-expression-map)
-        [escape] #'abort-recursive-edit
-        "C-r" #'evil-paste-from-register
-        "C-a" #'move-beginning-of-line
-        "C-b" #'backward-word
-        "C-f" #'forward-word)
+      ;; (:map (minibuffer-local-map
+	    ;;      minibuffer-local-ns-map
+	    ;;      minibuffer-local-completion-map
+	    ;;      minibuffer-local-must-match-map
+	    ;;      minibuffer-local-isearch-map
+	    ;;      read-expression-map)
+      ;;   [escape] #'abort-recursive-edit
+      ;;   "C-r" #'evil-paste-from-register
+      ;;   "C-a" #'move-beginning-of-line
+      ;;   "C-b" #'backward-word
+      ;;   "C-f" #'forward-word)
 
       (:after evil
         (:map evil-ex-completion-map

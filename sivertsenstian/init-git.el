@@ -5,6 +5,7 @@
  :defer t
  :straight t
  :config
+ (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
  (which-key-mode))
 
 (use-package git-gutter+

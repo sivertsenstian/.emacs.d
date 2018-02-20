@@ -33,7 +33,8 @@
 :after clojure-mode
 :straight t
 :config
-(setq smartparens-strict-mode t))
+(smartparens-global-strict-mode)
+(smartparens-global-mode))
 
 (use-package flycheck-joker
  :after flycheck

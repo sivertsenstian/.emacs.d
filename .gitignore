@@ -1,6 +1,7 @@
 .cache/
 auto-save-list/
 straight/
+server/
 *.cache
 *.eld
 *.el~

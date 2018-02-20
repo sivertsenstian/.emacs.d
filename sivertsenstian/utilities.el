@@ -259,6 +259,13 @@ Example
   (interactive)
   (ivy-with-thing-at-point 'counsel-ag))
 
+(defun +company/complete ()
+  "Bring up the completion popup. If only one result, complete it."
+  (interactive)
+  (require 'company)
+  (when (and (company-manual-begin)
+             (= company-candidates-length 1))
+    (company-complete-common)))
 
 ;; export
 (provide 'utilities)
