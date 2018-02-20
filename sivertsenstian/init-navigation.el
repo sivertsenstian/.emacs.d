@@ -14,9 +14,6 @@
 (use-package dumb-jump
  :straight t)
 
-(use-package smart-forward
- :straight t)
-
 (use-package ace-window
  :straight t)
 

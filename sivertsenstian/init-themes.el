@@ -60,7 +60,7 @@
  :straight t
  :config
  (load-theme 'nord t)
- (setq nord-comment-brightness 15))
+ (setq nord-comment-brightness 20))
 
 (use-package all-the-icons-ivy
   :straight t
@@ -71,8 +71,12 @@
 (use-package smart-mode-line
 :straight t
 :config
+(setq evil-normal-state-tag " NORMAL")
+(setq evil-insert-state-tag " INSERT")
+(setq evil-visual-state-tag " VISUAL")
 (setq sml/no-confirm-load-theme t
-      sml/shorten-modes t)
+      sml/hidden-modes t
+      sml/mode-width 'full)
 (sml/setup))
 
 ;; export

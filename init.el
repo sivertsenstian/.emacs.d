@@ -53,6 +53,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(browse-kill-ring-highlight-inserted-item (quote pulse))
  '(custom-safe-themes
    (quote
     ("bd19fec77fa640b63cbf22f8328222b3dc4c8f891f63be6ea861187bc6c6c4e4" "d8cec8251169ccfe192aa87d69b9378bc81599330f31498f85deaef633721302" "b72213f8339991fbd58f9ac518a16c30fd2986c0e28415788f19ed3014ce3141" "a94bd69f1140c41fd22174d6d082de915c96124c54cea7ddd5d41e166ead905b" "0c5a64b9705db7b8cf871d84ce6a90553468f313190d52cb3cfcdf7b1a0ceec1" default)))

@@ -42,10 +42,6 @@
   (evil-snipe-mode +1)
   (evil-snipe-override-mode +1))
 
-(use-package evil-indent-plus
-  :after evil
-  :straight t)
-
 (use-package evil-escape
   :after evil
   :straight t
