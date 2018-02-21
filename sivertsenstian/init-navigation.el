@@ -27,6 +27,9 @@
 (use-package winum
  :straight t
  :init
+ (push '(("\\(.*\\) 0" . "winum-select-window-0") . ("\\1 0..9" . "window 0..9"))
+      which-key-replacement-alist)
+ (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)
  (setq winum-keymap
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "SPC 0") 'winum-select-window-0-or-10)
