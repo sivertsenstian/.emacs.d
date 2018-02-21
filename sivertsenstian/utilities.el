@@ -153,7 +153,7 @@ Example
 	      ((eq key :localleader)
 	       (push 'doom-localleader-key rest)
 	       (setq key :prefix
-		     desc "<localleader>")))
+		     desc "major mode")))
 	(pcase key
 	  (:when    (push `(if ,(pop rest)       ,(macroexpand `(map! ,@rest))) forms) (setq rest '()))
 	  (:unless  (push `(if (not ,(pop rest)) ,(macroexpand `(map! ,@rest))) forms) (setq rest '()))
@@ -262,7 +262,7 @@ Example
 (defun +company/complete ()
   "Bring up the completion popup. If only one result, complete it."
   (interactive)
-  (require 'company)
+  ;(require 'company)
   (when (and (company-manual-begin)
              (= company-candidates-length 1))
     (company-complete-common)))

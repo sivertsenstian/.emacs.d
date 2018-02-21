@@ -72,6 +72,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :ne "M-q" #'prog-indent-sexp ;;indent-pp-sexp
 			:ne "C-M-q" #'indent-pp-sexp
 
+			;; --- Kill ring ------------------------------------
+			:ne "M-p" #'browse-kill-ring
+
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
       :n  "[b" #'previous-buffer
@@ -105,8 +108,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Eval expression"         :n ","   #'switch-to-buffer
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to bookmark"        :n "RET" #'bookmark-jump
-	:desc "search"                  :n "/"   #'counsel-ag
-	:desc "search symbol"           :n "*"  #'counsel-ag-thing-at-point
+	:desc "search"                  :n "/"   #'counsel-projectile-ag
+	:desc "search symbol"           :n "*"   #'counsel-ag-thing-at-point
 	:desc "window"                  :n "w"  evil-window-map
   :desc "Jump to bookmark"        :n "RET" #'bookmark-jump
 
@@ -147,7 +150,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		:desc "Avy goto"              :nv "j" #'evil-avy-goto-char
 	  :desc "Imenu"                 :nv "j" #'imenu
 	  :desc "Imenu across buffers"  :nv "J" #'imenu-anywhere
-		:desc "Browse kill ring"      :nv "y" #'browse-kill-ring)
+		:desc "Browse kill ring"      :nv "k" #'browse-kill-ring)
 
 	(:desc "error" :prefix "e"
 	  :desc "next"                  :nv "n" #'next-error
@@ -179,8 +182,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'find-file
-      :desc "Save file"                 :n "s" #'save-buffer
-      :desc "Save files"                :n "S" #'save-some-buffers
+    :desc "Save file"                 :n "s" #'save-buffer
+    :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'projectile-find-file
 	  :desc "Find file from here"       :n "j" #'counsel-file-jump
 	  :desc "Find other file"           :n "a" #'projectile-find-other-file
@@ -203,13 +206,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "help" :prefix "h"
 	  :n "h" help-map
-	  :desc "Describe function"     :n  "f" #'describe-function
-	  :desc "Describe key"          :n  "k" #'describe-key
-	  :desc "Find definition"       :n  "." #'+lookup/definition
-	  :desc "Find references"       :n  "/" #'+lookup/references
-	  :desc "Find documentation"    :n  "h" #'+lookup/documentation
-	  :desc "Describe at point"     :n  "." #'helpful-at-point
+		(:desc "define" :prefix "d"
+  	  :desc "Describe function"     :n  "f" #'describe-function
+	    :desc "Describe key"          :n  "k" #'describe-key
+  	  :desc "Describe at point"     :n  "." #'helpful-at-point
+			:desc "Find definition"       :n  "d" #'+lookup/definition
+			:desc "Find references"       :n  "r" #'+lookup/references
+			:desc "Find documentation"    :n  "h" #'+lookup/documentation
+		)
 		:desc "Highlight symbol"      :nv "h" #'highlight-symbol-at-point
+		:desc "Unhighlight search"    :nv "s" #'evil-search-highlight-persist-remove-all
 		:desc "Unhighlight symbol"    :nv "u" #'unhighlight-regexp)
 
 	(:desc "Jump" :prefix "j"
@@ -392,7 +398,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; hl-todo
       :m  "]t" #'hl-todo-next
       :m  "[t" #'hl-todo-previous
-
+(:after browse-kill-ring
+ :map browse-kill-ring-mode-map
+ "j" #'browse-kill-ring-forward
+ "k" #'browse-kill-ring-previous
+ "J" #'browse-kill-ring-search-forward
+ "K" #'browse-kill-ring-search-backward
+ "P" #'browse-kill-ring-prepend-insert
+ "p" #'browse-kill-ring-append-insert)
       ;; ivy
       (:after ivy
 	:map ivy-minibuffer-map
@@ -497,17 +510,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :i "C-f" #'forward-word
 
       ;; Restore common editing keys (and ESC) in minibuffer
-      ;; (:map (minibuffer-local-map
-	    ;;      minibuffer-local-ns-map
-	    ;;      minibuffer-local-completion-map
-	    ;;      minibuffer-local-must-match-map
-	    ;;      minibuffer-local-isearch-map
-	    ;;      read-expression-map)
-      ;;   [escape] #'abort-recursive-edit
-      ;;   "C-r" #'evil-paste-from-register
-      ;;   "C-a" #'move-beginning-of-line
-      ;;   "C-b" #'backward-word
-      ;;   "C-f" #'forward-word)
+      (:map (minibuffer-local-map
+	         minibuffer-local-ns-map
+	         minibuffer-local-completion-map
+	         minibuffer-local-must-match-map
+	         minibuffer-local-isearch-map
+	         read-expression-map)
+        [escape] #'abort-recursive-edit
+        "C-r" #'evil-paste-from-register
+        "C-a" #'move-beginning-of-line
+        "C-b" #'backward-word
+        "C-f" #'forward-word)
 
       (:after evil
         (:map evil-ex-completion-map

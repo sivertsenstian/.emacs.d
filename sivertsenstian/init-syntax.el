@@ -16,11 +16,26 @@
  :straight t
  :config
  (setq browse-kill-ring-show-preview t
-       browse-kill-ring-highlight-current-entry 'pulse))
+       browse-kill-ring-highlight-current-entry t
+       browse-kill-ring-highlight-inserted-item 'pulse))
 
-(use-package browse-kill-ring+
- :after browse-kill-ring
- :straight t)
+(use-package rainbow-delimiters
+ :straight t
+ :config
+ (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package smartparens
+ :straight t
+ :config
+ (require 'smartparens-config)
+ (add-hook 'prog-mode-hook #'smartparens-mode)
+ (add-hook 'prog-mode-hook #'smartparens-strict-mode))
+
+(use-package paredit
+ :straight t
+ :config
+ (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+ (add-hook 'prog-mode-hook #'enable-paredit-mode))
 
 ;; export
 (provide 'init-syntax)

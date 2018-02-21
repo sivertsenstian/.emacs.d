@@ -11,6 +11,7 @@
 (electric-indent-mode +1)
 (fringe-mode '(8 . 2))
 (display-time-mode)
+(set-default 'truncate-lines t)
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
