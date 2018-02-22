@@ -1,5 +1,4 @@
-(load-file (expand-file-name "sivertsenstian/utilities.el" user-emacs-directory))
-;;----------------------------------------------------------------------------
+;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - CLOJURE MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package clojure-mode

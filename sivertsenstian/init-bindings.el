@@ -1,8 +1,6 @@
-(load-file (expand-file-name "sivertsenstian/utilities.el" user-emacs-directory))
-;;----------------------------------------------------------------------------
+;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - BINDINGS AND KEY MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
-
 (use-package which-key
  :straight t
  :config

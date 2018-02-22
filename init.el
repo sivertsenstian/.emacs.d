@@ -33,10 +33,12 @@
 ;;----------------------------------------------------------------------------
 ;; Top-level configuration
 ;;----------------------------------------------------------------------------
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
+(use-package utilities)
 (use-package init-evil)
 (use-package init-themes)
 (use-package init-syntax)
