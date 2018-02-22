@@ -19,17 +19,22 @@
        browse-kill-ring-highlight-current-entry t
        browse-kill-ring-highlight-inserted-item 'pulse))
 
+(use-package undo-tree
+ :straight t
+ :config
+ (global-undo-tree-mode))
+
 (use-package rainbow-delimiters
  :straight t
  :config
  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(use-package smartparens
- :straight t
- :config
- (require 'smartparens-config)
- (add-hook 'prog-mode-hook #'smartparens-mode)
- (add-hook 'prog-mode-hook #'smartparens-strict-mode))
+; (use-package smartparens
+;;  :straight t
+;;  :config
+;;  (require 'smartparens-config)
+;;  (add-hook 'prog-mode-hook #'smartparens-mode)
+;;  (add-hook 'prog-mode-hook #'smartparens-strict-mode))
 
 (use-package paredit
  :straight t

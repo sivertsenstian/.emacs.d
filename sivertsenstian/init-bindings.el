@@ -105,11 +105,21 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Browse files"            :n "."   #'find-file
 	:desc "Eval expression"         :n ","   #'switch-to-buffer
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
-	:desc "Jump to bookmark"        :n "RET" #'bookmark-jump
+	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
 	:desc "search"                  :n "/"   #'counsel-projectile-ag
 	:desc "search symbol"           :n "*"   #'counsel-ag-thing-at-point
 	:desc "window"                  :n "w"  evil-window-map
-  :desc "Jump to bookmark"        :n "RET" #'bookmark-jump
+	:desc "winum-select-window-0"   :n "0" #'winum-select-window-0-or-10
+                                  :n "1" #'winum-select-window-1
+                                  :n "2" #'winum-select-window-2
+                                  :n "3" #'winum-select-window-3
+                                  :n "4" #'winum-select-window-4
+                                  :n "5" #'winum-select-window-5
+                                  :n "6" #'winum-select-window-6
+                                  :n "7" #'winum-select-window-7
+                                  :n "8" #'winum-select-window-8
+                                  :n "9" #'winum-select-window-9
+
 
 	(:desc "paredit"     :prefix "k"
 	  :desc "Slurp sexp forward"   :nv "s" #'paredit-forward-slurp-sexp
@@ -119,7 +129,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Kill sexp"            :nv "x" #'kill-sexp
 	  :desc "toggle mode"          :nv "m" #'paredit-mode
 	  :desc "wrap sexp"            :nv "w" #'paredit-wrap-sexp
-	  :desc "unwrap sexp"          :nv "W" #'sp-unwrap-sexp
+	  :desc "unwrap sexp"          :nv "W" #'paredit-splice
 	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 
 	(:desc "previous..." :prefix "["
@@ -179,18 +189,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 					                            :v  "r" #'+eval:repl)
 
 	(:desc "file" :prefix "f"
-	  :desc "Find file"                 :n "f" #'find-file
+	  :desc "Find file"                 :n "f" #'counsel-find-file
     :desc "Save file"                 :n "s" #'save-buffer
     :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'projectile-find-file
 	  :desc "Find file from here"       :n "j" #'counsel-file-jump
 	  :desc "Find other file"           :n "a" #'projectile-find-other-file
 	  :desc "Open project editorconfig" :n "c" #'editorconfig-find-current-editorconfig
-	  :desc "Find file in emacs.d"      :n "e" #'+default/find-in-emacsd
-	  :desc "Browse emacs.d"            :n "E" #'+default/browse-emacsd
-	  :desc "Recent files"              :n "r" #'recentf-open-files
-	  :desc "Recent project files"      :n "R" #'projectile-recentf
-	  :desc "Yank filename"             :n "y" #'+default/yank-buffer-filename)
+	  :desc "Recent files"              :n "r" #'counsel-recentf
+	  :desc "Recent project files"      :n "R" #'projectile-recentf)
 
 	(:desc "git" :prefix "g"
 	    :desc "Git status"            :n  "s" #'magit-status
@@ -207,6 +214,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		(:desc "define" :prefix "d"
   	  :desc "Describe function"     :n  "f" #'describe-function
 	    :desc "Describe key"          :n  "k" #'describe-key
+	    :desc "Describe variable"     :n  "v" #'describe-variable
   	  :desc "Describe at point"     :n  "." #'helpful-at-point
 			:desc "Find definition"       :n  "d" #'+lookup/definition
 			:desc "Find references"       :n  "r" #'+lookup/references
@@ -218,6 +226,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "Jump" :prefix "j"
 	  :desc "to char"               :nv "j" #'avy-goto-char
+		:desc "to fn"                 :nv "f" #'imenu
+		:desc "to fn across buffers"  :nv "F" #'imenu-anywhere
 		:desc "to definition"         :nv "d" #'evil-goto-definition)
 
 	(:desc "project" :prefix "p"
@@ -240,7 +250,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		:desc "Truncate lines"         :n "t" #'toggle-truncate-lines
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
-	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode))
+	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode)
+		:desc "Theme"                  :n "T" #'counsel-load-theme)
 
 
       ;; --- Personal vim-esque bindings ------------------

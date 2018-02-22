@@ -59,9 +59,11 @@
 
 (use-package nord-theme
  :straight t
+ :init
+ (setq nord-comment-brightness 20)
+ (setq nord-region-highlight "frost")
  :config
- (load-theme 'nord t)
- (setq nord-comment-brightness 20))
+ (load-theme 'nord t))
 
 (use-package all-the-icons-ivy
   :straight t
