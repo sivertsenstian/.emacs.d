@@ -82,5 +82,11 @@
       sml/mode-width 'full)
 (sml/setup))
 
+
+(use-package golden-ratio
+ :straight t
+ :config
+ (golden-ratio-mode 1))
+
 ;; export
 (provide 'init-themes)

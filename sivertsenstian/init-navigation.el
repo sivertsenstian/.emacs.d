@@ -33,6 +33,5 @@
  :config
  (winum-mode))
 
-
 ;; export
 (provide 'init-navigation)

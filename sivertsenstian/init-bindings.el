@@ -122,15 +122,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 
 	(:desc "paredit"     :prefix "k"
-	  :desc "Slurp sexp forward"   :nv "s" #'paredit-forward-slurp-sexp
-	  :desc "Slurp sexp backward"  :nv "S" #'paredit-backward-slurp-sexp
-	  :desc "Barf sexp forward"    :nv "b" #'paredit-forward-barf-sexp
-	  :desc "Barf sexp backward"   :nv "B" #'paredit-backward-barf-sexp
-	  :desc "Kill sexp"            :nv "x" #'kill-sexp
-	  :desc "toggle mode"          :nv "m" #'paredit-mode
-	  :desc "wrap sexp"            :nv "w" #'paredit-wrap-sexp
-	  :desc "unwrap sexp"          :nv "W" #'paredit-splice
-	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
+	  :desc "Slurp sexp forward"   :nv "s" #'lispy-forward-slurp-sexp
+	  :desc "Slurp sexp backward"  :nv "S" #'lispy-backward-slurp-sexp
+	  :desc "Barf sexp forward"    :nv "b" #'lispy-forward-barf-sexp
+	  :desc "Barf sexp backward"   :nv "B" #'lispy-backward-barf-sexp
+	  :desc "Kill"                 :nv "x" #'lispy-kill
+	  :desc "Kill!"                :nv "X" #'lispy-kill-at-poin
+	  :desc "toggle mode"          :nv "m" #'lispy-mode
+	  :desc "wrap sexp"            :nv "w" #'lispy-wrap-round
+	  :desc "unwrap sexp"          :nv "W" #'lispy-splice
+		:desc "Raise sexp"           :nv "r" #'lispy-raise-sexp
+		:desc "Convolute sexp"       :nv "r" #'lispy-convolute-sexp
+	  :desc "wrap sexp in []"      :nv "[" #'lispy-wrap-brackets
+	  :desc "wrap sexp in {}"      :nv "{" #'lispy-wrap-braces
+	  :desc "stringify"            :nv "\"" #'lispy-stringify
+	  :desc "unstringify"          :nv "'" #'lispy-stringify
+	  :desc "toggle strict"        :nv "!" #'smartparens-strict-mode
+	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp
+	)
 
 	(:desc "previous..." :prefix "["
 	  :desc "Text size"             :nv "[" #'text-scale-decrease
@@ -251,7 +260,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode)
-		:desc "Theme"                  :n "T" #'counsel-load-theme)
+		:desc "Theme"                  :n "T" #'counsel-load-theme
+		:desc "Golden ratio"           :n "g" #'golden-ratio-mod)
 
 
       ;; --- Personal vim-esque bindings ------------------
