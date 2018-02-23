@@ -21,7 +21,13 @@
  :straight t)
 
 (use-package projectile
- :straight t)
+ :straight t
+ :config
+ (setq projectile-globally-ignored-files
+       (append '(".pyc"
+                 ".class"
+                 "~")
+                projectile-globally-ignored-files)))
 
 (use-package counsel-projectile
  :after (counsel projectile)
