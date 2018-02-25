@@ -30,9 +30,7 @@
  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package lispy
- :straight t
- :config
- )
+ :straight t)
 
 (use-package smartparens
  :straight t
@@ -40,11 +38,10 @@
  (add-hook 'prog-mode-hook #'smartparens-mode)
  (add-hook 'prog-mode-hook #'smartparens-strict-mode))
 
-;; (use-package paredit
-;;  :straight t
-;;  :config
-;;  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;;  (add-hook 'prog-mode-hook #'enable-paredit-mode))
+(use-package paredit
+ :straight t
+ :config
+ (add-hook 'prog-mode-hook #'enable-paredit-mode))
 
 ;; export
 (provide 'init-syntax)

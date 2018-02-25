@@ -43,10 +43,10 @@
   (evil-snipe-override-mode +1))
 
 (use-package evil-search-highlight-persist
-:after evil
-:straight t
-:config
-(global-evil-search-highlight-persist t))
+ :after evil
+ :straight t
+ :config
+ (global-evil-search-highlight-persist t))
 
 (use-package evil-escape
   :after evil

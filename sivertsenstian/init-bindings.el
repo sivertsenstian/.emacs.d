@@ -2,14 +2,14 @@
 ;; SIVERTSENSTIAN - BINDINGS AND KEY MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package which-key
- :straight t
- :config
- (setq which-key-sort-order 'which-key-prefix-then-key-order
-       which-key-sort-uppercase-first nil
-       which-key-add-column-padding 1
-       which-key-max-display-columns nil
-       which-key-min-display-lines 5)
- (which-key-mode))
+  :straight t
+  :config
+  (setq which-key-sort-order 'which-key-prefix-then-key-order
+	which-key-sort-uppercase-first nil
+	which-key-add-column-padding 1
+	which-key-max-display-columns nil
+	which-key-min-display-lines 5)
+  (which-key-mode))
 
 (defun simulate-key-press (key)
   "Pretend that KEY was pressed.
@@ -68,10 +68,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; --- Indentation ----------------------------------
       :ne "M-q" #'prog-indent-sexp ;;indent-pp-sexp
-			:ne "C-M-q" #'indent-pp-sexp
+      :ne "C-M-q" #'indent-pp-sexp
 
-			;; --- Kill ring ------------------------------------
-			:ne "M-p" #'browse-kill-ring
+      ;; --- Kill ring ------------------------------------
+      :ne "M-p" #'browse-kill-ring
 
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
@@ -88,7 +88,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :v  "@"  #'+evil:macro-on-all-lines
       :n  "g@" #'+evil:macro-on-all-lines
 
-			:en "C-f"   #'swiper
+      :en "C-f"   #'swiper
       ;; Easier window navigation
       :en "C-h"   #'evil-window-left
       :en "C-j"   #'evil-window-down
@@ -96,12 +96,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :en "C-l"   #'evil-window-right
 
       ;; --- <leader> -------------------------------------
-    (:leader
+      (:leader
 	;; Most commonly used
 	:desc "Find file in project"    :n "SPC" #'projectile-find-file
 	:desc "Switch buffer"           :n "TAB" (λ! (switch-to-buffer (other-buffer (current-buffer) 1)))
-  :desc "Ex command"              :nv ";"  #'execute-extended-command
-  :desc "M-x"                     :nv ":"  #'evil-ex
+	:desc "Ex command"              :nv ";"  #'execute-extended-command
+	:desc "M-x"                     :nv ":"  #'evil-ex
 	:desc "Browse files"            :n "."   #'find-file
 	:desc "Eval expression"         :n ","   #'switch-to-buffer
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
@@ -110,15 +110,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "search symbol"           :n "*"   #'counsel-ag-thing-at-point
 	:desc "window"                  :n "w"  evil-window-map
 	:desc "winum-select-window-0"   :n "0" #'winum-select-window-0-or-10
-                                  :n "1" #'winum-select-window-1
-                                  :n "2" #'winum-select-window-2
-                                  :n "3" #'winum-select-window-3
-                                  :n "4" #'winum-select-window-4
-                                  :n "5" #'winum-select-window-5
-                                  :n "6" #'winum-select-window-6
-                                  :n "7" #'winum-select-window-7
-                                  :n "8" #'winum-select-window-8
-                                  :n "9" #'winum-select-window-9
+	:n "1" #'winum-select-window-1
+	:n "2" #'winum-select-window-2
+	:n "3" #'winum-select-window-3
+	:n "4" #'winum-select-window-4
+	:n "5" #'winum-select-window-5
+	:n "6" #'winum-select-window-6
+	:n "7" #'winum-select-window-7
+	:n "8" #'winum-select-window-8
+	:n "9" #'winum-select-window-9
 
 
 	(:desc "paredit"     :prefix "k"
@@ -131,15 +131,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "toggle mode"          :nv "m" #'lispy-mode
 	  :desc "wrap sexp"            :nv "w" #'lispy-wrap-round
 	  :desc "unwrap sexp"          :nv "W" #'lispy-splice
-		:desc "Raise sexp"           :nv "r" #'lispy-raise-sexp
-		:desc "Convolute sexp"       :nv "r" #'lispy-convolute-sexp
+	  :desc "Raise sexp"           :nv "r" #'lispy-raise-sexp
+	  :desc "Convolute sexp"       :nv "r" #'lispy-convolute-sexp
 	  :desc "wrap sexp in []"      :nv "[" #'lispy-wrap-brackets
 	  :desc "wrap sexp in {}"      :nv "{" #'lispy-wrap-braces
 	  :desc "stringify"            :nv "\"" #'lispy-stringify
 	  :desc "unstringify"          :nv "'" #'lispy-stringify
 	  :desc "toggle strict"        :nv "!" #'smartparens-strict-mode
-	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp
-	)
+	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 
 	(:desc "previous..." :prefix "["
 	  :desc "Text size"             :nv "[" #'text-scale-decrease
@@ -160,28 +159,27 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Smart jump"            :nv "l" #'smart-forward)
 
 	(:desc "search" :prefix "s"
-		:desc "ag"                    :nv "a" #'ag
-		:desc "counsel find"          :nv "c" #'counsel-ag
-		:desc "in project"            :nv "p" #'projectile-ag
+	  :desc "ag"                    :nv "a" #'ag
+	  :desc "counsel find"          :nv "c" #'counsel-ag
+	  :desc "in project"            :nv "p" #'projectile-ag
 	  :desc "Swiper"                :nv "s" #'swiper
-		:desc "Avy goto"              :nv "j" #'evil-avy-goto-char
+	  :desc "Avy goto"              :nv "j" #'evil-avy-goto-char
 	  :desc "Imenu"                 :nv "j" #'imenu
 	  :desc "Imenu across buffers"  :nv "J" #'imenu-anywhere
-		:desc "Browse kill ring"      :nv "k" #'browse-kill-ring)
+	  :desc "Browse kill ring"      :nv "k" #'browse-kill-ring)
 
 	(:desc "error" :prefix "e"
 	  :desc "next"                  :nv "n" #'next-error
-		:desc "previous"              :nv "p" #'previous-error
-		:desc "next"                  :nv "]" #'next-error
-		:desc "previous"              :nv "[" #'previous-error
-		)
+	  :desc "previous"              :nv "p" #'previous-error
+	  :desc "next"                  :nv "]" #'next-error
+	  :desc "previous"              :nv "[" #'previous-error)
 
 	(:desc "buffer" :prefix "b"
 	  :desc "New empty buffer"        :n "n" #'evil-buffer-new
 	  :desc "Switch buffer"           :n "b" #'switch-to-buffer
 	  :desc "Kill buffer"             :n "k" #'kill-this-buffer
 	  :desc "Save buffer"             :n "s" #'save-buffer
-    :desc "Save buffers"            :n "S" #'save-some-buffers
+	  :desc "Save buffers"            :n "S" #'save-some-buffers
 	  :desc "Bury buffer"             :n "z" #'bury-buffer
 	  :desc "Next buffer"             :n "]" #'next-buffer
 	  :desc "Previous buffer"         :n "[" #'previous-buffer)
@@ -189,55 +187,53 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	(:desc "code" :prefix "c"
 	  :desc "List errors"               :n  "x" #'flycheck-list-errors
 	  :desc "Evaluate buffer/region"    :n  "e" #'+eval/buffer
-					                            :v  "e" #'+eval/region
+	  :v  "e" #'+eval/region
 	  :desc "Evaluate & replace region" :nv "E" #'+eval:replace-region
 	  :desc "Build tasks"               :nv "b" #'+eval/build
 	  :desc "Jump to definition"        :n  "d" #'+lookup/definition
 	  :desc "Jump to references"        :n  "D" #'+lookup/references
 	  :desc "Open REPL"                 :n  "r" #'+eval/open-repl
-					                            :v  "r" #'+eval:repl)
+	  :v  "r" #'+eval:repl)
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'counsel-find-file
-    :desc "Save file"                 :n "s" #'save-buffer
-    :desc "Save files"                :n "S" #'save-some-buffers
+	  :desc "Save file"                 :n "s" #'save-buffer
+	  :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'projectile-find-file
 	  :desc "Find file from here"       :n "j" #'counsel-file-jump
 	  :desc "Find other file"           :n "a" #'projectile-find-other-file
-	  :desc "Open project editorconfig" :n "c" #'editorconfig-find-current-editorconfig
 	  :desc "Recent files"              :n "r" #'counsel-recentf
 	  :desc "Recent project files"      :n "R" #'projectile-recentf)
 
 	(:desc "git" :prefix "g"
-	    :desc "Git status"            :n  "s" #'magit-status
-	    :desc "Git blame"             :n  "b" #'magit-blame
-	    :desc "Git time machine"      :n  "t" #'git-timemachine-toggle
-	    :desc "Git stage hunk"        :n  "S" #'git-gutter:stage-hunk
-	    :desc "Git revert hunk"       :n  "r" #'git-gutter:revert-hunk
-	    :desc "Git revert buffer"     :n  "R" #'vc-revert
-	    :desc "Next hunk"             :nv "]" #'git-gutter:next-hunk
-	    :desc "Previous hunk"         :nv "[" #'git-gutter:previous-hunk)
+	  :desc "Git status"            :n  "s" #'magit-status
+	  :desc "Git blame"             :n  "b" #'magit-blame
+	  :desc "Git time machine"      :n  "t" #'git-timemachine-toggle
+	  :desc "Git stage hunk"        :n  "S" #'git-gutter:stage-hunk
+	  :desc "Git revert hunk"       :n  "r" #'git-gutter:revert-hunk
+	  :desc "Git revert buffer"     :n  "R" #'vc-revert
+	  :desc "Next hunk"             :nv "]" #'git-gutter:next-hunk
+	  :desc "Previous hunk"         :nv "[" #'git-gutter:previous-hunk)
 
 	(:desc "help" :prefix "h"
 	  :n "h" help-map
-		(:desc "define" :prefix "d"
-  	  :desc "Describe function"     :n  "f" #'describe-function
+	  (:desc "define" :prefix "d"
+	    :desc "Describe function"     :n  "f" #'describe-function
 	    :desc "Describe key"          :n  "k" #'describe-key
 	    :desc "Describe variable"     :n  "v" #'describe-variable
-  	  :desc "Describe at point"     :n  "." #'helpful-at-point
-			:desc "Find definition"       :n  "d" #'+lookup/definition
-			:desc "Find references"       :n  "r" #'+lookup/references
-			:desc "Find documentation"    :n  "h" #'+lookup/documentation
-		)
-		:desc "Highlight symbol"      :nv "h" #'highlight-symbol-at-point
-		:desc "Unhighlight search"    :nv "s" #'evil-search-highlight-persist-remove-all
-		:desc "Unhighlight symbol"    :nv "u" #'unhighlight-regexp)
+	    :desc "Describe at point"     :n  "." #'helpful-at-point
+	    :desc "Find definition"       :n  "d" #'+lookup/definition
+	    :desc "Find references"       :n  "r" #'+lookup/references
+	    :desc "Find documentation"    :n  "h" #'+lookup/documentation)
+	  :desc "Highlight symbol"      :nv "h" #'highlight-symbol-at-point
+	  :desc "Unhighlight search"    :nv "s" #'evil-search-highlight-persist-remove-all
+	  :desc "Unhighlight symbol"    :nv "u" #'unhighlight-regexp)
 
 	(:desc "Jump" :prefix "j"
 	  :desc "to char"               :nv "j" #'avy-goto-char
-		:desc "to fn"                 :nv "f" #'imenu
-		:desc "to fn across buffers"  :nv "F" #'imenu-anywhere
-		:desc "to definition"         :nv "d" #'evil-goto-definition)
+	  :desc "to fn"                 :nv "f" #'imenu
+	  :desc "to fn across buffers"  :nv "F" #'imenu-anywhere
+	  :desc "to definition"         :nv "d" #'evil-goto-definition)
 
 	(:desc "project" :prefix "p"
 	  :desc "Browse project"          :n  "." #'+default/browse-project
@@ -246,9 +242,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Switch project"          :n  "p" #'projectile-switch-project
 	  :desc "Recent project files"    :n  "r" #'projectile-recentf
 	  :desc "List project tasks"      :n  "t" #'+ivy/tasks
-		:desc "ag in project"           :nv "a" #'projectile-ag
+	  :desc "ag in project"           :nv "a" #'projectile-ag
 	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache
-		:desc "neotree"                 :nv "t" #'neotree-projectile-action)
+	  :desc "neotree"                 :nv "t" #'neotree-projectile-action)
 
 	(:desc "quit" :prefix "q"
 	  :desc "Quit"                   :n "q" #'evil-save-and-quit
@@ -256,12 +252,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "toggle" :prefix "t"
 	  :desc "Flycheck"               :n "f" #'flycheck-mode
-		:desc "Truncate lines"         :n "t" #'toggle-truncate-lines
+	  :desc "Truncate lines"         :n "t" #'toggle-truncate-lines
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode)
-		:desc "Theme"                  :n "T" #'counsel-load-theme
-		:desc "Golden ratio"           :n "g" #'golden-ratio-mod)
+	:desc "Theme"                  :n "T" #'counsel-load-theme
+	:desc "Golden ratio"           :n "g" #'golden-ratio-mod)
 
 
       ;; --- Personal vim-esque bindings ------------------
@@ -274,9 +270,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :n  "gr" #'+eval:region
       :n  "gR" #'+eval/buffer
       :v  "gR" #'+eval:replace-region
-			:nv "gj" #'evil-avy-goto-char
-			:nv "gJ" #'evil-avy-goto-line-below
-			:nv "gK" #'evil-avy-goto-line-above
+      :nv "gj" #'evil-avy-goto-char
+      :nv "gJ" #'evil-avy-goto-line-below
+      :nv "gK" #'evil-avy-goto-line-above
       ;; repeat in visual mode (FIXME buggy)
       :v  "."  #'evil-repeat
       ;; don't leave visual mode after shifting
@@ -293,7 +289,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; company-mode (vim-like omnicompletion)
       :i "TAB"    #'+company/complete
       :i "C-SPC"  #'+company/complete
-   (:after company
+      (:after company
 	(:map company-active-map
 	  ;; Don't interfere with `evil-delete-backward-word' in insert mode
 	  "C-w"        nil
@@ -318,24 +314,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; counsel
       (:after counsel
-        (:map counsel-ag-map
-         [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
-         "C-SPC"    #'ivy-call-and-recenter ; preview
-        ))
+	(:map counsel-ag-map
+	  [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
+	  "C-SPC"    #'ivy-call-and-recenter ; preview
+	  ))
 
       ;; evil
       (:after evil
-				(:map evil-window-map ; prefix "C-w"
-				;; Navigation
-				"C-h"     #'evil-window-left
-				"C-j"     #'evil-window-down
-				"C-k"     #'evil-window-up
-				"C-l"     #'evil-window-right
-				"w"       #'ace-window
-				"_"				#'ace-delete-other-windows
-				"s"       #'ace-swap-window
-				;; Delete window
-				"d"     #'ace-delete-window))
+	(:map evil-window-map ; prefix "C-w"
+	  ;; Navigation
+	  "C-h"     #'evil-window-left
+	  "C-j"     #'evil-window-down
+	  "C-k"     #'evil-window-up
+	  "C-l"     #'evil-window-right
+	  "w"       #'ace-window
+	  "_"				#'ace-delete-other-windows
+	  "s"       #'ace-swap-window
+	  ;; Delete window
+	  "d"     #'ace-delete-window))
 
       ;; evil-commentary
       :n  "gc"  #'evil-commentary
@@ -343,15 +339,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :n  "gx"  #'evil-exchange
 
       ;; evil-matchit
-			:nv [tab]   #'indent-for-tab-command
-			:nv [S-tab] #'evil-jump-item
-			:nv "S"     #'browse-kill-ring
+      :nv [tab]   #'indent-for-tab-command
+      :nv [S-tab] #'evil-jump-item
+      :nv "S"     #'browse-kill-ring
       ;; evil-magit
       (:after evil-magit
-				:map (magit-status-mode-map magit-revision-mode-map)
-				:n [tab] #'magit-section-toggle
-				:n "C-j" nil
-				:n "C-k" nil)
+	:map (magit-status-mode-map magit-revision-mode-map)
+	:n [tab] #'magit-section-toggle
+	:n "C-j" nil
+	:n "C-k" nil)
 
       ;; evil-multiedit
       :v  "R"     #'evil-multiedit-match-all
@@ -417,14 +413,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; hl-todo
       :m  "]t" #'hl-todo-next
       :m  "[t" #'hl-todo-previous
-(:after browse-kill-ring
- :map browse-kill-ring-mode-map
- "j" #'browse-kill-ring-forward
- "k" #'browse-kill-ring-previous
- "J" #'browse-kill-ring-search-forward
- "K" #'browse-kill-ring-search-backward
- "P" #'browse-kill-ring-prepend-insert
- "p" #'browse-kill-ring-append-insert)
+      (:after browse-kill-ring
+	:map browse-kill-ring-mode-map
+	"j" #'browse-kill-ring-forward
+	"k" #'browse-kill-ring-previous
+	"J" #'browse-kill-ring-search-forward
+	"K" #'browse-kill-ring-search-backward
+	"P" #'browse-kill-ring-prepend-insert
+	"p" #'browse-kill-ring-append-insert)
       ;; ivy
       (:after ivy
 	:map ivy-minibuffer-map
@@ -443,35 +439,35 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; neotree
       (:after neotree
-				:map neotree-mode-map
-				:n "g"         nil
-				:n [tab]       #'neotree-quick-look
-				:n "RET"       #'neotree-enter
-				:n [backspace] #'evil-window-prev
-				:n "c"         #'neotree-create-node
-				:n "r"         #'neotree-rename-node
-				:n "d"         #'neotree-delete-node
-				:n "j"         #'neotree-next-line
-				:n "k"         #'neotree-previous-line
-				:n "n"         #'neotree-next-line
-				:n "p"         #'neotree-previous-line
-				:n "h"         #'+neotree/collapse-or-up
-				:n "l"         #'+neotree/expand-or-open
-				:n "J"         #'neotree-select-next-sibling-node
-				:n "K"         #'neotree-select-previous-sibling-node
-				:n "H"         #'neotree-select-up-node
-				:n "L"         #'neotree-select-down-node
-				:n "G"         #'evil-goto-line
-				:n "gg"        #'evil-goto-first-line
-				:n "v"         #'neotree-enter-vertical-split
-				:n "s"         #'neotree-enter-horizontal-split
-				:n "q"         #'neotree-hide
-				:n "R"         #'neotree-refresh)
+	:map neotree-mode-map
+	:n "g"         nil
+	:n [tab]       #'neotree-quick-look
+	:n "RET"       #'neotree-enter
+	:n [backspace] #'evil-window-prev
+	:n "c"         #'neotree-create-node
+	:n "r"         #'neotree-rename-node
+	:n "d"         #'neotree-delete-node
+	:n "j"         #'neotree-next-line
+	:n "k"         #'neotree-previous-line
+	:n "n"         #'neotree-next-line
+	:n "p"         #'neotree-previous-line
+	:n "h"         #'+neotree/collapse-or-up
+	:n "l"         #'+neotree/expand-or-open
+	:n "J"         #'neotree-select-next-sibling-node
+	:n "K"         #'neotree-select-previous-sibling-node
+	:n "H"         #'neotree-select-up-node
+	:n "L"         #'neotree-select-down-node
+	:n "G"         #'evil-goto-line
+	:n "gg"        #'evil-goto-first-line
+	:n "v"         #'neotree-enter-vertical-split
+	:n "s"         #'neotree-enter-horizontal-split
+	:n "q"         #'neotree-hide
+	:n "R"         #'neotree-refresh)
 
       ;; swiper
       (:after swiper
-				(:map swiper-map
-						  [backtab]  #'+ivy/wgrep-occur))
+	(:map swiper-map
+	  [backtab]  #'+ivy/wgrep-occur))
 
       ;; undo-tree -- undo/redo for visual regions
       :v "C-u" #'undo-tree-undo
@@ -479,35 +475,34 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; --- Built-in plugins -----------------------------
       (:after comint
-    	;; TAB auto-completion in term buffers
-	    :map comint-mode-map [tab] #'company-complete)
+	;; TAB auto-completion in term buffers
+	:map comint-mode-map [tab] #'company-complete)
 
       (:after debug
-        ;; For elisp debugging
-        :map debugger-mode-map
-        :n "RET" #'debug-help-follow
-        :n "e"   #'debugger-eval-expression
-        :n "n"   #'debugger-step-through
-        :n "c"   #'debugger-continue)
+	;; For elisp debugging
+	:map debugger-mode-map
+	:n "RET" #'debug-help-follow
+	:n "e"   #'debugger-eval-expression
+	:n "n"   #'debugger-step-through
+	:n "c"   #'debugger-continue)
 
       (:map help-mode-map
-        :n "[["  #'help-go-back
-        :n "]]"  #'help-go-forward
-        :n "o"   #'ace-link-help
-        :n "q"   #'quit-window
-        :n "Q"   #'ivy-resume)
+	:n "[["  #'help-go-back
+	:n "]]"  #'help-go-forward
+	:n "o"   #'ace-link-help
+	:n "q"   #'quit-window
+	:n "Q"   #'ivy-resume)
 
       (:after vc-annotate
-        :map vc-annotate-mode-map
-        :n "q"   #'kill-this-buffer
-        :n "d"   #'vc-annotate-show-diff-revision-at-line
-        :n "D"   #'vc-annotate-show-changeset-diff-revision-at-line
-        :n "SPC" #'vc-annotate-show-log-revision-at-line
-        :n "]]"  #'vc-annotate-next-revision
-        :n "[["  #'vc-annotate-prev-revision
-        :n "TAB" #'vc-annotate-toggle-annotation-visibility
-        :n "RET" #'vc-annotate-find-revision-at-line)
-			)
+	:map vc-annotate-mode-map
+	:n "q"   #'kill-this-buffer
+	:n "d"   #'vc-annotate-show-diff-revision-at-line
+	:n "D"   #'vc-annotate-show-changeset-diff-revision-at-line
+	:n "SPC" #'vc-annotate-show-log-revision-at-line
+	:n "]]"  #'vc-annotate-next-revision
+	:n "[["  #'vc-annotate-prev-revision
+	:n "TAB" #'vc-annotate-toggle-annotation-visibility
+	:n "RET" #'vc-annotate-find-revision-at-line))
 
 ;;
 ;; Keybinding fixes
@@ -530,31 +525,31 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; Restore common editing keys (and ESC) in minibuffer
       (:map (minibuffer-local-map
-	         minibuffer-local-ns-map
-	         minibuffer-local-completion-map
-	         minibuffer-local-must-match-map
-	         minibuffer-local-isearch-map
-	         read-expression-map)
-        [escape] #'abort-recursive-edit
-        "C-r" #'evil-paste-from-register
-        "C-a" #'move-beginning-of-line
-        "C-b" #'backward-word
-        "C-f" #'forward-word)
+	     minibuffer-local-ns-map
+	     minibuffer-local-completion-map
+	     minibuffer-local-must-match-map
+	     minibuffer-local-isearch-map
+	     read-expression-map)
+	[escape] #'abort-recursive-edit
+	"C-r" #'evil-paste-from-register
+	"C-a" #'move-beginning-of-line
+	"C-b" #'backward-word
+	"C-f" #'forward-word)
 
       (:after evil
-        (:map evil-ex-completion-map
-            "C-a" #'move-beginning-of-line))
+	(:map evil-ex-completion-map
+	  "C-a" #'move-beginning-of-line))
 
       (:map messages-buffer-mode-map
-        "M-;" #'eval-expression
-        "A-;" #'eval-expression)
+	"M-;" #'eval-expression
+	"A-;" #'eval-expression)
 
       (:after tabulated-list
-        (:map tabulated-list-mode-map
-        [remap evil-record-macro] #'quit-window))
+	(:map tabulated-list-mode-map
+	  [remap evil-record-macro] #'quit-window))
 
       (:after view
-	    (:map view-mode-map "<escape>" #'View-quit-all)))
+	(:map view-mode-map "<escape>" #'View-quit-all)))
 
 ;; export
 (provide 'init-bindings)

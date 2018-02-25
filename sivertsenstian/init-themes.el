@@ -9,7 +9,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Source Code Pro" nil t)
 (electric-indent-mode +1)
-(fringe-mode '(8 . 2))
+(fringe-mode '(8 . 4))
 (display-time-mode)
 (set-default 'truncate-lines t)
 
@@ -25,7 +25,7 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-banner-logo-title
    "Build a man a fire, and he'll be warm for a day. Set a man on fire, and he'll be warm for the rest of his life.")
-  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-startup-banner (expand-file-name "sivertsenstian/logo.png" user-emacs-directory))
   (setq dashboard-items '((recents  . 5)
                           (projects . 5))))
 
@@ -81,12 +81,6 @@
       sml/hidden-modes t
       sml/mode-width 'full)
 (sml/setup))
-
-
-(use-package golden-ratio
- :straight t
- :config
- (golden-ratio-mode 1))
 
 ;; export
 (provide 'init-themes)
