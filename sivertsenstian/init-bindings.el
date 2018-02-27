@@ -185,15 +185,19 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Previous buffer"         :n "[" #'previous-buffer)
 
 	(:desc "code" :prefix "c"
-	  :desc "List errors"               :n  "x" #'flycheck-list-errors
-	  :desc "Evaluate buffer/region"    :n  "e" #'+eval/buffer
-	  :v  "e" #'+eval/region
-	  :desc "Evaluate & replace region" :nv "E" #'+eval:replace-region
-	  :desc "Build tasks"               :nv "b" #'+eval/build
-	  :desc "Jump to definition"        :n  "d" #'+lookup/definition
-	  :desc "Jump to references"        :n  "D" #'+lookup/references
-	  :desc "Open REPL"                 :n  "r" #'+eval/open-repl
-	  :v  "r" #'+eval:repl)
+		(:desc "edit" :prefix "e"
+	   :desc "Edit symbol (in buffer)"  :n  "s" #'iedit-mode
+		 :desc "Edit symbol (in fn)"      :n  "S" #'iedit-mode-toggle-on-function
+     :desc "Restrict"                 :n  "r" #'iedit-restrict-function
+     :desc "Upcase"                   :n  "u" #'iedit-upcase-occurences
+     :desc "Downcase"                 :n  "d" #'iedit-downcase-occurences
+		 :desc "Delete"                   :n  "!" #'iedit-delete-occurences
+		 :desc "Case sensitive"           :n  "c" #'iedit-toggle-case-sensitive
+		 :desc "Quit"                     :n  "q" #'iedit-quit)
+	  :desc "List errors"                :n  "x" #'flycheck-list-errors
+	  :desc "Jump to definition"         :n  "j" #'smart-jump-go
+		:desc "Jumpt to definition (dumb)" :n  "J" #'dumb-jump-go
+	  :desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-ag)
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'counsel-find-file
@@ -255,9 +259,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Truncate lines"         :n "t" #'toggle-truncate-lines
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
-	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode)
-	:desc "Theme"                  :n "T" #'counsel-load-theme
-	:desc "Golden ratio"           :n "g" #'golden-ratio-mod)
+	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode
+	  :desc "Theme"                  :n "T" #'counsel-load-theme
+	  :desc "Golden ratio"           :n "g" #'golden-ratio-mod))
 
 
       ;; --- Personal vim-esque bindings ------------------
