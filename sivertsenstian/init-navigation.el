@@ -21,7 +21,8 @@
  :straight t
  :config
  (popwin-mode 1)
- (push '(ag-mode :stick t) popwin:special-display-config)
+ ;(push '(ag-mode :stick t) popwin:special-display-config)
+ (push '(rg-mode :stick t) popwin:special-display-config)
  (push "*Kill Ring*" popwin:special-display-config))
 
 (use-package winum

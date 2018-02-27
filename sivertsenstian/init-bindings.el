@@ -106,8 +106,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Eval expression"         :n ","   #'switch-to-buffer
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
-	:desc "search"                  :n "/"   #'counsel-projectile-ag
-	:desc "search symbol"           :n "*"   #'counsel-ag-thing-at-point
+	:desc "search"                  :n "/"   #'counsel-projectile-rg
+	:desc "search symbol"           :n "*"   #'rg-dwim
 	:desc "window"                  :n "w"  evil-window-map
 	:desc "winum-select-window-0"   :n "0" #'winum-select-window-0-or-10
 	:n "1" #'winum-select-window-1
@@ -159,9 +159,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Smart jump"            :nv "l" #'smart-forward)
 
 	(:desc "search" :prefix "s"
-	  :desc "ag"                    :nv "a" #'ag
-	  :desc "counsel find"          :nv "c" #'counsel-ag
-	  :desc "in project"            :nv "p" #'projectile-ag
+	  :desc "rg"                    :nv "r" #'rg
+	  :desc "list searches"         :nv "l" #'rg-list-searches
+	  :desc "counsel find"          :nv "c" #'counsel-rg
+	  :desc "in project"            :nv "p" #'counsel-projectile-rg
+	  :desc "in project (results)"  :nv "P" #'rg-project
 	  :desc "Swiper"                :nv "s" #'swiper
 	  :desc "Avy goto"              :nv "j" #'evil-avy-goto-char
 	  :desc "Imenu"                 :nv "j" #'imenu
@@ -185,19 +187,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Previous buffer"         :n "[" #'previous-buffer)
 
 	(:desc "code" :prefix "c"
-		(:desc "edit" :prefix "e"
-	   :desc "Edit symbol (in buffer)"  :n  "s" #'iedit-mode
-		 :desc "Edit symbol (in fn)"      :n  "S" #'iedit-mode-toggle-on-function
-     :desc "Restrict"                 :n  "r" #'iedit-restrict-function
-     :desc "Upcase"                   :n  "u" #'iedit-upcase-occurences
-     :desc "Downcase"                 :n  "d" #'iedit-downcase-occurences
-		 :desc "Delete"                   :n  "!" #'iedit-delete-occurences
-		 :desc "Case sensitive"           :n  "c" #'iedit-toggle-case-sensitive
-		 :desc "Quit"                     :n  "q" #'iedit-quit)
-	  :desc "List errors"                :n  "x" #'flycheck-list-errors
-	  :desc "Jump to definition"         :n  "j" #'smart-jump-go
-		:desc "Jumpt to definition (dumb)" :n  "J" #'dumb-jump-go
-	  :desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-ag)
+	  :desc "List errors"               :n  "x" #'flycheck-list-errors
+	  :desc "Evaluate buffer/region"    :n  "e" #'+eval/buffer
+	  :v  "e" #'+eval/region
+	  :desc "Evaluate & replace region" :nv "E" #'+eval:replace-region
+	  :desc "Build tasks"               :nv "b" #'+eval/build
+	  :desc "Jump to definition"        :n  "d" #'+lookup/definition
+	  :desc "Jump to references"        :n  "D" #'+lookup/references
+	  :desc "Open REPL"                 :n  "r" #'+eval/open-repl
+	  :v  "r" #'+eval:repl)
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'counsel-find-file
@@ -246,7 +244,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Switch project"          :n  "p" #'projectile-switch-project
 	  :desc "Recent project files"    :n  "r" #'projectile-recentf
 	  :desc "List project tasks"      :n  "t" #'+ivy/tasks
-	  :desc "ag in project"           :nv "a" #'projectile-ag
+	  :desc "rg in project"           :nv "s" #'counsel-projectile-rg
+	  :desc "rg in project (results)" :nv "S" #'rg-project
 	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache
 	  :desc "neotree"                 :nv "t" #'neotree-projectile-action)
 
@@ -260,8 +259,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode
-	  :desc "Theme"                  :n "T" #'counsel-load-theme
-	  :desc "Golden ratio"           :n "g" #'golden-ratio-mod))
+      :desc "Theme"                  :n "T" #'counsel-load-theme))
 
 
       ;; --- Personal vim-esque bindings ------------------
@@ -315,13 +313,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  "C-p"        #'company-search-repeat-backward
 	  "C-s"        (λ! (company-search-abort) (company-filter-candidates))
 	  [escape]     #'company-search-abort))
-
-      ;; counsel
-      (:after counsel
-	(:map counsel-ag-map
-	  [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
-	  "C-SPC"    #'ivy-call-and-recenter ; preview
-	  ))
 
       ;; evil
       (:after evil

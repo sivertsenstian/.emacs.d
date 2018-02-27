@@ -52,7 +52,8 @@
 (use-package neotree
  :straight t
  :config
- (setq neo-theme 'icons))
+ (setq neo-theme 'icons)
+ )
 
 (use-package all-the-icons-ivy
   :straight t
@@ -68,15 +69,13 @@
 (setq evil-visual-state-tag " VISUAL")
 (setq sml/no-confirm-load-theme t
       sml/hidden-modes t
-      sml/mode-width 'full)
+      sml/mode-width 'full
+      sml/theme 'respectful)
 (sml/setup))
 
 ;; THEMES
 (use-package doom-themes
  :straight t)
-
-;; (use-package spacemacs-theme
-;;  :straight t)
 
 (use-package material-theme
  :straight t)
@@ -90,9 +89,7 @@
 (use-package nord-theme
  :straight t
  :config
- (setq nord-comment-brightness 20)
- (setq nord-region-highlight "frost")
- (load-theme 'nord t))
+ (setq nord-comment-brightness 20))
 
 (use-package solarized-theme
  :straight t
@@ -104,9 +101,10 @@
  (setq solarized-height-plus-1 1.0)
  (setq solarized-height-plus-2 1.0)
  (setq solarized-height-plus-3 1.0)
- (setq solarized-height-plus-4 1.0)
- ;(load-theme 'solarized-dark t)
- )
+ (setq solarized-height-plus-4 1.0))
+
+(use-package cyberpunk-theme
+ :straight t)
 
 ;; export
 (provide 'init-themes)
