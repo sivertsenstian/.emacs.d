@@ -12,9 +12,13 @@
  :straight t
  :config
  (global-git-gutter+-mode)
- (set-face-background 'git-gutter+-modified "#E9CB8B")
- (set-face-background 'git-gutter+-added "#A3BE8C")
- (set-face-background 'git-gutter+-deleted "#CE8770"))
+ (set-face-foreground 'git-gutter+-modified "#33859E")
+ (set-face-foreground 'git-gutter+-added "#2AA889")
+ (set-face-foreground 'git-gutter+-deleted "#D25C26")
+ (set-face-background 'git-gutter+-modified "#33859E")
+ (set-face-background 'git-gutter+-added "#2AA889")
+ (set-face-background 'git-gutter+-deleted "#D25C26")
+ )
 
 (use-package git-gutter-fringe+
  :straight t

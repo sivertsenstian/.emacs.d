@@ -9,7 +9,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Source Code Pro" nil t)
 (electric-indent-mode +1)
-(fringe-mode '(8 . 4))
+(fringe-mode '(8 . 6))
 (display-time-mode)
 (set-default 'truncate-lines t)
 
@@ -52,8 +52,7 @@
 (use-package neotree
  :straight t
  :config
- (setq neo-theme 'icons)
- )
+ (setq neo-theme 'icons))
 
 (use-package all-the-icons-ivy
   :straight t
@@ -74,22 +73,20 @@
 (sml/setup))
 
 ;; THEMES
-(use-package doom-themes
- :straight t)
-
-(use-package material-theme
- :straight t)
-
-(use-package moe-theme
- :straight t)
-
-(use-package ample-theme
- :straight t)
-
 (use-package nord-theme
- :straight t
- :config
- (setq nord-comment-brightness 20))
+ :straight t)
+
+(use-package gruber-darker-theme
+ :straight t)
+
+(use-package dracula-theme
+ :straight t)
+
+(use-package cyberpunk-theme
+ :straight t)
+
+(use-package gotham-theme
+ :straight t)
 
 (use-package solarized-theme
  :straight t
@@ -102,9 +99,6 @@
  (setq solarized-height-plus-2 1.0)
  (setq solarized-height-plus-3 1.0)
  (setq solarized-height-plus-4 1.0))
-
-(use-package cyberpunk-theme
- :straight t)
 
 ;; export
 (provide 'init-themes)
