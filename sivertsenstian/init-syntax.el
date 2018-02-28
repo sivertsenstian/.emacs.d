@@ -12,6 +12,12 @@
  (global-flycheck-mode)
  (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
+(use-package flycheck-color-mode-line
+ :after flycheck
+ :straight t
+ :config
+ (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+
 (use-package browse-kill-ring
  :straight t
  :config
