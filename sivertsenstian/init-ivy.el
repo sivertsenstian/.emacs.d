@@ -23,11 +23,8 @@
 (use-package projectile
  :straight t
  :config
- (setq projectile-globally-ignored-files
-       (append '(".pyc"
-                 ".class"
-                 "~")
-                projectile-globally-ignored-files)))
+ (setq projectile-indexing-method 'native)
+ (setq projectile-enable-caching t))
 
 (use-package counsel-projectile
  :after (counsel projectile)

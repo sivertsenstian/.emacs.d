@@ -33,6 +33,8 @@
 ;;----------------------------------------------------------------------------
 ;; Top-level configuration
 ;;----------------------------------------------------------------------------
+(setq debug-on-error t)
+(winner-mode 1)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
   backup-by-copying t    ; Don't delink hardlinks
@@ -57,3 +59,23 @@
 (use-package init-git)
 (use-package init-clojure)
 (use-package init-css)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((((type graphic)) :foreground "#99d1ce" :background "#0c1014") (((type tty)) :foreground "white" :background "black")))
+ '(company-tooltip-common ((t (:inherit company-tooltip :foreground "#edb443" :weight bold))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "#edb443" :foreground "#091f2e"))))
+ '(hlt-property-highlight ((t (:background "#599cab" :foreground "#d3ebe9"))))
+ '(mode-line-inactive ((t (:foreground "#245361"))))
+ '(sml/filename ((t (:inherit mode-line-buffer-id :background "none" :foreground "#2aa889" :weight normal))))
+ '(sml/minor-modes ((t (:inherit sml/global))))
+ '(sml/modes ((t (:inherit sml/filename :background "none" :foreground "#edb443" :weight normal))))
+ '(sml/time ((t (:inherit sml/modes :background "none" :foreground "#2aa889")))))

@@ -9,7 +9,7 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Source Code Pro" nil t)
 (electric-indent-mode +1)
-(fringe-mode '(8 . 6))
+(fringe-mode '(8 . 4))
 (display-time-mode)
 (set-default 'truncate-lines t)
 
@@ -86,7 +86,9 @@
  :straight t)
 
 (use-package gotham-theme
- :straight t)
+ :straight t
+ :config
+ (set-face-background hl-line-face "#161E26"))
 
 (use-package solarized-theme
  :straight t

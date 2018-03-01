@@ -34,5 +34,10 @@
  :config
  (winum-mode))
 
+;;  (use-package golden-ratio
+;;   :straight t
+;;   :config
+;;   (golden-ratio-mode 1))
+
 ;; export
 (provide 'init-navigation)

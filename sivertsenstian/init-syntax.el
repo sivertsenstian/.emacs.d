@@ -35,6 +35,12 @@
  :config
  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package highlight-indentation
+ :straight t
+ :config
+ (set-face-background 'highlight-indentation-face "#195466")
+ (set-face-background 'highlight-indentation-current-column-face "#26859E"))
+
 (use-package lispy
  :straight t)
 
