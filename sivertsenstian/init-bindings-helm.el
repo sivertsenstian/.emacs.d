@@ -58,8 +58,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; --- Global keybindings ---------------------------
       ;; Make M-x available everywhere
-      :gnvime "M-x" #'execute-extended-command
-      :gnvime "A-x" #'execute-extended-command
+      :gnvime "M-x" #'helm-M-x
+      :gnvime "A-x" #'helm-M-x
 
       ;; Text-scaling
       "M-="       (λ! (text-scale-set 0))
@@ -556,4 +556,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	(:map view-mode-map "<escape>" #'View-quit-all)))
 
 ;; export
-(provide 'init-bindings)
+(provide 'init-bindings-helm)
