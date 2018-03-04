@@ -20,8 +20,7 @@
                (display-buffer-in-side-window)
                (window-height . 0.2)))
 
- (setq helm-display-function #'display-buffer)
- )
+ (setq helm-display-function #'display-buffer))
 
 (use-package projectile
  :straight t
@@ -35,6 +34,12 @@
  (helm-projectile-on))
 
 (use-package helm-ag
+ :straight t)
+
+(use-package swiper-helm
+ :straight t)
+
+(use-package helm-themes
  :straight t)
 
 ;; export

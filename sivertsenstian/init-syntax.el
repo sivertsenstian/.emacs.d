@@ -50,10 +50,5 @@
  (add-hook 'prog-mode-hook #'smartparens-mode)
  (add-hook 'prog-mode-hook #'smartparens-strict-mode))
 
-(use-package paredit
- :straight t
- :config
- (add-hook 'prog-mode-hook #'enable-paredit-mode))
-
 ;; export
 (provide 'init-syntax)

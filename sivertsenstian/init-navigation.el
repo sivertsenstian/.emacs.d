@@ -39,5 +39,7 @@
 ;;   :config
 ;;   (golden-ratio-mode 1))
 
+(use-package imenu-anywhere
+ :straight t)
 ;; export
 (provide 'init-navigation)
