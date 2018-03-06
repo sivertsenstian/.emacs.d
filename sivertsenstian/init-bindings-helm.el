@@ -123,7 +123,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "wrap sexp in []"      :nv "[" #'lispy-wrap-brackets
 	  :desc "wrap sexp in {}"      :nv "{" #'lispy-wrap-braces
 	  :desc "stringify"            :nv "\"" #'lispy-stringify
-	  :desc "unstringify"          :nv "'" #'lispy-stringify
+	  :desc "unstringify"          :nv "'" #'lispy-unstringify
 	  :desc "toggle strict"        :nv "!" #'smartparens-strict-mode
 	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 

@@ -1,13 +1,8 @@
 ;;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - CSS MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
-(use-package counsel-css
-  :straight (counsel-css :type git :host github :repo "hlissner/emacs-counsel-css")
-  :commands (counsel-css counsel-css-imenu-setup)
-  :hook (css-mode . counsel-css-imenu-setup)
-  :init
-  (map! :map* (css-mode-map scss-mode-map less-css-mode-map)
-        :localleader :n ";" #'counsel-css))
+(use-package helm-css-scss
+ :straight t)
 
 (use-package rainbow-mode
   :straight t

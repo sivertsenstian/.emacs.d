@@ -64,6 +64,7 @@
 (use-package init-git)
 (use-package init-clojure)
 (use-package init-css)
+(use-package init-web)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
