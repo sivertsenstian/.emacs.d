@@ -189,7 +189,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		:desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-rg)
 
 	(:desc "file" :prefix "f"
-	  :desc "Find file"                 :n "f" #'helm-find-file
+	  :desc "Find file"                 :n "f" #'helm-find-files
 	  :desc "Save file"                 :n "s" #'save-buffer
 	  :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'helm-projectile-find-file

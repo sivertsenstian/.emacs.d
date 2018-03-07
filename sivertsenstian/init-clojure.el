@@ -7,6 +7,7 @@
  :mode "\\.clj$"
  :mode ("\\.cljs$" . clojurescript-mode)
  :config
+ (setq cider-repl-history-file "~/.emacs.d/cider.history.log")
  (map! :map clojure-mode-map
   (:localleader
      :nv "e" #'cider-eval-last-sexp
