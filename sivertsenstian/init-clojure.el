@@ -7,7 +7,12 @@
  :mode "\\.clj$"
  :mode ("\\.cljs$" . clojurescript-mode)
  :config
- (setq cider-repl-history-file "~/.emacs.d/cider.history.log")
+ (setq cider-repl-history-file "~/.emacs.d/cider.history.log"
+       cider-repl-pop-to-buffer-on-connect nil
+       cider-repl-use-clojure-font-lock t
+       cider-repl-use-pretty-printing t
+       cider-show-error-buffer nil
+       )
  (map! :map clojure-mode-map
   (:localleader
      :nv "e" #'cider-eval-last-sexp

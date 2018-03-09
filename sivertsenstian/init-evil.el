@@ -54,6 +54,15 @@
   :config
   (evil-escape-mode)
   (setq-default evil-escape-key-sequence "jk"
-                evil-escape-delay 0.2))
+		evil-escape-delay 0.2))
+
+(use-package evil-goggles
+  :after evil
+  :straight t
+  :config
+  (setq evil-goggles-blocking-duration 0.100)
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces))
+
 ;; export
 (provide 'init-evil)

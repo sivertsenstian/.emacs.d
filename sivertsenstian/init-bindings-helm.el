@@ -147,12 +147,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "search" :prefix "s"
 	  :desc "search"                :nv "s" #'helm-ag
-	  :desc "resume"                :nv "s" #'helm-resume
+	  :desc "resume"                :nv "r" #'helm-resume
 	  :desc "list searches"         :nv "l" #'rg-list-searches
 	  :desc "in project"            :nv "p" #'helm-projectile-ag
 	  :desc "in project (results)"  :nv "P" #'helm-ag-project-root
-	  :desc "Swiper"                :nv "s" #'swiper-helm
-	  :desc "Avy goto"              :nv "j" #'evil-avy-goto-char
+	  :desc "Swiper"                :nv "f" #'swiper-helm
 	  :desc "Imenu"                 :nv "j" #'helm-imenu
 	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
 		:desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
@@ -223,8 +222,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "Jump" :prefix "j"
 	  :desc "to char"               :nv "j" #'avy-goto-char
-	  :desc "to fn"                 :nv "f" #'imenu
-	  :desc "to fn across buffers"  :nv "F" #'imenu-anywhere
+	  :desc "to word"               :nv "w" #'avy-goto-word-1
+	  :desc "to line above"         :nv "K" #'avy-goto-line-above
+	  :desc "to line below"         :nv "J" #'avy-goto-line-below
+	  :desc "Imenu"                 :nv "s" #'helm-imenu
+	  :desc "Imenu across buffers"  :nv "S" #'helm-imenu-anywhere
 	  :desc "to definition"         :nv "d" #'evil-goto-definition)
 
 	(:desc "project" :prefix "p"

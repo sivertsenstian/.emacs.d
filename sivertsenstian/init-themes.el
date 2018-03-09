@@ -27,7 +27,7 @@
    "Build a man a fire, and he'll be warm for a day. Set a man on fire, and he'll be warm for the rest of his life.")
   (setq dashboard-startup-banner (expand-file-name "sivertsenstian/logo.png" user-emacs-directory))
   (setq dashboard-items '((recents  . 5)
-                          (projects . 5))))
+			  (projects . 5))))
 
 (use-package nlinum
  :straight t
@@ -52,7 +52,8 @@
 (use-package neotree
  :straight t
  :config
- (setq neo-theme 'icons))
+ (setq neo-theme 'icons)
+ (setq neo-window-fixed-size nil))
 
 (use-package all-the-icons-ivy
   :straight t

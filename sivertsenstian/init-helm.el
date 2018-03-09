@@ -16,9 +16,9 @@
  (setq helm-grep-ag-pipe-cmd-switches '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'"))
 
  (add-to-list 'display-buffer-alist
-             '("\\`\\*helm"
-               (display-buffer-in-side-window)
-               (window-height . 0.2)))
+	     '("\\`\\*helm"
+	       (display-buffer-in-side-window)
+	       (window-height . 0.2)))
 
  (setq helm-display-function #'display-buffer))
 
@@ -37,10 +37,12 @@
  :straight t)
 
 (use-package swiper-helm
- :straight t)
+  :straight t
+  :config
+  (setq swiper-helm-display-function 'helm-default-display-buffer))
 
 (use-package helm-themes
- :straight t)
+  :straight t)
 
 ;; export
 (provide 'init-helm)
