@@ -38,16 +38,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
   (global-set-key [escape] 'evil-exit-emacs-state);; slack
 
-(define-key evil-motion-state-map (kbd "ø") (simulate-key-press "["))
-(define-key evil-motion-state-map (kbd "æ") (simulate-key-press "]"))
-(define-key evil-motion-state-map (kbd "Ø") (simulate-key-press "{"))
-(define-key evil-motion-state-map (kbd "Æ") (simulate-key-press "}"))
-
-(define-key evil-insert-state-map (kbd "ø") (simulate-key-press "["))
-(define-key evil-insert-state-map (kbd "æ") (simulate-key-press "]"))
-(define-key evil-insert-state-map (kbd "Ø") (simulate-key-press "{"))
-(define-key evil-insert-state-map (kbd "Æ") (simulate-key-press "}"))
-
 ;; KEYBINDINGS
 (map! [remap evil-jump-to-tag] #'projectile-find-tag
       [remap find-tag]         #'projectile-find-tag
@@ -58,8 +48,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; --- Global keybindings ---------------------------
       ;; Make M-x available everywhere
-      :gnvime "M-x" #'execute-extended-command
-      :gnvime "A-x" #'execute-extended-command
+      :gnvime "M-x" #'helm-M-x
+      :gnvime "A-x" #'helm-M-x
 
       ;; Text-scaling
       "M-="       (λ! (text-scale-set 0))
@@ -82,13 +72,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :m  "gD" #'+lookup/references
       :m  "gh" #'+lookup/documentation
       :n  "gp" #'+evil/reselect-paste
-      :n  "gr" #'+eval:region
-      :n  "gR" #'+eval/buffer
       :v  "gR" #'+eval:replace-region
-      :v  "@"  #'+evil:macro-on-all-lines
-      :n  "g@" #'+evil:macro-on-all-lines
 
-      :en "C-f"   #'swiper
+      :en "C-f"   #'swiper-helm
       ;; Easier window navigation
       :en "C-h"   #'evil-window-left
       :en "C-j"   #'evil-window-down
@@ -106,7 +92,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Eval expression"         :n ","   #'switch-to-buffer
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
-	:desc "search"                  :n "/"   #'counsel-projectile-rg
+	:desc "search"                  :n "/"   #'helm-projectile-ag
 	:desc "search symbol"           :n "*"   #'rg-dwim
 	:desc "window"                  :n "w"   evil-window-map
 	:desc "shell"                   :n "!"   #'shell
@@ -137,7 +123,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "wrap sexp in []"      :nv "[" #'lispy-wrap-brackets
 	  :desc "wrap sexp in {}"      :nv "{" #'lispy-wrap-braces
 	  :desc "stringify"            :nv "\"" #'lispy-stringify
-	  :desc "unstringify"          :nv "'" #'lispy-stringify
+	  :desc "unstringify"          :nv "'" #'lispy-unstringify
 	  :desc "toggle strict"        :nv "!" #'smartparens-strict-mode
 	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 
@@ -160,16 +146,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Smart jump"            :nv "l" #'smart-forward)
 
 	(:desc "search" :prefix "s"
-	  :desc "rg"                    :nv "r" #'rg
+	  :desc "search"                :nv "s" #'helm-ag
+	  :desc "resume"                :nv "r" #'helm-resume
 	  :desc "list searches"         :nv "l" #'rg-list-searches
-	  :desc "counsel find"          :nv "c" #'counsel-rg
-	  :desc "in project"            :nv "p" #'counsel-projectile-rg
-	  :desc "in project (results)"  :nv "P" #'rg-project
-	  :desc "Swiper"                :nv "s" #'swiper
-	  :desc "Avy goto"              :nv "j" #'evil-avy-goto-char
-	  :desc "Imenu"                 :nv "j" #'imenu
-	  :desc "Imenu across buffers"  :nv "J" #'imenu-anywhere
-	  :desc "Browse kill ring"      :nv "k" #'browse-kill-ring)
+	  :desc "in project"            :nv "p" #'helm-projectile-ag
+	  :desc "in project (results)"  :nv "P" #'helm-ag-project-root
+	  :desc "Swiper"                :nv "f" #'swiper-helm
+	  :desc "Imenu"                 :nv "j" #'helm-imenu
+	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
+		:desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
 
 	(:desc "error" :prefix "e"
 	  :desc "next"                  :nv "n" #'next-error
@@ -203,14 +188,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		:desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-rg)
 
 	(:desc "file" :prefix "f"
-	  :desc "Find file"                 :n "f" #'counsel-find-file
+	  :desc "Find file"                 :n "f" #'helm-find-files
 	  :desc "Save file"                 :n "s" #'save-buffer
 	  :desc "Save files"                :n "S" #'save-some-buffers
-	  :desc "Find file in project"      :n "p" #'projectile-find-file
-	  :desc "Find file from here"       :n "j" #'counsel-file-jump
-	  :desc "Find other file"           :n "a" #'projectile-find-other-file
-	  :desc "Recent files"              :n "r" #'counsel-recentf
-	  :desc "Recent project files"      :n "R" #'projectile-recentf)
+	  :desc "Find file in project"      :n "p" #'helm-projectile-find-file
+	  :desc "Find other file"           :n "a" #'helm-projectile-find-other-file
+	  :desc "Recent files"              :n "r" #'helm-recentf
+	  :desc "Recent project files"      :n "R" #'helm-projectile-recentf)
 
 	(:desc "git" :prefix "g"
 	  :desc "Git status"            :n  "s" #'magit-status
@@ -238,19 +222,21 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "Jump" :prefix "j"
 	  :desc "to char"               :nv "j" #'avy-goto-char
-	  :desc "to fn"                 :nv "f" #'imenu
-	  :desc "to fn across buffers"  :nv "F" #'imenu-anywhere
+	  :desc "to word"               :nv "w" #'avy-goto-word-1
+	  :desc "to line above"         :nv "K" #'avy-goto-line-above
+	  :desc "to line below"         :nv "J" #'avy-goto-line-below
+	  :desc "Imenu"                 :nv "s" #'helm-imenu
+	  :desc "Imenu across buffers"  :nv "S" #'helm-imenu-anywhere
 	  :desc "to definition"         :nv "d" #'evil-goto-definition)
 
 	(:desc "project" :prefix "p"
 	  :desc "Browse project"          :n  "." #'+default/browse-project
-	  :desc "Find file in project"    :n  "f" #'projectile-find-file
+	  :desc "Find file in project"    :n  "f" #'helm-projectile-find-file
 	  :desc "Run cmd in project root" :nv "!" #'projectile-run-shell-command-in-root
 	  :desc "Switch project"          :n  "p" #'projectile-switch-project
 	  :desc "Recent project files"    :n  "r" #'projectile-recentf
-	  :desc "List project tasks"      :n  "t" #'+ivy/tasks
-	  :desc "rg in project"           :nv "s" #'counsel-projectile-rg
-	  :desc "rg in project (results)" :nv "S" #'rg-project
+	  :desc "search in project"           :nv "s" #'helm-projectile-ag
+	  :desc "search in project (results)" :nv "S" #'helm-ag-project-root
 	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache
 	  :desc "neotree"                 :nv "t" #'neotree-projectile-action)
 
@@ -265,7 +251,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "New frame"              :n "N" #'make-frame
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode
-      :desc "Theme"                  :n "T" #'counsel-load-theme))
+      :desc "Theme"                  :n "T" #'helm-themes))
 
 
       ;; --- Personal vim-esque bindings ------------------
@@ -322,6 +308,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  "C-s"        (λ! (company-search-abort) (company-filter-candidates))
 	  [escape]     #'company-search-abort))
 
+	  ;;helm
+	  (:after helm
+	   (:map helm-map
+	    "C-j" #'helm-next-line
+		"C-k" #'helm-previous-line))
       ;; evil
       (:after evil
 	(:map evil-window-map ; prefix "C-w"
@@ -425,21 +416,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	"K" #'browse-kill-ring-search-backward
 	"P" #'browse-kill-ring-prepend-insert
 	"p" #'browse-kill-ring-append-insert)
-      ;; ivy
-      (:after ivy
-	:map ivy-minibuffer-map
-	[escape] #'keyboard-escape-quit
-	"C-SPC" #'ivy-call-and-recenter
-	"M-v" #'yank
-	"M-z" #'undo
-	"C-r" #'evil-paste-from-register
-	"C-k" #'ivy-previous-line
-	"C-j" #'ivy-next-line
-	"C-l" #'ivy-alt-done
-	"C-w" #'ivy-backward-kill-word
-	"C-u" #'ivy-kill-line
-	"C-b" #'backward-word
-	"C-f" #'forward-word)
 
       ;; neotree
       (:after neotree
@@ -468,11 +444,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:n "q"         #'neotree-hide
 	:n "R"         #'neotree-refresh)
 
-      ;; swiper
-      (:after swiper
-	(:map swiper-map
-	  [backtab]  #'+ivy/wgrep-occur))
-
       ;; undo-tree -- undo/redo for visual regions
       :v "C-u" #'undo-tree-undo
       :v "C-r" #'undo-tree-redo
@@ -494,8 +465,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:n "[["  #'help-go-back
 	:n "]]"  #'help-go-forward
 	:n "o"   #'ace-link-help
-	:n "q"   #'quit-window
-	:n "Q"   #'ivy-resume)
+	:n "q"   #'quit-window)
 
       (:after vc-annotate
 	:map vc-annotate-mode-map

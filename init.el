@@ -55,16 +55,15 @@
  :config
  (load-theme 'gotham t))
 (use-package init-syntax)
-;(use-package init-bindings)
-(use-package init-bindings-helm)
+(use-package init-bindings)
 (use-package init-helm)
-;(use-package init-ivy)
 (use-package init-files)
 (use-package init-navigation)
 (use-package init-git)
 (use-package init-clojure)
 (use-package init-css)
 (use-package init-web)
+(use-package init-arduino)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
