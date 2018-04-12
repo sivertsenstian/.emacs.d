@@ -6,6 +6,7 @@
  :init
  (helm-mode 1)
  :config
+ (setq helm-use-frame-when-more-than-two-windows nil)
  (setq helm-display-header-line nil)
  (set-face-attribute 'helm-source-header nil :height 0.1)
  (helm-autoresize-mode 1)
@@ -39,7 +40,8 @@
 (use-package swiper-helm
   :straight t
   :config
-  (setq swiper-helm-display-function 'helm-default-display-buffer))
+  (setq swiper-helm-display-function 'helm-default-display-buffer)
+  )
 
 (use-package helm-themes
   :straight t)
