@@ -52,8 +52,8 @@
 (use-package utilities)
 (use-package init-evil)
 (use-package init-themes
- :config
- (load-theme 'gotham t))
+  :config
+  (load-theme 'dracula t))
 (use-package init-syntax)
 (use-package init-bindings)
 (use-package init-helm)
@@ -64,6 +64,7 @@
 (use-package init-css)
 (use-package init-web)
 (use-package init-arduino)
+(use-package init-elm)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -73,17 +74,4 @@
    (quote
     ((cider-lein-parameters . "with-profile +dirac repl :headless :host ::")
      (cider-lein-parameters . "with-profile +debug repl :headless :host ::")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((type graphic)) :foreground "#99d1ce" :background "#0c1014") (((type tty)) :foreground "white" :background "black")))
- '(company-tooltip-common ((t (:inherit company-tooltip :foreground "#edb443" :weight bold))))
- '(evil-search-highlight-persist-highlight-face ((t (:background "#edb443" :foreground "#091f2e"))))
- '(hlt-property-highlight ((t (:background "#599cab" :foreground "#d3ebe9"))))
- '(mode-line-inactive ((t (:foreground "#245361"))))
- '(sml/filename ((t (:inherit mode-line-buffer-id :background "none" :foreground "#2aa889" :weight normal))))
- '(sml/minor-modes ((t (:inherit sml/global))))
- '(sml/modes ((t (:inherit sml/filename :background "none" :foreground "#edb443" :weight normal))))
- '(sml/time ((t (:inherit sml/modes :background "none" :foreground "#2aa889")))))
+

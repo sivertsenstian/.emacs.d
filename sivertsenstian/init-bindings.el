@@ -89,7 +89,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Ex command"              :nv ";"  #'execute-extended-command
 	:desc "M-x"                     :nv ":"  #'evil-ex
 	:desc "Browse files"            :n "."   #'find-file
-	:desc "Eval expression"         :n ","   #'switch-to-buffer
+	:desc "Browse buffers"          :n ","   #'helm-mini
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
 	:desc "search"                  :n "/"   #'helm-projectile-ag
@@ -154,7 +154,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Swiper"                :nv "f" #'swiper-helm
 	  :desc "Imenu"                 :nv "j" #'helm-imenu
 	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
-		:desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
+	  :desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
 
 	(:desc "error" :prefix "e"
 	  :desc "next"                  :nv "n" #'next-error
@@ -174,18 +174,18 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "code" :prefix "c"
 	  (:desc "edit" :prefix "e"
-		  :desc "Edit symbol (in buffer)"  :n  "s" #'iedit-mode
-		  :desc "Edit symbol (in fn)"      :n  "S" #'iedit-mode-toggle-on-function
-	      :desc "Restrict"                 :n  "r" #'iedit-restrict-function
-	      :desc "Upcase"                   :n  "u" #'iedit-upcase-occurences
-	      :desc "Downcase"                 :n  "d" #'iedit-downcase-occurences
-		  :desc "Delete"                   :n  "!" #'iedit-delete-occurences
-		  :desc "Case sensitive"           :n  "c" #'iedit-toggle-case-sensitive
-		:desc "Quit"                       :n  "q" #'iedit-quit)
-		:desc "List errors"                :n  "x" #'flycheck-list-errors
-		:desc "Jump to definition"         :n  "j" #'smart-jump-go
-		:desc "Jumpt to definition (dumb)" :n  "J" #'dumb-jump-go
-		:desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-rg)
+	    :desc "Edit symbol (in buffer)"  :n  "s" #'iedit-mode
+	    :desc "Edit symbol (in fn)"      :n  "S" #'iedit-mode-toggle-on-function
+	    :desc "Restrict"                 :n  "r" #'iedit-restrict-function
+	    :desc "Upcase"                   :n  "u" #'iedit-upcase-occurences
+	    :desc "Downcase"                 :n  "d" #'iedit-downcase-occurences
+	    :desc "Delete"                   :n  "!" #'iedit-delete-occurences
+	    :desc "Case sensitive"           :n  "c" #'iedit-toggle-case-sensitive
+	    :desc "Quit"                       :n  "q" #'iedit-quit)
+	  :desc "List errors"                :n  "x" #'flycheck-list-errors
+	  :desc "Jump to definition"         :n  "j" #'smart-jump-go
+	  :desc "Jumpt to definition (dumb)" :n  "J" #'dumb-jump-go
+	  :desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-rg)
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'helm-find-files
@@ -251,7 +251,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "New frame"              :n "N" #'make-frame
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode
-      :desc "Theme"                  :n "T" #'helm-themes))
+	  :desc "Theme"                  :n "T" #'helm-themes))
 
 
       ;; --- Personal vim-esque bindings ------------------

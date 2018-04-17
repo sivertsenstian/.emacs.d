@@ -19,6 +19,11 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
 (use-package dashboard
   :straight t
   :config
@@ -55,12 +60,6 @@
  (setq neo-theme 'icons)
  (setq neo-window-fixed-size nil))
 
-(use-package all-the-icons-ivy
-  :straight t
-  :after ivy
-  :config
-  (all-the-icons-ivy-setup))
-
 (use-package smart-mode-line
 :straight t
 :config
@@ -73,7 +72,15 @@
       sml/theme 'respectful)
 (sml/setup))
 
+
 ;; THEMES
+(use-package doom-themes
+  :straight t
+  :config
+  (let ((height (face-attribute 'default :height)))
+    ;; for all linum/nlinum users
+    (set-face-attribute 'linum nil :height height)))
+
 (use-package nord-theme
  :straight t)
 
