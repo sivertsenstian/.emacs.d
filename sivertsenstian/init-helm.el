@@ -35,13 +35,16 @@
  (helm-projectile-on))
 
 (use-package helm-ag
-  :straight t)
+  :straight t
+  :config
+  (custom-set-variables
+   '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
+   '(helm-ag-insert-at-point 'symbol)))
 
 (use-package swiper-helm
   :straight t
   :config
-  (setq swiper-helm-display-function 'helm-default-display-buffer)
-  )
+  (setq swiper-helm-display-function 'helm-default-display-buffer))
 
 (use-package helm-themes
   :straight t)
