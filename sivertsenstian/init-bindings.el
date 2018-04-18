@@ -74,7 +74,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :n  "gp" #'+evil/reselect-paste
       :v  "gR" #'+eval:replace-region
 
-      :en "C-f"   #'swiper-helm
+      :en "C-f"   #'helm-swoop
+      :en "C-F"   #'helm-multi-swoop-projectile
       ;; Easier window navigation
       :en "C-h"   #'evil-window-left
       :en "C-j"   #'evil-window-down
@@ -151,7 +152,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "list searches"         :nv "l" #'rg-list-searches
 	  :desc "in project"            :nv "p" #'helm-projectile-ag
 	  :desc "in project (results)"  :nv "P" #'helm-ag-project-root
-	  :desc "Swiper"                :nv "f" #'swiper-helm
+	  :desc "Swoop"                 :nv "f" #'helm-swoop
+	  :desc "Swoop project"         :nv "F" #'helm-multi-swoop-projectile
 	  :desc "Imenu"                 :nv "j" #'helm-imenu
 	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
 	  :desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)

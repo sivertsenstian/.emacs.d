@@ -41,10 +41,12 @@
    '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
    '(helm-ag-insert-at-point 'symbol)))
 
-(use-package swiper-helm
+(use-package helm-swoop
   :straight t
   :config
-  (setq swiper-helm-display-function 'helm-default-display-buffer))
+  (setq helm-swoop-split-with-multiple-windows t)
+  (setq helm-swoop-speed-or-color t)
+  (setq helm-swoop-split-direction 'split-window-vertically))
 
 (use-package helm-themes
   :straight t)

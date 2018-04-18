@@ -11,8 +11,7 @@
        cider-repl-pop-to-buffer-on-connect nil
        cider-repl-use-clojure-font-lock t
        cider-repl-use-pretty-printing t
-       cider-show-error-buffer nil
-       )
+       cider-show-error-buffer nil)
  (map! :map clojure-mode-map
   (:localleader
      :nv "e" #'cider-eval-last-sexp
