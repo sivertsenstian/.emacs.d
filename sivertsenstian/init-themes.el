@@ -75,6 +75,7 @@
 
 ;; THEMES
 (use-package doom-themes
+  :defer t
   :straight t
   :config
   (let ((height (face-attribute 'default :height)))
@@ -82,23 +83,29 @@
     (set-face-attribute 'linum nil :height height)))
 
 (use-package nord-theme
- :straight t)
+  :defer t
+  :straight t)
 
 (use-package gruber-darker-theme
- :straight t)
+  :defer t
+  :straight t)
 
 (use-package dracula-theme
- :straight t)
+  :defer t
+  :straight t)
 
 (use-package cyberpunk-theme
- :straight t)
+  :defer t
+  :straight t)
 
 (use-package gotham-theme
+ :defer t
  :straight t
  :config
  (set-face-background hl-line-face "#161E26"))
 
 (use-package solarized-theme
+ :defer t
  :straight t
  :config
  (setq solarized-emphasize-indicators nil)

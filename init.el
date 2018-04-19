@@ -70,8 +70,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
+ '(helm-ag-insert-at-point (quote symbol))
  '(safe-local-variable-values
    (quote
     ((cider-lein-parameters . "with-profile +dirac repl :headless :host ::")
      (cider-lein-parameters . "with-profile +debug repl :headless :host ::")))))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(sml/filename ((t (:inherit nil :foreground "#edb443" :weight normal))))
+ '(sml/modes ((t (:inherit nil :foreground "#2aa889" :weight normal))))
+ '(sml/time ((t (:inherit sml/global)))))
