@@ -60,11 +60,14 @@
 (use-package init-files)
 (use-package init-navigation)
 (use-package init-git)
+(use-package init-vctfs)
 (use-package init-clojure)
 (use-package init-css)
 (use-package init-web)
 (use-package init-arduino)
 (use-package init-elm)
+(use-package init-javascript)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
