@@ -2,9 +2,11 @@
 ;; SIVERTSENSTIAN - CSS MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package helm-css-scss
- :straight t)
+  :after web-mode
+  :straight t)
 
 (use-package rainbow-mode
+  :after (:any css-mode scss-mode less-css-mode web-mode)
   :straight t
   :hook (css-mode sass-mode))
 

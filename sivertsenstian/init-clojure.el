@@ -2,7 +2,6 @@
 ;; SIVERTSENSTIAN - CLOJURE MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package clojure-mode
- :defer t
  :straight t
  :mode "\\.clj$"
  :mode ("\\.cljs$" . clojurescript-mode)
@@ -31,7 +30,7 @@
  :straight t)
 
 (use-package flycheck-joker
- :after (clojure-mode flycheck)
+ :after (:all clojure-mode flycheck)
  :straight t)
 
 ;; export

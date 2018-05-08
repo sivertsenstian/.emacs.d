@@ -49,24 +49,23 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
-(use-package utilities)
-(use-package init-evil)
-(use-package init-themes
-  :config
-  (load-theme 'dracula t))
-(use-package init-syntax)
-(use-package init-bindings)
-(use-package init-helm)
-(use-package init-files)
-(use-package init-navigation)
-(use-package init-git)
-(use-package init-vctfs)
-(use-package init-clojure)
-(use-package init-css)
-(use-package init-web)
-(use-package init-arduino)
-(use-package init-elm)
-(use-package init-javascript)
+ (use-package utilities)
+ (use-package init-evil)
+ (use-package init-themes
+   :config
+   (load-theme 'dracula t))
+ (use-package init-syntax)
+ (use-package init-bindings)
+ (use-package init-helm)
+ (use-package init-files)
+ (use-package init-navigation)
+ (use-package init-git)
+ (use-package init-clojure)
+ (use-package init-css)
+ (use-package init-arduino)
+ (use-package init-elm)
+ (use-package init-javascript)
+ (use-package init-csharp)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -74,17 +73,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
- '(helm-ag-insert-at-point (quote symbol))
- '(safe-local-variable-values
-   (quote
-    ((cider-lein-parameters . "with-profile +dirac repl :headless :host ::")
-     (cider-lein-parameters . "with-profile +debug repl :headless :host ::")))))
-
+ '(helm-ag-insert-at-point (quote symbol)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(sml/filename ((t (:inherit nil :foreground "#edb443" :weight normal))))
- '(sml/modes ((t (:inherit nil :foreground "#2aa889" :weight normal))))
- '(sml/time ((t (:inherit sml/global)))))
+ '(powerline-active1 ((t (:background "#ff79c6" :foreground "#f8f8f2"))))
+ '(powerline-active2 ((t (:background "#ff79c6" :foreground "#f8f8f2")))))

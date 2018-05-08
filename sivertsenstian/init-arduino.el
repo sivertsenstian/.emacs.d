@@ -22,10 +22,6 @@
   :after irony
   :straight t)
 
-;; (use-package irony-eldoc
-;;   :after irony
-;;   :straight t)
-
 (use-package platformio-mode
   :after arduino-mode
   :straight t

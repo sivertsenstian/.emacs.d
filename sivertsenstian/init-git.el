@@ -2,11 +2,11 @@
 ;; SIVERTSENSTIAN - GIT MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package magit
- :defer t
- :straight t
- :config
- (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
- (which-key-mode))
+  :commands (magit-status magit-blame)
+  :straight t
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (which-key-mode))
 
 (use-package git-gutter+
  :straight t
@@ -17,17 +17,17 @@
  (set-face-foreground 'git-gutter+-deleted "#D25C26")
  (set-face-background 'git-gutter+-modified "#33859E")
  (set-face-background 'git-gutter+-added "#2AA889")
- (set-face-background 'git-gutter+-deleted "#D25C26")
- )
+ (set-face-background 'git-gutter+-deleted "#D25C26"))
 
 (use-package git-gutter-fringe+
- :straight t
- :config
- (setq git-gutter-fr+-side 'right-fringe))
+  :straight t
+  :config
+  (setq git-gutter-fr+-side 'right-fringe))
 
 (use-package git-timemachine
- :defer t
- :straight t)
+  :commands (git-timemachine git-timemachine-toggle)
+  :defer t
+  :straight t)
 
 ;; export
 (provide 'init-git)

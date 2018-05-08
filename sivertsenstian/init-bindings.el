@@ -68,14 +68,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :n  "[b" #'previous-buffer
       :n  "]w" #'evil-window-next
       :n  "[w" #'evil-window-prev
-      :m  "gd" #'+lookup/definition
-      :m  "gD" #'+lookup/references
-      :m  "gh" #'+lookup/documentation
+      :m  "gd" #'smart-jump-go
+      :m  "gb" #'smart-jump-back
+      :m  "gh" #'smart-jump-references
       :n  "gp" #'+evil/reselect-paste
       :v  "gR" #'+eval:replace-region
 
       :en "C-f"   #'helm-swoop
-      :en "C-F"   #'helm-multi-swoop-projectile
+      :en "M-f"   #'helm-multi-swoop-projectile
       ;; Easier window navigation
       :en "C-h"   #'evil-window-left
       :en "C-j"   #'evil-window-down
@@ -150,9 +150,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "search"                :nv "s" #'helm-ag
 	  :desc "resume"                :nv "r" #'helm-resume
 	  :desc "list searches"         :nv "l" #'rg-list-searches
-	  :desc "in project"            :nv "p" #'helm-projectile-ag
-	  :desc "in project (results)"  :nv "P" #'helm-ag-project-root
-	  :desc "Swoop"                 :nv "f" #'helm-swoop
+	  :desc "in project"            :nv "p" #'sivertsenstian/helm-project-do-ag
+	  :desc "in project (results)"  :nv "P" #'sivertsenstian/helm-project-do-ag-region-or-symbol
+	  :desc "Swoop"                 :nv "f" #'sivertsenstian/helm-swoop-region-or-symbol
 	  :desc "Swoop project"         :nv "F" #'helm-multi-swoop-projectile
 	  :desc "Imenu"                 :nv "j" #'helm-imenu
 	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
@@ -259,13 +259,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
       :n  "[b" #'previous-buffer
-      :m  "gd" #'+lookup/definition
-      :m  "gD" #'+lookup/references
-      :m  "gh" #'+lookup/documentation
-      :n  "gp" #'+evil/reselect-paste
-      :n  "gr" #'+eval:region
-      :n  "gR" #'+eval/buffer
-      :v  "gR" #'+eval:replace-region
       :nv "gj" #'evil-avy-goto-char
       :nv "gJ" #'evil-avy-goto-line-below
       :nv "gK" #'evil-avy-goto-line-above
@@ -332,6 +325,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       ;; evil-commentary
       :n  "gc"  #'evil-commentary
+      :n  "gy"  #'evil-commentary-yank
       ;; evil-exchange
       :n  "gx"  #'evil-exchange
 

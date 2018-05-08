@@ -3,25 +3,46 @@
 ;;----------------------------------------------------------------------------
 
 (use-package avy
- :straight t)
+  :commands (avy-goto-word-1
+	     avy-goto-line
+	     avy-goto-line-above
+	     avy-goto-line-below
+	     avy-goto-char)
+  :straight t
+  :config
+  (setq avy-all-windows nil
+        avy-background t))
 
 (use-package smart-jump
- :straight t
- :config
- (smart-jump-setup-default-registers)
- (smart-jump-register :modes '(clojure-mode)))
+  :commands (smart-jump-go
+	     smart-jump-back
+	     smart-jump-references
+	     smart-jump-find-references-with-rg)
+  :straight t
+  :config
+  (smart-jump-setup-default-registers)
+  (smart-jump-register :modes '(clojure-mode)))
 
 (use-package dumb-jump
- :straight t)
+  :commands (dumb-jump-go
+	     dumb-jump-quick-look
+	     dumb-jump-back
+	     dumb-jump-result-follow)
+  :straight t
+  :config
+  (setq dumb-jump-aggressive nil
+	dumb-jump-selector 'helm))
 
 (use-package ace-window
- :straight t)
+  :commands (ace-window ace-swap-window ace-delete-window
+			ace-select-window ace-delete-other-windows)
+  :straight t
+  :config (setq aw-background t))
 
 (use-package popwin
  :straight t
  :config
  (popwin-mode 1)
- ;(push '(ag-mode :stick t) popwin:special-display-config)
  (push '(rg-mode :stick t) popwin:special-display-config)
  (push "*Kill Ring*" popwin:special-display-config))
 
@@ -34,12 +55,9 @@
  :config
  (winum-mode))
 
-;;  (use-package golden-ratio
-;;   :straight t
-;;   :config
-;;   (golden-ratio-mode 1))
-
 (use-package imenu-anywhere
- :straight t)
+  :commands helm-imenu-anywhere
+  :straight t)
+
 ;; export
 (provide 'init-navigation)

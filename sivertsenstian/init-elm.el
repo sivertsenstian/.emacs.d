@@ -33,7 +33,7 @@
         :nvig "q" 'quit-window))
 
 (use-package flycheck-elm
- :after elm-mode
+ :after (:all flycheck elm-mode)
  :hook (flycheck-mode . flycheck-elm-setup)
  :straight t)
 
