@@ -19,7 +19,9 @@
 	  :n  "i" #'tide-organize-imports
 	  :n  "u" #'tide-references
 	  :n  "f" #'tide-fix
-	  ))
+	  (:desc "html" :prefix "h"
+	    :n "r" #'rjsx-rename-tag-at-point
+	    :n "t" #'js2-mode-toggle-element)))
   (setq js2-basic-offset 2)
   (define-key evil-insert-state-map (kbd "C-d") nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
@@ -45,25 +47,16 @@
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
-(use-package web-mode
-  :mode "\\.css$"
-  :mode "\\.less$"
-  :mode "\\.scss$"
-  :straight t
-  :config
-  (defun my-web-mode-hook ()
-    "Hooks for Web mode. Adjust indents"
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-attr-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq css-indent-offset 2))
-  (add-hook 'web-mode-hook  'my-web-mode-hook))
-
  (use-package prettier-js
    :after rjsx-mode
    :straight t
    :hook (rjsx-mode . prettier-js-mode))
+
+(use-package js2-refactor
+  :after rjsx-mode 
+  :straight t
+  :config
+  (add-hook 'rjsx-mode-hook #'js2-refactor-mode))
 
 ;; export
 (provide 'init-javascript)

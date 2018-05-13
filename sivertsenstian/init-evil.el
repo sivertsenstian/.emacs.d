@@ -19,7 +19,7 @@
  (evil-leader/set-leader "<SPC>"))
 
 (use-package evil-escape
-  :commands evil-escape-mode
+  :after evil
   :straight t
   :init
   (setq evil-escape-excluded-states '(normal visual multiedit emacs motion)
