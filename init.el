@@ -2,6 +2,7 @@
 ;; Init straight, use-package and add subdir for custom packages
 ;;----------------------------------------------------------------------------
 (add-to-list 'load-path (expand-file-name "sivertsenstian/" user-emacs-directory))
+(add-to-list 'custom-theme-load-path (expand-file-name "sivertsenstian/themes/" user-emacs-directory)) 
 ;;bootstrap straight package manager
 (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
       (bootstrap-version 3))
@@ -15,6 +16,8 @@
   (load bootstrap-file nil 'nomessage))
 ;;manually load use-package with straight
 (straight-use-package 'use-package)
+(setq straight-cache-autoloads t
+      straight-check-for-modifications 'never)
 (use-package init-benchmark) ;; Measure startup time
 ;;----------------------------------------------------------------------------
 ;; Adjust garbage collection thresholds during startup, and thereafter
@@ -53,19 +56,19 @@
  (use-package init-evil)
  (use-package init-themes
    :config
-   (load-theme 'dracula t))
+   (load-theme 'doom-dracula t))
  (use-package init-syntax)
  (use-package init-bindings)
  (use-package init-helm)
  (use-package init-files)
  (use-package init-navigation)
  (use-package init-git)
- (use-package init-clojure)
+ ;; (use-package init-clojure)
  (use-package init-css)
- (use-package init-arduino)
- (use-package init-elm)
+ ;; (use-package init-arduino)
+ ;; (use-package init-elm)
  (use-package init-javascript)
- (use-package init-csharp)
+ ;; (use-package init-csharp)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

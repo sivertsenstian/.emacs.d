@@ -8,7 +8,7 @@
 (toggle-frame-fullscreen)
 (global-hl-line-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-frame-font "Source Code Pro" nil t)
+(set-frame-font "Inconsolata" nil t)
 (electric-indent-mode +1)
 (fringe-mode '(8 . 4))
 (display-time-mode)
@@ -132,13 +132,14 @@
 (use-package spaceline
   :straight t
   :config
-  (spaceline-spacemacs-theme)
+  (spaceline-emacs-theme)
   (spaceline-toggle-minor-modes-off)
   (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
   (spaceline-helm-mode))
 
 ;; THEMES
 (use-package doom-themes
+  :preface (defvar region-fg nil)
   :defer t
   :straight t
   :config

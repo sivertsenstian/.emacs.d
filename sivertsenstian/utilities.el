@@ -258,5 +258,14 @@ Example
              (= company-candidates-length 1))
     (company-complete-common)))
 
+(defun sivertsenstian/reload-init ()
+  "Reload init.el."
+  (interactive)
+  (straight-transaction
+    (straight-mark-transaction-as-init)
+    (message "Reloading init.el...")
+    (load user-init-file nil 'nomessage)
+    (message "Reloading init.el... done.")))
+
 ;; export
 (provide 'utilities)

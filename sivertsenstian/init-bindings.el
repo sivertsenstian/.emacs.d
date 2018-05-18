@@ -243,6 +243,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "neotree"                 :nv "t" #'neotree-projectile-action)
 
 	(:desc "quit" :prefix "q"
+	  :desc "Reload"                 :n "r" #'sivertsenstian/reload-init
 	  :desc "Quit"                   :n "q" #'evil-save-and-quit
 	  :desc "Quit (forget session)"  :n "Q" #'+workspace/kill-session-and-quit)
 

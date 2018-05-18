@@ -45,7 +45,8 @@
   ;;testing
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
 
  (use-package prettier-js
    :after rjsx-mode
