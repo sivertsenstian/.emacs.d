@@ -34,5 +34,11 @@
  :config
  (setq-default ag-highlight-search t))
 
+(use-package flx-ido
+  :straight t
+  :config
+  (flx-ido-mode 1))
+
+
 ;; export
 (provide 'init-files)

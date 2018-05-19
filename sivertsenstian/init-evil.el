@@ -97,7 +97,8 @@
   :straight t
   :config
   (setq evil-goggles-blocking-duration 0.100)
-  (evil-goggles-mode))
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces))
 
 ;; export
 (provide 'init-evil)
