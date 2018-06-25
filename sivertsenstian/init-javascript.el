@@ -12,6 +12,7 @@
   (map! :map rjsx-mode-map
 	(:localleader
 	  :n  "j" #'tide-jump-to-definition
+	  :n  "J" #'tide-jump-to-implementation
 	  :n  "b" #'tide-jump-back
 	  :n  "d" #'tide-documentation-at-point
 	  :n  "r" #'tide-rename-symbol
@@ -39,7 +40,9 @@
   :after (:any web-mode rjsx-mode)
   :straight t
   :config
-  (setq company-tooltip-align-annotations t)
+  (setq company-tooltip-align-annotations t
+	tide-completion-detailed t
+        tide-always-show-documentation t)
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
 
   ;;testing
@@ -48,10 +51,17 @@
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
 
- (use-package prettier-js
-   :after rjsx-mode
-   :straight t
-   :hook (rjsx-mode . prettier-js-mode))
+(use-package add-node-modules-path
+  :after rjsx-mode
+  :straight t)
+
+(use-package prettier-js
+  :after (rjsx-mode add-node-modules-path)
+  :straight t
+  :hook (rjsx-mode . add-node-modules-path) ;;use project prettier
+  :hook (rjsx-mode . prettier-js-mode)
+  :hook (less-css-mode . add-node-modules-path)
+  :hook (less-css-mode . prettier-js-mode))
 
 (use-package js2-refactor
   :after rjsx-mode 

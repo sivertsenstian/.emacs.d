@@ -23,7 +23,6 @@
   :straight t
   :init
   (setq evil-escape-excluded-states '(normal visual multiedit emacs motion)
-        evil-escape-excluded-major-modes '(neotree-mode)
         evil-escape-key-sequence "jk"
         evil-escape-delay 0.25)
   :config
@@ -99,6 +98,12 @@
   (setq evil-goggles-blocking-duration 0.100)
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces))
+
+(use-package evil-multiedit
+  :after evil
+  :straight t
+  :config
+  (evil-multiedit-default-keybinds))
 
 ;; export
 (provide 'init-evil)

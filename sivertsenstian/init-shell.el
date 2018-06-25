@@ -1,9 +1,8 @@
 (use-package company-shell
   :straight t)
 
-
-(use-package insert-shebang)
-(use-package sh-script)
+;; (use-package insert-shebang)
+;; (use-package sh-script)
 
 (use-package exec-path-from-shell
   :straight t

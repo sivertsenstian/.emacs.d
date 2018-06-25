@@ -56,7 +56,9 @@
  (use-package init-evil)
  (use-package init-themes
    :config
-   (load-theme 'doom-dracula t))
+   (load-theme 'doom-city-lights t)
+   (solaire-mode-swap-bg)
+   )
  (use-package init-syntax)
  (use-package init-bindings)
  (use-package init-helm)
@@ -69,6 +71,9 @@
  ;; (use-package init-elm)
  (use-package init-javascript)
  ;; (use-package init-csharp)
+;;(use-package init-slack)
+(use-package init-hydra)
+;; (use-package init-shell)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -82,5 +87,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(powerline-active1 ((t (:background "#ff79c6" :foreground "#f8f8f2"))))
- '(powerline-active2 ((t (:background "#ff79c6" :foreground "#f8f8f2")))))
+ '(evil-goggles-change-face ((t (:inherit diff-removed))))
+ '(evil-goggles-delete-face ((t (:inherit diff-removed))))
+ '(evil-goggles-paste-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-add-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
+ '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
+ '(evil-goggles-yank-face ((t (:inherit diff-changed))))
+ '(powerline-active1 ((t (:background "#373844" :foreground "#f8f8f2"))))
+ '(powerline-active2 ((t (:background "#373844" :foreground "#f8f8f2")))))

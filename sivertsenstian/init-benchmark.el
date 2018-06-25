@@ -58,6 +58,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (display-buffer (current-buffer))))
 
 (defun sanityinc/show-init-time ()
+  (setq dashboard-banner-logo-title
+	(message "init completed in %.2fms"
+		 (sanityinc/time-subtract-millis after-init-time before-init-time)))
   (message "init completed in %.2fms"
            (sanityinc/time-subtract-millis after-init-time before-init-time)))
 

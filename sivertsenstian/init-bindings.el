@@ -61,7 +61,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :ne "C-M-q" #'indent-pp-sexp
 
       ;; --- Kill ring ------------------------------------
-      :ne "M-p" #'browse-kill-ring
+      :ne "M-p" #'hydra--paste/body
 
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
@@ -98,6 +98,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "window"                  :n "w"   evil-window-map
 	:desc "shell"                   :n "!"   #'shell
 	:desc "winum-select-window-0"   :n "0"   #'winum-select-window-0-or-10
+	:desc "zoom"                    :n "z"   #'hydra--text-zoom/body 
+	:desc "move"                    :n "l"   #'hydra--move/body
 	:n "1" #'winum-select-window-1
 	:n "2" #'winum-select-window-2
 	:n "3" #'winum-select-window-3
@@ -239,8 +241,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Recent project files"    :n  "r" #'projectile-recentf
 	  :desc "search in project"           :nv "s" #'helm-projectile-ag
 	  :desc "search in project (results)" :nv "S" #'helm-ag-project-root
-	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache
-	  :desc "neotree"                 :nv "t" #'neotree-projectile-action)
+	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache)
 
 	(:desc "quit" :prefix "q"
 	  :desc "Reload"                 :n "r" #'sivertsenstian/reload-init
@@ -413,33 +414,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	"K" #'browse-kill-ring-search-backward
 	"P" #'browse-kill-ring-prepend-insert
 	"p" #'browse-kill-ring-append-insert)
-
-      ;; neotree
-      (:after neotree
-	:map neotree-mode-map
-	:n "g"         nil
-	:n [tab]       #'neotree-quick-look
-	:n "RET"       #'neotree-enter
-	:n [backspace] #'evil-window-prev
-	:n "c"         #'neotree-create-node
-	:n "r"         #'neotree-rename-node
-	:n "d"         #'neotree-delete-node
-	:n "j"         #'neotree-next-line
-	:n "k"         #'neotree-previous-line
-	:n "n"         #'neotree-next-line
-	:n "p"         #'neotree-previous-line
-	:n "h"         #'+neotree/collapse-or-up
-	:n "l"         #'+neotree/expand-or-open
-	:n "J"         #'neotree-select-next-sibling-node
-	:n "K"         #'neotree-select-previous-sibling-node
-	:n "H"         #'neotree-select-up-node
-	:n "L"         #'neotree-select-down-node
-	:n "G"         #'evil-goto-line
-	:n "gg"        #'evil-goto-first-line
-	:n "v"         #'neotree-enter-vertical-split
-	:n "s"         #'neotree-enter-horizontal-split
-	:n "q"         #'neotree-hide
-	:n "R"         #'neotree-refresh)
 
       ;; undo-tree -- undo/redo for visual regions
       :v "C-u" #'undo-tree-undo

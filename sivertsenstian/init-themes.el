@@ -8,12 +8,13 @@
 (toggle-frame-fullscreen)
 (global-hl-line-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-frame-font "Inconsolata" nil t)
+(set-frame-font "Inconsolata 12" nil t)
 (electric-indent-mode +1)
-(fringe-mode '(8 . 4))
+(fringe-mode '(8 . 5))
 (display-time-mode)
 (set-default 'truncate-lines t)
 (set-window-fringes (minibuffer-window) 0 0 nil) ;;Disable fringes in the minibuffer window.
+(global-display-line-numbers-mode)
 
 (setq-default
  bidi-display-reordering nil ; disable bidirectional text for tiny performance boost
@@ -78,23 +79,22 @@
 
 (use-package dashboard
   :straight t
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-banner-logo-title
-	"Build a man a fire, and he'll be warm for a day. Set a man on fire, and he'll be warm for the rest of his life.")
-  (setq dashboard-startup-banner (expand-file-name "sivertsenstian/logo.png" user-emacs-directory))
-  (setq dashboard-items '((recents  . 5)
-			  (projects . 5))))
-
-(use-package nlinum
-  :commands nlinum-mode
-  :straight t
   :init
-  (add-hook 'prog-mode-hook 'nlinum-mode))
+  (setq dashboard-startup-banner (expand-file-name "sivertsenstian/logo.png" user-emacs-directory)
+	dashboard-items '((recents  . 10)
+			  (projects . 6)))
+  :config
+  (dashboard-setup-startup-hook))
 
-(use-package nlinum-hl
- :after nlinum
- :straight t)
+;; (use-package nlinum
+;;   :commands nlinum-mode
+;;   :straight t
+;;   :init
+;;   (add-hook 'prog-mode-hook 'nlinum-mode))
+
+;; (use-package nlinum-hl
+;;  :after nlinum
+;;  :straight t)
 
 (use-package hl-todo
   :commands hl-todo-mode
@@ -116,19 +116,6 @@
 (use-package nav-flash
  :straight t)
 
-(use-package neotree
-  :commands (neotree-show
-             neotree-hide
-             neotree-toggle
-             neotree-dir
-             neotree-find
-             neo-global--with-buffer
-             neo-global--window-exists-p)
- :straight t
- :config
- (setq neo-theme 'icons)
- (setq neo-window-fixed-size nil))
-
 (use-package spaceline
   :straight t
   :config
@@ -136,30 +123,25 @@
   (spaceline-toggle-minor-modes-off)
   (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
   (spaceline-helm-mode))
+ 
+(use-package solaire-mode
+  :straight t
+  :config
+  ;; brighten buffers (that represent real files)
+  (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
+  ;; To enable solaire-mode unconditionally for certain modes:
+  (add-hook 'ediff-prepare-buffer-hook #'solaire-mode)
+
+  ;; ...if you use auto-revert-mode, this prevents solaire-mode from turning
+  ;; itself off every time Emacs reverts the file
+  (add-hook 'after-revert-hook #'turn-on-solaire-mode)
+
+  ;; highlight the minibuffer when it is activated:
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 
 ;; THEMES
 (use-package doom-themes
   :preface (defvar region-fg nil)
-  :defer t
-  :straight t
-  :config
-  (let ((height (face-attribute 'default :height)))
-    ;; for all linum/nlinum users
-    (set-face-attribute 'linum nil :height height)))
-
-(use-package nord-theme
-  :defer t
-  :straight t)
-
-(use-package gruber-darker-theme
-  :defer t
-  :straight t)
-
-(use-package dracula-theme
-  :defer t
-  :straight t)
-
-(use-package cyberpunk-theme
   :defer t
   :straight t)
 
