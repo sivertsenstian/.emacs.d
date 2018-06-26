@@ -110,7 +110,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:n "8" #'winum-select-window-8
 	:n "9" #'winum-select-window-9
 
-
 	(:desc "paredit"     :prefix "k"
 	  :desc "Slurp sexp forward"   :nv "s" #'lispy-forward-slurp-sexp
 	  :desc "Slurp sexp backward"  :nv "S" #'lispy-backward-slurp-sexp

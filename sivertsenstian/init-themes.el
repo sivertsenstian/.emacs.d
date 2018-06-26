@@ -81,20 +81,11 @@
   :straight t
   :init
   (setq dashboard-startup-banner (expand-file-name "sivertsenstian/logo.png" user-emacs-directory)
+	dashboard-banner-logo-title "It's not worth doing something unless you were doing something that someone, somewere, would much rather you weren't doing."
 	dashboard-items '((recents  . 10)
 			  (projects . 6)))
   :config
   (dashboard-setup-startup-hook))
-
-;; (use-package nlinum
-;;   :commands nlinum-mode
-;;   :straight t
-;;   :init
-;;   (add-hook 'prog-mode-hook 'nlinum-mode))
-
-;; (use-package nlinum-hl
-;;  :after nlinum
-;;  :straight t)
 
 (use-package hl-todo
   :commands hl-todo-mode

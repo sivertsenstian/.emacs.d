@@ -12,3 +12,5 @@ smex-items
 .vscode
 *.log
 company-statistics-cache.el
+emojis/
+url/

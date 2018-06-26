@@ -71,9 +71,10 @@
  ;; (use-package init-elm)
  (use-package init-javascript)
  ;; (use-package init-csharp)
-;;(use-package init-slack)
+(use-package init-slack)
 (use-package init-hydra)
 ;; (use-package init-shell)
+(use-package init-log)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
