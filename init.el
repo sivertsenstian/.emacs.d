@@ -24,12 +24,15 @@
 ;;----------------------------------------------------------------------------
 (defvar sivertsenstian--file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-(setq gc-cons-threshold 500000000
-      gc-cons-percentage 0.6)
+(setq gc-cons-threshold 402653184 ;;500000000
+      gc-cons-percentage 1.0
+      ;; consulted on every `require', `load' and various file reading
+      ;; functions. You get a minor speed up by nooping this.
+      file-name-handler-alist nil)
   (add-hook 'after-init-hook
 	    (lambda ()
 	     (setq gc-cons-threshold 16777216
-		   gc-cons-percentage 0.1)))
+		   gc-cons-percentage 0.15)))
   (add-hook 'after-init-hook
 	     (lambda ()
 	      (setq file-name-handler-alist sivertsenstian--file-name-handler-alist)))
@@ -57,7 +60,7 @@
  (use-package init-themes
    :config
    (load-theme 'doom-city-lights t)
-   (solaire-mode-swap-bg)
+   ;;(solaire-mode-swap-bg)
    )
  (use-package init-syntax)
  (use-package init-bindings)
@@ -65,7 +68,7 @@
  (use-package init-files)
  (use-package init-navigation)
  (use-package init-git)
- ;; (use-package init-clojure)
+ (use-package init-clojure)
  (use-package init-css)
  ;; (use-package init-arduino)
  ;; (use-package init-elm)
@@ -81,8 +84,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
+ '(font-lock-maximum-size 1024000)
  '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
- '(helm-ag-insert-at-point (quote symbol)))
+ '(helm-ag-insert-at-point (quote symbol))
+ '(jit-lock-chunk-size 1000)
+ '(safe-local-variable-values
+   (quote
+    ((cider-lein-parameters . "with-profile +dirac repl :headless :host ::")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

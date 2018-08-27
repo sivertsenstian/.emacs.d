@@ -76,11 +76,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
       :en "C-f"   #'helm-swoop
       :en "M-f"   #'helm-multi-swoop-projectile
+      ;; Easier code navigation
+      :en "C-k"   #'evil-scroll-page-up
+      :en "C-j"   #'evil-scroll-page-down
+      :en "C-h"   #'evil-first-non-blank
+      :en "C-l"   #'evil-end-of-line
       ;; Easier window navigation
-      :en "C-h"   #'evil-window-left
-      :en "C-j"   #'evil-window-down
-      :en "C-k"   #'evil-window-up
-      :en "C-l"   #'evil-window-right
+      ;; :en "C-h"   #'evil-window-left
+      ;; :en "C-j"   #'evil-window-down
+      ;; :en "C-k"   #'evil-window-up
+      ;; :en "C-l"   #'evil-window-right
 
       ;; --- <leader> -------------------------------------
       (:leader
@@ -134,7 +139,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Buffer"                :nv "b" #'previous-buffer
 	  :desc "Diff Hunk"             :nv "d" #'git-gutter:previous-hunk
 	  :desc "Todo"                  :nv "t" #'hl-todo-previous
-	  :desc "Error"                 :nv "e" #'previous-error
+	  :desc "Error"                 :nv "e" #'flycheck-previous-error
 	  :desc "Window"                :nv "w" #'evil-window-prev
 	  :desc "Smart jump"            :nv "h" #'smart-backward)
 
@@ -143,7 +148,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Buffer"                :nv "b" #'next-buffer
 	  :desc "Diff Hunk"             :nv "d" #'git-gutter:next-hunk
 	  :desc "Todo"                  :nv "t" #'hl-todo-next
-	  :desc "Error"                 :nv "e" #'next-error
+	  :desc "Error"                 :nv "e" #'flycheck-next-error
 	  :desc "Window"                :nv "w" #'evil-window-next
 	  :desc "Smart jump"            :nv "l" #'smart-forward)
 
@@ -160,10 +165,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
 
 	(:desc "error" :prefix "e"
-	  :desc "next"                  :nv "n" #'next-error
-	  :desc "previous"              :nv "p" #'previous-error
-	  :desc "next"                  :nv "]" #'next-error
-	  :desc "previous"              :nv "[" #'previous-error)
+	  :desc "next"                  :nv "n" #'flycheck-next-error
+	  :desc "previous"              :nv "p" #'flycheck-previous-error
+	  :desc "next"                  :nv "]" #'flycheck-next-error
+	  :desc "previous"              :nv "[" #'flycheck-previous-error)
 
 	(:desc "buffer" :prefix "b"
 	  :desc "New empty buffer"        :n "n" #'evil-buffer-new
@@ -378,8 +383,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :v  "V"  #'er/contract-region
 
       ;; flycheck
-      :m  "]e" #'next-error
-      :m  "[e" #'previous-error
+      :m  "]e" #'flycheck-next-error
+      :m  "[e" #'flycheck-previous-error
       (:after flycheck
 	:map flycheck-error-list-mode-map
 	:n "C-n" #'flycheck-error-list-next-error

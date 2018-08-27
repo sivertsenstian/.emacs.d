@@ -40,7 +40,7 @@
 (use-package projectile
  :straight t
  :config
- (setq projectile-indexing-method 'native
+ (setq projectile-indexing-method 'alien
        projectile-enable-caching t))
 
 (use-package helm-projectile

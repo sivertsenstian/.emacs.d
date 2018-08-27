@@ -27,11 +27,16 @@
 
 (use-package cider
  :after clojure-mode
- :straight t)
+ :straight t
+ :config
+ (setq cider-prompt-for-symbol nil)
+ (setq cider-prefer-local-resources t)
+ ;;(setq cider-font-lock-dynamically '(macro core function var))
+ (add-hook 'cider-mode-hook #'eldoc-mode))
 
 (use-package flycheck-joker
- :after (:all clojure-mode flycheck)
- :straight t)
+  :after flycheck
+  :straight t)
 
 ;; export
 (provide 'init-clojure)

@@ -5,7 +5,7 @@
 (tool-bar-mode -1)
 (tooltip-mode -1) ; relegate tooltips to echo area only
 (scroll-bar-mode -1)
-(toggle-frame-fullscreen)
+;; (toggle-frame-fullscreen)
 (global-hl-line-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Inconsolata 12" nil t)
