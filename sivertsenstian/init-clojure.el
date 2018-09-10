@@ -1,42 +1,107 @@
 ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - CLOJURE MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
+(defun clojure/fancify-symbols (mode)
+  "Pretty symbols for Clojure's anonymous functions and sets,
+   like (λ [a] (+ a 5)), ƒ(+ % 5), and ∈{2 4 6}."
+  (font-lock-add-keywords mode
+			  `(("(\\(fn\\)[[[:space:]]"
+			     (0 (progn (compose-region (match-beginning 1)
+						       (match-end 1) "λ")
+				       nil)))
+			    ("(\\(partial\\)[[[:space:]]"
+			     (0 (progn (compose-region (match-beginning 1)
+						       (match-end 1) "ρ")
+				       nil)))
+			    ("(\\(comp\\)[[[:space:]]"
+			     (0 (progn (compose-region (match-beginning 1)
+						       (match-end 1) "∘")
+				       nil)))
+			    ("\\(#\\)("
+			     (0 (progn (compose-region (match-beginning 1)
+						       (match-end 1) "ƒ")
+				       nil)))
+			    ("\\(#\\){"
+			     (0 (progn (compose-region (match-beginning 1)
+						       (match-end 1) "∈")
+				       nil))))))
+
+
+(defun spacemacs/clj-find-var ()
+  "Attempts to jump-to-definition of the symbol-at-point. If CIDER fails, or not available, falls back to dumb-jump"
+  (interactive)
+  (let ((var (cider-symbol-at-point)))
+    (if (and (cider-connected-p) (cider-var-info var))
+        (unless (eq 'symbol (type-of (cider-find-var nil var)))
+          (dumb-jump-go))
+      (dumb-jump-go))))
+
+;;;;
 (use-package clojure-mode
- :straight t
- :mode "\\.clj$"
- :mode ("\\.cljs$" . clojurescript-mode)
- :config
- (setq cider-repl-history-file "~/.emacs.d/cider.history.log"
-       cider-repl-pop-to-buffer-on-connect nil
-       cider-repl-use-clojure-font-lock t
-       cider-repl-use-pretty-printing t
-       cider-show-error-buffer nil)
- (map! :map clojure-mode-map
-  (:localleader
-     :nv "e" #'cider-eval-last-sexp
-     :nv "f" #'cider-eval-defun-at-point
-     :n  "B" #'cider-switch-to-repl-buffer
-     :n  "b" #'cider-eval-buffer
-     :n  "n" #'cider-repl-set-ns
-     :n  "j" #'cider-find-var
-     :n  "d" #'cider-doc
-     :nv "m" #'cider-macroexpand-1
-     :n  "p" #'cider-eval-sexp-at-point
-     :n  "r" #'cider-eval-region
-     :nv "'" #'cider-jack-in)))
+  :straight t
+  :mode "\\.clj$"
+  :mode ("\\.cljs$" . clojurescript-mode)
+  :config
+  (setq cider-repl-history-file "~/.emacs.d/cider.history.log"
+	cider-repl-pop-to-buffer-on-connect nil
+	cider-repl-use-clojure-font-lock t
+	cider-repl-use-pretty-printing t
+	cider-prompt-for-symbol nil
+	cider-show-error-buffer nil)
+
+  (map! :map clojure-mode-map
+	(:localleader
+	  :nv "e" #'cider-eval-last-sexp
+	  :nv "f" #'cider-eval-defun-at-point
+	  :n  "B" #'cider-switch-to-repl-buffer
+	  :n  "b" #'cider-eval-buffer
+	  :n  "n" #'cider-repl-set-ns
+	  :n  "j" #'cider-find-var
+	  :n  "d" #'cider-doc
+	  :nv "m" #'cider-macroexpand-1
+	  :n  "p" #'cider-eval-sexp-at-point
+	  :n  "r" #'cider-eval-region
+	  :nv "'" #'cider-jack-in))
+
+
+  (clojure/fancify-symbols 'clojure-mode)
+  (clojure/fancify-symbols 'clojurescript-mode)
+
+  (eldoc-mode)
+  (subword-mode))
+
+
+(use-package clj-refactor
+  :straight t
+  :config
+  (clj-refactor-mode))
+
+(use-package cider-eval-sexp-fu
+  :straight t)
+
+(use-package helm-cider
+  :straight t
+  :after cider
+  :config
+  (helm-cider-mode 1))
 
 (use-package cider
- :after clojure-mode
- :straight t
- :config
- (setq cider-prompt-for-symbol nil)
- (setq cider-prefer-local-resources t)
- ;;(setq cider-font-lock-dynamically '(macro core function var))
- (add-hook 'cider-mode-hook #'eldoc-mode))
+  :after clojure-mode
+  :straight t
+  :config
+  (setq cider-prompt-for-symbol nil)
+  (setq cider-prefer-local-resources t)
+  ;;(setq cider-font-lock-dynamically '(macro core function var))
+  (add-hook 'cider-mode-hook #'eldoc-mode))
+
+(use-package evil-cleverparens
+:straight t
+:config
+(evil-cleverparens-mode))
 
 (use-package flycheck-joker
-  :after flycheck
-  :straight t)
+:after flycheck
+:straight t)
 
 ;; export
 (provide 'init-clojure)

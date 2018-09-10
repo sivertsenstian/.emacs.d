@@ -59,8 +59,8 @@
  (use-package init-evil)
  (use-package init-themes
    :config
-   (load-theme 'doom-city-lights t)
-   ;;(solaire-mode-swap-bg)
+   (load-theme 'doom-one t)
+   ;(solaire-mode-swap-bg)
    )
  (use-package init-syntax)
  (use-package init-bindings)

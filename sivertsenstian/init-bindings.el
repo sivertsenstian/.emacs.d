@@ -289,8 +289,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  ;; Don't interfere with `evil-delete-backward-word' in insert mode
 	  "C-w"        nil
 	  "C-o"        #'company-search-kill-others
-	  "C-n"        #'company-select-next
-	  "C-p"        #'company-select-previous
+	  "C-j"        #'company-select-next
+	  "C-k"        #'company-select-previous
 	  "]"          #'company-select-next
 	  "["          #'company-select-previous
 	  "C-h"        #'company-quickhelp-manual-begin

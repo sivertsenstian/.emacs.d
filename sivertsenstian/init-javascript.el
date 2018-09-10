@@ -37,17 +37,19 @@
   (setq tide-completion-detailed t))
 
 (use-package tide
-  :after (:any web-mode rjsx-mode)
+  :after (:any web-mode rjsx-mode typescript-mode)
   :straight t
   :config
   (setq company-tooltip-align-annotations t
 	tide-completion-detailed t
         tide-always-show-documentation t)
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-  ;;testing
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  (flycheck-add-mode 'typescript-tslint 'typescript-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
 
@@ -56,10 +58,12 @@
   :straight t)
 
 (use-package prettier-js
-  :after (rjsx-mode add-node-modules-path)
+  :after (rjsx-mode add-node-modules-path typescript-mode)
   :straight t
   :hook (rjsx-mode . add-node-modules-path) ;;use project prettier
   :hook (rjsx-mode . prettier-js-mode)
+  :hook (typescript-mode . add-node-modules-path)
+  :hook (typescript-mode . prettier-js-mode)
   :hook (less-css-mode . add-node-modules-path)
   :hook (less-css-mode . prettier-js-mode))
 
@@ -68,6 +72,14 @@
   :straight t
   :config
   (add-hook 'rjsx-mode-hook #'js2-refactor-mode))
+
+;; typescript
+(use-package ts-comint
+  :straight t)
+
+(use-package typescript-mode
+  :mode "\\.ts$"
+  :straight t)
 
 ;; export
 (provide 'init-javascript)
