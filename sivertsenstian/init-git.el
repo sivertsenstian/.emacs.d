@@ -1,6 +1,12 @@
 ;;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - GIT MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
+(setenv "GIT_ASKPASS" "git-gui--askpass")
+(setenv "SSH_ASKPASS" "git-gui--askpass")
+
+(use-package ssh-agency
+  :straight t)
+
 (use-package magit
   :commands (magit-status magit-blame)
   :straight t

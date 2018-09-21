@@ -105,7 +105,11 @@
   :straight t)
 
 (use-package nav-flash
- :straight t)
+  :straight t)
+
+;; (use-package doom-modeline
+;;   :straight t
+;;   :hook (after-init . doom-modeline-init))
 
 (use-package spaceline
   :straight t

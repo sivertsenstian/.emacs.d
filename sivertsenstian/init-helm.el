@@ -18,7 +18,7 @@
        helm-find-files-doc-header nil
        ;; Don't override evil-ex's completion
        helm-mode-handle-completion-in-region nil
-       helm-candidate-number-limit 10
+       helm-candidate-number-limit 20
        ;; Don't wrap item cycling
        helm-move-to-line-cycle-in-source t)
  (helm-mode 1)
@@ -87,8 +87,8 @@
 	  (message "error: Not in a project.")))))
   :init
   (custom-set-variables
+   ;; '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
    '(helm-ag-base-command "rg --no-heading --vimgrep")
-   ;;'(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
    '(helm-ag-insert-at-point 'symbol)))
 
 (use-package helm-swoop

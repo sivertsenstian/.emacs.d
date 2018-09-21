@@ -57,11 +57,11 @@
 ;;----------------------------------------------------------------------------
  (use-package utilities)
  (use-package init-evil)
- (use-package init-themes
-   :config
-   (load-theme 'doom-one t)
-   ;(solaire-mode-swap-bg)
-   )
+(use-package init-themes
+  :config
+  (load-theme 'doom-one t)
+  ;;(solaire-mode-swap-bg) 
+  )
  (use-package init-syntax)
  (use-package init-bindings)
  (use-package init-helm)
@@ -73,25 +73,29 @@
  ;; (use-package init-arduino)
  ;; (use-package init-elm)
  (use-package init-javascript)
- ;; (use-package init-csharp)
-(use-package init-slack)
-(use-package init-hydra)
+ (use-package init-csharp)
+ ;; (use-package init-slack)
+ (use-package init-hydra)
 ;; (use-package init-shell)
-(use-package init-log)
+ ;; (use-package init-log)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cider-annotate-completion-candidates t)
+ '(cider-completion-use-context t)
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(font-lock-maximum-size 1024000)
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
+ '(helm-ag-base-command "rg --no-heading --vimgrep")
  '(helm-ag-insert-at-point (quote symbol))
  '(jit-lock-chunk-size 1000)
  '(safe-local-variable-values
    (quote
-    ((cider-lein-parameters . "with-profile +dirac repl :headless :host ::")))))
+    ((projectile-project-compile-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
+     (projectile-project-compilation-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
+     (cider-lein-parameters . "with-profile +dirac repl :headless :host ::")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

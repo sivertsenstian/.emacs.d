@@ -304,8 +304,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  [escape]     (λ! (company-abort) (evil-normal-state 1)))
 	;; Automatically applies to `company-filter-map'
 	(:map company-search-map
-	  "C-n"        #'company-search-repeat-forward
-	  "C-p"        #'company-search-repeat-backward
+	  "C-j"        #'company-search-repeat-forward
+	  "C-k"        #'company-search-repeat-backward
 	  "C-s"        (λ! (company-search-abort) (company-filter-candidates))
 	  [escape]     #'company-search-abort))
 
@@ -359,8 +359,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  "M-D" #'evil-multiedit-match-and-prev
 	  "RET" #'evil-multiedit-toggle-or-restrict-region)
 	(:map (evil-multiedit-state-map evil-multiedit-insert-state-map)
-	  "C-n" #'evil-multiedit-next
-	  "C-p" #'evil-multiedit-prev))
+	  "C-j" #'evil-multiedit-next
+	  "C-k" #'evil-multiedit-prev))
 
       ;; evil-snipe
       (:after evil-snipe
@@ -387,8 +387,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :m  "[e" #'flycheck-previous-error
       (:after flycheck
 	:map flycheck-error-list-mode-map
-	:n "C-n" #'flycheck-error-list-next-error
-	:n "C-p" #'flycheck-error-list-previous-error
+	:n "C-j" #'flycheck-error-list-next-error
+	:n "C-k" #'flycheck-error-list-previous-error
 	:n "j"   #'flycheck-error-list-next-error
 	:n "k"   #'flycheck-error-list-previous-error
 	:n "RET" #'flycheck-error-list-goto-error)
@@ -400,8 +400,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; git-timemachine
       (:after git-timemachine
 	(:map git-timemachine-mode-map
-	  :n "C-p" #'git-timemachine-show-previous-revision
-	  :n "C-n" #'git-timemachine-show-next-revision
+	  :n "C-k" #'git-timemachine-show-previous-revision
+	  :n "C-j" #'git-timemachine-show-next-revision
 	  :n "[["  #'git-timemachine-show-previous-revision
 	  :n "]]"  #'git-timemachine-show-next-revision
 	  :n "q"   #'git-timemachine-quit

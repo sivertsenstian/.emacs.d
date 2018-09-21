@@ -63,7 +63,6 @@
 	  :n  "r" #'cider-eval-region
 	  :nv "'" #'cider-jack-in))
 
-
   (clojure/fancify-symbols 'clojure-mode)
   (clojure/fancify-symbols 'clojurescript-mode)
 
@@ -99,9 +98,39 @@
 :config
 (evil-cleverparens-mode))
 
+(use-package cider-eval-sexp-fu
+  :after clojure-mode
+  :straight t)
+
+(use-package clj-refactor
+  :after clojure-mode
+  :straight t)
+
 (use-package flycheck-joker
 :after flycheck
 :straight t)
+
+(defun clojure/fancify-symbols (mode)
+  "Pretty symbols for Clojure's anonymous functions and sets,
+   like (λ [a] (+ a 5)), ƒ(+ % 5), and ∈{2 4 6}."
+  (font-lock-add-keywords mode
+    `(("(\\(fn\\)[\[[:space:]]"
+       (0 (progn (compose-region (match-beginning 1)
+                                 (match-end 1) "λ"))))
+      ("(\\(partial\\)[\[[:space:]]"
+       (0 (progn (compose-region (match-beginning 1)
+                                 (match-end 1) "ρ"))))
+      ("(\\(comp\\)[\[[:space:]]"
+       (0 (progn (compose-region (match-beginning 1)
+                                 (match-end 1) "∘"))))
+      ("\\(#\\)("
+       (0 (progn (compose-region (match-beginning 1)
+                                 (match-end 1) "ƒ"))))
+      ("\\(#\\){"
+       (0 (progn (compose-region (match-beginning 1)
+                                 (match-end 1) "∈")))))))
+
+
 
 ;; export
 (provide 'init-clojure)
