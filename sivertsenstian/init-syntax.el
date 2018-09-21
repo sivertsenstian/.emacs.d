@@ -39,8 +39,8 @@
 (use-package company-box
   :after company
   :straight t
+  :hook (company-mode . company-box-mode)
   :config
-  (company-box-mode)
   (setq
    company-box-backends-colors nil
    company-box-max-candidates 50
@@ -76,7 +76,8 @@
      (22 . (all-the-icons-material "streetview"               :height 0.8 :face 'all-the-icons-red))   ; struct
      (23 . (all-the-icons-material "event"                    :height 0.8 :face 'all-the-icons-red))   ; event
      (24 . (all-the-icons-material "control_point"            :height 0.8 :face 'all-the-icons-red))   ; operator
-     (25 . (all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-red)))
+     (25 . (all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-red))))
+
    (defun +company*box-frontend-even-if-single (command)
      (cond ((eq command 'hide)
             (company-box-hide))
@@ -86,7 +87,8 @@
             (company-box-show))
            ((eq command 'post-command)
             (company-box--post-command))))
-   (advice-add #'company-box-frontend :override #'+company*box-frontend-even-if-single)))
+
+   (advice-add #'company-box-frontend :override #'+company*box-frontend-even-if-single))
 
 ;; (use-package company-statistics
 ;;  :after company
