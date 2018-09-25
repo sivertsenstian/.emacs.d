@@ -16,8 +16,7 @@
        company-require-match 'never
        company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
        company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-       company-backends '(company-capf company-dabbrev company-ispell)
-       company-transformers '(company-sort-by-occurrence))
+       company-backends '(company-capf company-dabbrev company-ispell))
  
  (global-company-mode +1)) 
 
@@ -89,6 +88,12 @@
             (company-box--post-command))))
 
    (advice-add #'company-box-frontend :override #'+company*box-frontend-even-if-single))
+
+(use-package company-prescient
+  :hook (company-mode . company-prescient-mode)
+  :config
+  (setq prescient-save-file "~/.emacs.d/prescient-save.el")
+  (prescient-persist-mode +1))
 
 ;; (use-package company-statistics
 ;;  :after company
