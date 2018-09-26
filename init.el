@@ -55,29 +55,25 @@
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
- (use-package utilities)
- (use-package init-evil)
+(use-package utilities)
+(use-package init-evil)
 (use-package init-themes
   :config
-  (load-theme 'doom-one t)
-  ;;(solaire-mode-swap-bg) 
-  )
- (use-package init-syntax)
- (use-package init-bindings)
- (use-package init-helm)
- (use-package init-files)
- (use-package init-navigation)
- (use-package init-git)
- (use-package init-clojure)
- (use-package init-css)
- ;; (use-package init-arduino)
- ;; (use-package init-elm)
- (use-package init-javascript)
- (use-package init-csharp)
- ;; (use-package init-slack)
- (use-package init-hydra)
-;; (use-package init-shell)
- ;; (use-package init-log)
+  (load-theme 'doom-one t))
+(use-package init-syntax)
+(use-package init-bindings)
+(use-package init-helm)
+(use-package init-files)
+(use-package init-navigation)
+(use-package init-git)
+(use-package init-clojure)
+(use-package init-css)
+;; (use-package init-elm)
+(use-package init-javascript)
+(use-package init-csharp)
+(use-package init-hydra)
+(use-package init-shell)
+(use-package init-log)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

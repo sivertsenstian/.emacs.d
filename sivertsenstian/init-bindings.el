@@ -101,7 +101,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "search"                  :n "/"   #'helm-projectile-ag
 	:desc "search symbol"           :n "*"   #'rg-dwim
 	:desc "window"                  :n "w"   evil-window-map
-	:desc "shell"                   :n "!"   #'shell
+	:desc "shell"                   :n "!"   #'powershell
 	:desc "winum-select-window-0"   :n "0"   #'winum-select-window-0-or-10
 	:desc "zoom"                    :n "z"   #'hydra--text-zoom/body 
 	:desc "move"                    :n "l"   #'hydra--move/body

@@ -5,7 +5,6 @@
 (tool-bar-mode -1)
 (tooltip-mode -1) ; relegate tooltips to echo area only
 (scroll-bar-mode -1)
-;; (toggle-frame-fullscreen)
 (global-hl-line-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (set-frame-font "Inconsolata 12" nil t)
@@ -111,14 +110,18 @@
 ;;   :straight t
 ;;   :hook (after-init . doom-modeline-init))
 
-(use-package spaceline
-  :straight t
-  :config
-  (spaceline-emacs-theme)
-  (spaceline-toggle-minor-modes-off)
-  (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
-  (spaceline-helm-mode))
- 
+;; (use-package spaceline
+;;   :straight t
+;;   :config
+;;   (spaceline-emacs-theme)
+;;   (spaceline-toggle-minor-modes-off)
+;;   (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
+;;   (spaceline-helm-mode))
+
+(use-package doom-modeline
+      :straight t
+      :hook (after-init . doom-modeline-init))
+
 (use-package solaire-mode
   :straight t
   :config
@@ -139,25 +142,6 @@
   :preface (defvar region-fg nil)
   :defer t
   :straight t)
-
-(use-package gotham-theme
- :defer t
- :straight t
- :config
- (set-face-background hl-line-face "#161E26"))
-
-(use-package solarized-theme
- :defer t
- :straight t
- :config
- (setq solarized-emphasize-indicators nil)
- (setq solarized-use-less-bold t)
- (setq solarized-use-variable-pitch nil)
- (setq solarized-height-minus-1 1.0)
- (setq solarized-height-plus-1 1.0)
- (setq solarized-height-plus-2 1.0)
- (setq solarized-height-plus-3 1.0)
- (setq solarized-height-plus-4 1.0))
 
 ;; export
 (provide 'init-themes)
