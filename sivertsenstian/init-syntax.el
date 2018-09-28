@@ -89,18 +89,6 @@
 
    (advice-add #'company-box-frontend :override #'+company*box-frontend-even-if-single))
 
-(use-package company-prescient
-  :hook (company-mode . company-prescient-mode)
-  :config
-  (setq prescient-save-file "~/.emacs.d/prescient-save.el")
-  (prescient-persist-mode +1))
-
-;; (use-package company-statistics
-;;  :after company
-;;  :straight t
-;;  :config
-;;  (company-statistics-mode +1))
-
 (use-package flycheck
   :commands (flycheck-mode flycheck-list-errors flycheck-buffer)
   :straight t

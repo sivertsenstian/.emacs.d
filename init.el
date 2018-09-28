@@ -68,7 +68,7 @@
 (use-package init-git)
 (use-package init-clojure)
 (use-package init-css)
-;; (use-package init-elm)
+(use-package init-elm)
 (use-package init-javascript)
 (use-package init-csharp)
 (use-package init-hydra)
