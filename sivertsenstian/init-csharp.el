@@ -10,6 +10,7 @@
 
 (use-package omnisharp
   :straight t
+  :after company 
   :hook (csharp-mode . omnisharp-mode)
   ;;:commands omnisharp-install-server
   :preface
@@ -20,8 +21,7 @@
     (unless (file-exists-p omnisharp-bin)
       (warn! "Omnisharp server isn't installed, completion won't work")))
 
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends #'company-omnisharp))
+  (add-to-list 'company-backends #'company-omnisharp)
   (omnisharp-mode)
   (company-mode)
   (flycheck-mode)

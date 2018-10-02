@@ -59,7 +59,8 @@
 (use-package init-evil)
 (use-package init-themes
   :config
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one t)
+  (solaire-mode-swap-bg))
 (use-package init-syntax)
 (use-package init-bindings)
 (use-package init-helm)
@@ -82,16 +83,18 @@
  ;; If there is more than one, they won't work right.
  '(cider-annotate-completion-candidates t)
  '(cider-completion-use-context t)
- '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
+ '(flycheck-check-syntax-automatically '(save mode-enabled))
  '(font-lock-maximum-size 1024000)
  '(helm-ag-base-command "rg --no-heading --vimgrep")
- '(helm-ag-insert-at-point (quote symbol))
+ '(helm-ag-insert-at-point 'symbol)
  '(jit-lock-chunk-size 1000)
  '(safe-local-variable-values
-   (quote
-    ((projectile-project-compile-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
+   '((elm-package-json . "elm.json")
+     (elm-compile-arguments "--output=elm.js" "--debug")
+     (elm-reactor-arguments "--port" "8000")
+     (projectile-project-compile-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
      (projectile-project-compilation-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
-     (cider-lein-parameters . "with-profile +dirac repl :headless :host ::")))))
+     (cider-lein-parameters . "with-profile +dirac repl :headless :host ::"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
