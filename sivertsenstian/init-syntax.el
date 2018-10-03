@@ -27,13 +27,13 @@
  (setq company-quickhelp-delay nil)
  (company-quickhelp-mode +1))
 
-;; (use-package company-prescient
-;;   :after company
-;;   :straight t
-;;   :config
-;;   (setq prescient-save-file "~/.emacs.d/prescient-save.el")
-;;   (company-prescient-mode)
-;;   (prescient-persist-mode +1))
+(use-package company-prescient
+  :after company
+  :straight t
+  :config
+  (setq prescient-save-file "~/.emacs.d/prescient-save.el")
+  (company-prescient-mode)
+  (prescient-persist-mode +1))
 
 (use-package company-box
   :after company

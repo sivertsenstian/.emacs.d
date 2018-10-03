@@ -91,14 +91,6 @@
  :config
  (global-evil-search-highlight-persist t))
 
-;; (use-package evil-goggles
-;;   :after evil
-;;   :straight t
-;;   :config
-;;   (setq evil-goggles-blocking-duration 0.100)
-;;   (evil-goggles-mode)
-;;   (evil-goggles-use-diff-faces))
-
 (use-package evil-multiedit
   :after evil
   :straight t

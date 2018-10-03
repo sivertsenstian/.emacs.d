@@ -73,8 +73,17 @@
 (use-package init-javascript)
 (use-package init-csharp)
 (use-package init-hydra)
-(use-package init-shell)
 (use-package init-log)
+
+;; init windows or linux stuff based on system-type
+(if (= system-type "windows-nt")
+    (progn
+      (use-package init-windows)
+      (use-package init-powershell))
+  (progn (use-package init-linux)
+	 (use-package init-shell)))
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

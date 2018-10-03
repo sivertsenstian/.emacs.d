@@ -106,22 +106,6 @@
 (use-package nav-flash
   :straight t)
 
-;; (use-package doom-modeline
-;;   :straight t
-;;   :hook (after-init . doom-modeline-init))
-
-;; (use-package spaceline
-;;   :straight t
-;;   :config
-;;   (spaceline-emacs-theme)
-;;   (spaceline-toggle-minor-modes-off)
-;;   (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
-;;   (spaceline-helm-mode))
-
-(use-package doom-modeline
-      :straight t
-      :hook (after-init . doom-modeline-init))
-
 (use-package solaire-mode
   :straight t
   :config
