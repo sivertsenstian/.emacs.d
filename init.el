@@ -76,7 +76,7 @@
 (use-package init-log)
 
 ;; init windows or linux stuff based on system-type
-(if (= system-type "windows-nt")
+(if (eq system-type 'windows-nt)
     (progn
       (use-package init-windows)
       (use-package init-powershell))
