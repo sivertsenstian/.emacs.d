@@ -93,13 +93,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Find file in project"    :n "SPC" #'projectile-find-file
 	:desc "Switch buffer"           :n "TAB" (λ! (switch-to-buffer (other-buffer (current-buffer) 1)))
 	:desc "Ex command"              :nv ";"  #'execute-extended-command
-	:desc "M-x"                     :nv ":"  #'evil-ex
-	:desc "Browse files"            :n "."   #'find-file
+	:desc "M-x"                     :nv ":"  #'helm-M-x
+	:desc "Browse files"            :n "."   #'helm-find-files
 	:desc "Browse buffers"          :n ","   #'helm-mini
 	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
-	:desc "search"                  :n "/"   #'helm-projectile-ag
-	:desc "search symbol"           :n "*"   #'rg-dwim
+	:desc "search"                  :n "/"   #'isearch-forward
+	:desc "search symbol"           :n "*"   #'sivertsenstian/helm-project-do-ag
 	:desc "window"                  :n "w"   evil-window-map
 	:desc "shell"                   :n "!"   #'powershell
 	:desc "winum-select-window-0"   :n "0"   #'winum-select-window-0-or-10
@@ -185,9 +185,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	    :desc "Edit symbol (in buffer)"  :n  "s" #'iedit-mode
 	    :desc "Edit symbol (in fn)"      :n  "S" #'iedit-mode-toggle-on-function
 	    :desc "Restrict"                 :n  "r" #'iedit-restrict-function
-	    :desc "Upcase"                   :n  "u" #'iedit-upcase-occurences
-	    :desc "Downcase"                 :n  "d" #'iedit-downcase-occurences
-	    :desc "Delete"                   :n  "!" #'iedit-delete-occurences
+	    :desc "Upcase"                   :n  "u" #'iedit-upcase-occurrences
+	    :desc "Downcase"                 :n  "d" #'iedit-downcase-occurrences
+	    :desc "Delete"                   :n  "!" #'iedit-delete-occurrences
 	    :desc "Case sensitive"           :n  "c" #'iedit-toggle-case-sensitive
 	    :desc "Quit"                       :n  "q" #'iedit-quit)
 	  :desc "List errors"                :n  "x" #'flycheck-list-errors

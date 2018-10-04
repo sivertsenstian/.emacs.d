@@ -12,7 +12,6 @@
   :straight t
   :after company 
   :hook (csharp-mode . omnisharp-mode)
-  ;;:commands omnisharp-install-server
   :preface
   (setq omnisharp-auto-complete-want-documentation nil
         omnisharp-cache-directory  "~/.emacs.d/omnisharp")
@@ -25,12 +24,13 @@
   (omnisharp-mode)
   (company-mode)
   (flycheck-mode)
+  (eldoc-mode)
 
   (setq compile-command "dotnet build")
 
   (setq indent-tabs-mode nil)
   (setq c-syntactic-indentation t)
-  (c-set-style "ellemtel")
+  ;; (c-set-style "ellemtel")
   (setq c-basic-offset 4)
   (setq truncate-lines t)
   (setq tab-width 4)
@@ -42,26 +42,38 @@
   (map! :map omnisharp-mode-map
 	:localleader
         :n "b" #'omnisharp-recompile
+	    :n  "j" #'omnisharp-go-to-definition
+	    :n  "J" #'omnisharp-go-to-definition-other-window
 
-        (:prefix "r"
+        (:desc "refactor" :prefix "r"
           :n "i"  #'omnisharp-fix-code-issue-at-point
           :n "u"  #'omnisharp-fix-usings
           :n "r"  #'omnisharp-rename
           :n "a"  #'omnisharp-show-last-auto-complete-result
           :n "o"  #'omnisharp-show-overloads-at-point)
 
-        (:prefix "f"
-          :n "u"  #'omnisharp-find-usages
-          :n "i"  #'omnisharp-find-implementations
+        (:desc "find" :prefix "f"
+          :n "u"  #'omnisharp-helm-find-usages
+          :n "s"  #'omnisharp-helm-find-symbols
+          :n "i"  #'omnisharp-find-implementations)
+
+        (:desc "navigate" :prefix "n"
           :n "f"  #'omnisharp-navigate-to-current-file-member
           :n "m"  #'omnisharp-navigate-to-solution-member
           :n "M"  #'omnisharp-navigate-to-solution-file-then-file-member
           :n "F"  #'omnisharp-navigate-to-solution-file
-          :n "r"  #'omnisharp-navigate-to-region
-          :n "ti" #'omnisharp-current-type-information
-          :n "td" #'omnisharp-current-type-documentation)
+          :n "r"  #'omnisharp-navigate-to-region)
+        
+        (:desc "type" :prefix "t"
+          :n "i" #'omnisharp-current-type-information
+          :n "d" #'omnisharp-current-type-documentation)
 
-        (:prefix "t"
+        (:desc "server" :prefix "s"
+          :n "s" 'omnisharp-start-omnisharp-server
+          :n "S" 'omnisharp-stop-server
+          :n "r" 'omnisharp-reload-solution)
+
+        (:desc "test" :prefix "t"
           :n "r" (λ! (omnisharp-unit-test "fixture"))
           :n "s" (λ! (omnisharp-unit-test "single"))
           :n "a" (λ! (omnisharp-unit-test "all")))))
