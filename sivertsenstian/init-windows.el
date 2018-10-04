@@ -1,6 +1,7 @@
 ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - WINDOWS SPECIFIC MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
+(set-frame-font "Inconsolata 12" nil t)
 
 (use-package spaceline
   :straight t

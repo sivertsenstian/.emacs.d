@@ -7,7 +7,6 @@
 (scroll-bar-mode -1)
 (global-hl-line-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(set-frame-font "Inconsolata 12" nil t)
 (electric-indent-mode +1)
 (fringe-mode '(8 . 5))
 (display-time-mode)

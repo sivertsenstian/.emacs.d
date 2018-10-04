@@ -1,6 +1,8 @@
 ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - LINUX SPECIFIC MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
+(set-frame-font "Ubuntu Mono 12" nil t)
+
 (use-package doom-modeline
   :straight t
   :config
