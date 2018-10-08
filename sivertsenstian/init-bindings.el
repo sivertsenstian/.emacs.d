@@ -3,6 +3,7 @@
 ;;----------------------------------------------------------------------------
 (use-package which-key
   :straight t
+  :defer t
   :config
   (setq which-key-sort-order 'which-key-prefix-then-key-order
 	which-key-sort-uppercase-first nil
@@ -96,7 +97,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "M-x"                     :nv ":"  #'helm-M-x
 	:desc "Browse files"            :n "."   #'helm-find-files
 	:desc "Browse buffers"          :n ","   #'helm-mini
-	:desc "Blink cursor line"       :n "DEL" (λ! (nav-flash-show))
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
 	:desc "search"                  :n "/"   #'isearch-forward
 	:desc "search symbol"           :n "*"   #'sivertsenstian/helm-project-do-ag

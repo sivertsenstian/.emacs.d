@@ -1,7 +1,6 @@
 ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - ELM MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
-(setq elm-format-on-save t)
 
 (use-package elm-mode;
   :mode "\\.elm$"
@@ -9,6 +8,7 @@
   :straight t
   :config
   (add-to-list 'company-backends #'company-elm)
+  (setq elm-format-on-save t)
   (setq elm-sort-imports-on-save t)
   (map! :map elm-mode-map
 	(:localleader

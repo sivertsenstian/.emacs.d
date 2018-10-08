@@ -2,36 +2,30 @@
 ;; SIVERTSENSTIAN - HELM ++ MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package helm
- :straight t
- :init
- (setq helm-quick-update t
-       ;; Speedier without fuzzy matching
-       ;; helm-mode-fuzzy-match nil
-       ;; helm-buffers-fuzzy-matching nil
-       ;; helm-apropos-fuzzy-match nil
-       ;; helm-M-x-fuzzy-match nil
-       ;; helm-recentf-fuzzy-match nil
-       ;; helm-projectile-fuzzy-match nil
-       ;; Display extraineous helm UI elements
-       helm-display-header-line nil
-       helm-ff-auto-update-initial-value nil
-       helm-find-files-doc-header nil
-       ;; Don't override evil-ex's completion
-       helm-mode-handle-completion-in-region nil
-       helm-candidate-number-limit 20
-       ;; Don't wrap item cycling
-       helm-move-to-line-cycle-in-source t)
- (helm-mode 1)
- :config
- (setq helm-use-frame-when-more-than-two-windows nil
-       helm-autoresize-max-height 20
-       helm-autoresize-min-height 20
-       helm-display-function #'display-buffer)
- (helm-autoresize-mode 1)
- (add-to-list 'display-buffer-alist
-	     '("\\`\\*helm"
-	       (display-buffer-in-side-window)
-	       (window-height . 0.2))))
+  :straight t
+  :defer t
+  :init
+  (setq helm-quick-update t
+	;; Display extraineous helm UI elements
+	helm-display-header-line nil
+	helm-ff-auto-update-initial-value nil
+	helm-find-files-doc-header nil
+	;; Don't override evil-ex's completion
+	helm-mode-handle-completion-in-region nil
+	helm-candidate-number-limit 20
+	;; Don't wrap item cycling
+	helm-move-to-line-cycle-in-source t)
+  (helm-mode 1)
+  :config
+  (setq helm-use-frame-when-more-than-two-windows nil
+	helm-autoresize-max-height 20
+	helm-autoresize-min-height 20
+	helm-display-function #'display-buffer)
+  (helm-autoresize-mode 1)
+  (add-to-list 'display-buffer-alist
+	       '("\\`\\*helm"
+		 (display-buffer-in-side-window)
+		 (window-height . 0.2))))
 
 (use-package helm-company
   :after (helm company)
@@ -39,6 +33,7 @@
 
 (use-package projectile
   :straight t
+  :defer t
   :config
   (projectile-global-mode)
   (setq projectile-indexing-method 'turbo-alien

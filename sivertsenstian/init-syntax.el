@@ -4,21 +4,21 @@
 (use-package company
   :commands (company-mode global-company-mode company-complete
 			  company-complete-common company-manual-begin company-grab-line)
- :straight t
- :config
- (setq company-idle-delay 0.5
-       companu-minimum-prefix-length 3
-       company-tooltip-limit 10
-       company-dabbrev-downcase nil
-       company-dabbrev-ignore-case nil
-       company-dabbrev-code-other-buffers t
-       company-tooltip-align-annotations t
-       company-require-match 'never
-       company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
-       company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
-       company-backends '(company-capf company-dabbrev company-ispell))
- 
- (global-company-mode +1)) 
+  :straight t
+  :config
+  (setq company-idle-delay 0.5
+	companu-minimum-prefix-length 3
+	company-tooltip-limit 10
+	company-dabbrev-downcase nil
+	company-dabbrev-ignore-case nil
+	company-dabbrev-code-other-buffers t
+	company-tooltip-align-annotations t
+	company-require-match 'never
+	company-global-modes '(not eshell-mode comint-mode erc-mode message-mode help-mode gud-mode)
+	company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend)
+	company-backends '(company-capf company-dabbrev company-ispell))
+  
+  (global-company-mode +1)) 
 
 (use-package company-quickhelp
  :after company
@@ -126,6 +126,7 @@
 
 (use-package rainbow-delimiters
   :straight t
+  :defer t
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
@@ -137,10 +138,12 @@
   (set-face-background 'highlight-indentation-current-column-face "#26859E"))
 
 (use-package lispy
- :straight t)
+  :defer t
+  :straight t)
 
 (use-package smartparens
  :straight t
+ :defer t
  :init
  (add-hook 'prog-mode-hook #'smartparens-mode)
  (add-hook 'prog-mode-hook #'smartparens-strict-mode))

@@ -21,9 +21,6 @@
   (add-hook 'dired-initial-position-hook 'dired-k)
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
 
-;; (use-package rg
-;;  :straight t)
-
 (use-package  wgrep
   :commands (wgrep-setup wgrep-change-to-wgrep-mode)
   :straight t
@@ -31,14 +28,13 @@
 
 (use-package iedit
  :straight t
+ :commands (iedit-mode
+	    iedit-toggle-on-function iedit-restrict-function
+	    iedit-upcase-occurrences iedit-downcase-occurrences
+	    iedit-delete-occurrences iedit-toggle-case-sensitive
+	    iedit-quit)
  :config
  (setq-default ag-highlight-search t))
-
-(use-package flx-ido
-  :straight t
-  :config
-  (flx-ido-mode 1))
-
 
 ;; export
 (provide 'init-files)

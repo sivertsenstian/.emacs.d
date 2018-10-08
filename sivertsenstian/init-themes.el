@@ -102,11 +102,9 @@
 				   all-the-icons-install-fonts)
   :straight t)
 
-(use-package nav-flash
-  :straight t)
-
 (use-package solaire-mode
   :straight t
+  :commands solaire-mode-swap-bg
   :config
   ;; brighten buffers (that represent real files)
   (add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)

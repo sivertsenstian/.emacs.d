@@ -73,10 +73,6 @@
   :config
   (add-hook 'rjsx-mode-hook #'js2-refactor-mode))
 
-;; typescript
-(use-package ts-comint
-  :straight t)
-
 (use-package typescript-mode
   :mode "\\.ts$"
   :straight t)

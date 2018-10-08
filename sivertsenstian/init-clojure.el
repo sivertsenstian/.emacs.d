@@ -72,6 +72,7 @@
 
 (use-package clj-refactor
   :straight t
+  :after clojure-mode
   :config
   (clj-refactor-mode))
 
@@ -85,52 +86,21 @@
   (helm-cider-mode 1))
 
 (use-package cider
-  :after clojure-mode
   :straight t
+  :after clojure-mode
   :config
   (setq cider-prompt-for-symbol nil)
   (setq cider-prefer-local-resources t)
   ;;(setq cider-font-lock-dynamically '(macro core function var))
   (add-hook 'cider-mode-hook #'eldoc-mode))
 
-(use-package evil-cleverparens
-:straight t
-:config
-(evil-cleverparens-mode))
-
 (use-package cider-eval-sexp-fu
   :after clojure-mode
   :straight t)
 
-(use-package clj-refactor
-  :after clojure-mode
-  :straight t)
-
 (use-package flycheck-joker
-:after flycheck
-:straight t)
-
-(defun clojure/fancify-symbols (mode)
-  "Pretty symbols for Clojure's anonymous functions and sets,
-   like (λ [a] (+ a 5)), ƒ(+ % 5), and ∈{2 4 6}."
-  (font-lock-add-keywords mode
-    `(("(\\(fn\\)[\[[:space:]]"
-       (0 (progn (compose-region (match-beginning 1)
-                                 (match-end 1) "λ"))))
-      ("(\\(partial\\)[\[[:space:]]"
-       (0 (progn (compose-region (match-beginning 1)
-                                 (match-end 1) "ρ"))))
-      ("(\\(comp\\)[\[[:space:]]"
-       (0 (progn (compose-region (match-beginning 1)
-                                 (match-end 1) "∘"))))
-      ("\\(#\\)("
-       (0 (progn (compose-region (match-beginning 1)
-                                 (match-end 1) "ƒ"))))
-      ("\\(#\\){"
-       (0 (progn (compose-region (match-beginning 1)
-                                 (match-end 1) "∈")))))))
-
-
+  :after (clojure-mode flycheck)
+  :straight t)
 
 ;; export
 (provide 'init-clojure)

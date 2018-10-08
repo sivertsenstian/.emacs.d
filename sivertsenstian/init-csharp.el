@@ -10,7 +10,7 @@
 
 (use-package omnisharp
   :straight t
-  :after company 
+  :after (csharp-mode company) 
   :hook (csharp-mode . omnisharp-mode)
   :preface
   (setq omnisharp-auto-complete-want-documentation nil

@@ -6,7 +6,7 @@
   :straight t)
 
 (use-package rainbow-mode
-  :after (:any css-mode scss-mode  web-mode less-css-mode)
+  :after (:any css-mode scss-mode web-mode less-css-mode)
   :straight t)
 
 (use-package css-mode

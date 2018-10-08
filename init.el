@@ -63,17 +63,20 @@
   (solaire-mode-swap-bg))
 (use-package init-syntax)
 (use-package init-bindings)
-(use-package init-helm)
 (use-package init-files)
 (use-package init-navigation)
+(use-package init-hydra)
+
+;; Tools
+(use-package init-helm)
 (use-package init-git)
-(use-package init-clojure)
+
+;; Languages
 (use-package init-css)
+(use-package init-clojure)
 (use-package init-elm)
 (use-package init-javascript)
 (use-package init-csharp)
-(use-package init-hydra)
-(use-package init-log)
 
 ;; init windows or linux stuff based on system-type
 (if (eq system-type 'windows-nt)
