@@ -1,8 +1,11 @@
 ;;----------------------------------------------------------------------------
 ;; Init straight, use-package and add subdir for custom packages
 ;;----------------------------------------------------------------------------
+(setq package-enable-at-startup nil ; don't auto-initialize!
+      ;; don't add that `custom-set-variables' block to my initl!
+      package--init-file-ensured t)
+
 (add-to-list 'load-path (expand-file-name "sivertsenstian/" user-emacs-directory))
-(add-to-list 'custom-theme-load-path (expand-file-name "sivertsenstian/themes/" user-emacs-directory)) 
 ;;bootstrap straight package manager
 (let ((bootstrap-file (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el"))
       (bootstrap-version 3))
@@ -24,15 +27,15 @@
 ;;----------------------------------------------------------------------------
 (defvar sivertsenstian--file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-(setq gc-cons-threshold 402653184 ;;500000000
-      gc-cons-percentage 1.0
+(setq gc-cons-threshold 402653184 
+      gc-cons-percentage 0.6
       ;; consulted on every `require', `load' and various file reading
       ;; functions. You get a minor speed up by nooping this.
       file-name-handler-alist nil)
   (add-hook 'after-init-hook
 	    (lambda ()
 	     (setq gc-cons-threshold 16777216
-		   gc-cons-percentage 0.15)))
+		   gc-cons-percentage 0.1)))
   (add-hook 'after-init-hook
 	     (lambda ()
 	      (setq file-name-handler-alist sivertsenstian--file-name-handler-alist)))
