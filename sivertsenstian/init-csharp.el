@@ -30,14 +30,13 @@
 
   (setq indent-tabs-mode nil)
   (setq c-syntactic-indentation t)
-  ;; (c-set-style "ellemtel")
   (setq c-basic-offset 4)
   (setq truncate-lines t)
   (setq tab-width 4)
   (setq evil-shift-width 4)
 
-  (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
-  (local-set-key (kbd "C-c C-c") 'recompile)
+  (setq projectile-compile-cmd (concat "dotnet build " projectile-project-root))
+  (setq projectile-run-cmd (concat "dotnet run " projectile-project-root))
 
   (map! :map omnisharp-mode-map
 	:localleader

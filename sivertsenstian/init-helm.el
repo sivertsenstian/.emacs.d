@@ -41,7 +41,6 @@
   :straight t
   :config
   (projectile-global-mode)
-  (setq projectile-project-search-path '("~/code/"))
   (setq projectile-indexing-method 'turbo-alien
 	projectile-enable-caching t
 	projectile-completion-system 'helm))
