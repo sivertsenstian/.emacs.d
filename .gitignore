@@ -14,4 +14,6 @@ smex-items
 company-statistics-cache.el
 emojis/
 url/
-prescient.el
+prescient-save.el
+session.*
+.#recentf

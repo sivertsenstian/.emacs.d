@@ -87,7 +87,6 @@
 	  (message "error: Not in a project.")))))
   :init
   (custom-set-variables
-   ;; '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case --vimgrep")
    '(helm-ag-base-command "rg --no-heading --vimgrep --smart-case")
    '(helm-ag-insert-at-point 'symbol)))
 
