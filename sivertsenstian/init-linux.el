@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - LINUX SPECIFIC MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
@@ -5,6 +6,7 @@
 
 (use-package doom-modeline
   :straight t
+  :after doom-themes
   :config
   (doom-modeline-init))
 

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; DOOM STUFF
 (eval-and-compile
   (when (version< emacs-version "26")
