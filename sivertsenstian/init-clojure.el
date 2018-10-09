@@ -52,21 +52,39 @@
 
   (map! :map clojure-mode-map
 	(:localleader
-	  :nv "e" #'cider-eval-last-sexp
-	  :nv "f" #'cider-eval-defun-at-point
-	  :n  "B" #'cider-switch-to-repl-buffer
-	  :n  "b" #'cider-eval-buffer
-	  :n  "n" #'cider-repl-set-ns
-	  :n  "j" #'cider-find-var
-	  :n  "d" #'cider-doc
-	  :nv "m" #'cider-macroexpand-1
-	  :n  "p" #'cider-eval-sexp-at-point
-	  :n  "r" #'cider-eval-region
-	  :nv "'" #'cider-jack-in))
+	  :nv "'" #'cider-jack-in
+	  :nv "SPC" #'clojure-align
+	  (:desc "cider" :prefix "c"
+	    :nv "e" #'cider-eval-last-sexp
+	    :nv "f" #'cider-eval-defun-at-point
+	    :n  "B" #'cider-switch-to-repl-buffer
+	    :n  "b" #'cider-eval-buffer
+	    :n  "n" #'cider-repl-set-ns
+	    :n  "j" #'cider-find-var
+	    :n  "d" #'cider-doc
+	    :nv "m" #'cider-macroexpand-1
+	    :n  "p" #'cider-eval-sexp-at-point
+	    :n  "r" #'cider-eval-region)
+	  (:desc "edit" :prefix "e"
+	    :nv "a" #'clojure-align
+	    :nv "k" #'clojure-toggle-keyword-string
+	    :nv "l" #'clojure-move-to-let
+	    :nv "L" #'clojure-introduce-let
+	    :nv "i" #'clojure-cycle-if
+	    :nv "w" #'clojure-cycle-when
+	    :nv "P" #'clojure-cycle-privacy
+	    :nv "n" #'clojure-cycle-not
+	    :nv "}" #'clojure-convert-collection-to-map
+	    :nv "]" #'clojure-convert-collection-to-vector
+	    :nv "#" #'clojure-convert-collection-to-vector)
+	  (:desc "go" :prefix "g"
+	    :nv "i" #'clojure--goto-if
+	    :nv "w" #'clojure--goto-when
+	    :nv "l" #'clojure--goto-let)))
 
   (clojure/fancify-symbols 'clojure-mode)
   (clojure/fancify-symbols 'clojurescript-mode)
-
+  (clojure-align-forms-automatically)
   (eldoc-mode)
   (subword-mode))
 

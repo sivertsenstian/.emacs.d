@@ -47,6 +47,10 @@
  :config
  (helm-projectile-on))
 
+(use-package pcre2el
+  :commands rxt-quote-pcre
+  :straight t)
+
 (use-package helm-ag
   :after (helm projectile)
   :straight t
@@ -79,7 +83,7 @@
       (interactive)
       (let ((dir (projectile-project-root)))
 	(if dir
-	    (spacemacs//helm-do-ag-region-or-symbol 'helm-do-ag dir)
+	    (sivertsenstian//helm-do-ag-region-or-symbol 'helm-do-ag dir)
 	  (message "error: Not in a project.")))))
   :init
   (custom-set-variables

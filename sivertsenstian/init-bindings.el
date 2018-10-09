@@ -22,15 +22,15 @@ KEY must be given in `kbd' notation."
      (setq unread-command-events (listify-key-sequence (read-kbd-macro ,key)))))
 
   ;; esc quits
-  (defun minibuffer-keyboard-quit ()
-    "Abort recursive edit.
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
 In Delete Selection mode, if the mark is active, just deactivate it;
 then it takes a second \\[keyboard-quit] to abort the minibuffer."
-    (interactive)
-    (if (and delete-selection-mode transient-mark-mode mark-active)
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
       (setq deactivate-mark  t)
-      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-      (abort-recursive-edit)))
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
   (define-key evil-normal-state-map [escape] 'keyboard-quit)
   (define-key evil-visual-state-map [escape] 'keyboard-quit)
   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
@@ -63,40 +63,38 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :ne "C-M-q" #'indent-pp-sexp
 
       ;; --- Kill ring ------------------------------------
-      :ne "M-p" #'hydra--paste/body
+      :ne "M-p" #'hydra--paste/evil-paste-after
+      :ne "M-P" #'hydra--paste/evil-paste-before
 
       ;; --- Personal vim-esque bindings ------------------
       :n  "]b" #'next-buffer
       :n  "[b" #'previous-buffer
       :n  "]w" #'evil-window-next
+      :n  "[h" #'git-gutter+-previous-hunk
+      :n  "]h" #'git-gutter+-next-hunk
       :n  "[w" #'evil-window-prev
       :m  "gd" #'smart-jump-go
       :m  "gb" #'smart-jump-back
       :m  "gh" #'smart-jump-references
-      :n  "gp" #'+evil/reselect-paste
-      :v  "gR" #'+eval:replace-region
 
       :en "C-f"   #'helm-swoop
       :en "M-f"   #'helm-multi-swoop-projectile
       ;; Easier code navigation
-      :en "C-k"   #'evil-scroll-page-up
-      :en "C-j"   #'evil-scroll-page-down
+      :en "C-M-k"   #'evil-backward-section-begin
+      :en "C-M-j"   #'evil-forward-section-begin
+      :en "C-k"   #'evil-backward-paragraph
+      :en "C-j"   #'evil-forward-paragraph
+
       :en "C-h"   #'evil-first-non-blank
       :en "C-l"   #'evil-end-of-line
-      ;; Easier window navigation
-      ;; :en "C-h"   #'evil-window-left
-      ;; :en "C-j"   #'evil-window-down
-      ;; :en "C-k"   #'evil-window-up
-      ;; :en "C-l"   #'evil-window-right
+      :en ","     #'(simulate-key-press "SPC m")
 
       ;; --- <leader> -------------------------------------
       (:leader
 	;; Most commonly used
 	:desc "Find file in project"    :n "SPC" #'projectile-find-file
 	:desc "Switch buffer"           :n "TAB" (λ! (switch-to-buffer (other-buffer (current-buffer) 1)))
-	:desc "Ex command"              :nv ";"  #'execute-extended-command
-	:desc "M-x"                     :nv ":"  #'helm-M-x
-	:desc "Browse files"            :n "."   #'helm-find-files
+	:desc "Browse files"            :n "."   #'dired
 	:desc "Browse buffers"          :n ","   #'helm-mini
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
 	:desc "search"                  :n "/"   #'isearch-forward
@@ -105,7 +103,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "shell"                   :n "!"   #'powershell
 	:desc "winum-select-window-0"   :n "0"   #'winum-select-window-0-or-10
 	:desc "zoom"                    :n "z"   #'hydra--text-zoom/body 
-	:desc "move"                    :n "l"   #'hydra--move/body
 	:n "1" #'winum-select-window-1
 	:n "2" #'winum-select-window-2
 	:n "3" #'winum-select-window-3
@@ -122,41 +119,20 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Barf sexp forward"    :nv "b" #'lispy-forward-barf-sexp
 	  :desc "Barf sexp backward"   :nv "B" #'lispy-backward-barf-sexp
 	  :desc "Kill"                 :nv "x" #'lispy-kill
-	  :desc "Kill!"                :nv "X" #'lispy-kill-at-poin
+	  :desc "Kill!"                :nv "X" #'lispy-kill-at-point
 	  :desc "toggle mode"          :nv "m" #'lispy-mode
 	  :desc "wrap sexp"            :nv "w" #'lispy-wrap-round
 	  :desc "unwrap sexp"          :nv "W" #'lispy-splice
-	  :desc "Raise sexp"           :nv "r" #'lispy-raise-sexp
-	  :desc "Convolute sexp"       :nv "r" #'lispy-convolute-sexp
-	  :desc "wrap sexp in []"      :nv "[" #'lispy-wrap-brackets
-	  :desc "wrap sexp in {}"      :nv "{" #'lispy-wrap-braces
+	  :desc "wrap sexp in []"      :nv "]" #'lispy-wrap-brackets
+	  :desc "wrap sexp in {}"      :nv "}" #'lispy-wrap-braces
 	  :desc "stringify"            :nv "\"" #'lispy-stringify
 	  :desc "unstringify"          :nv "'" #'lispy-unstringify
 	  :desc "toggle strict"        :nv "!" #'smartparens-strict-mode
 	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 
-	(:desc "previous..." :prefix "["
-	  :desc "Text size"             :nv "[" #'text-scale-decrease
-	  :desc "Buffer"                :nv "b" #'previous-buffer
-	  :desc "Diff Hunk"             :nv "d" #'git-gutter:previous-hunk
-	  :desc "Todo"                  :nv "t" #'hl-todo-previous
-	  :desc "Error"                 :nv "e" #'flycheck-previous-error
-	  :desc "Window"                :nv "w" #'evil-window-prev
-	  :desc "Smart jump"            :nv "h" #'smart-backward)
-
-	(:desc "next..." :prefix "]"
-	  :desc "Text size"             :nv "]" #'text-scale-increase
-	  :desc "Buffer"                :nv "b" #'next-buffer
-	  :desc "Diff Hunk"             :nv "d" #'git-gutter:next-hunk
-	  :desc "Todo"                  :nv "t" #'hl-todo-next
-	  :desc "Error"                 :nv "e" #'flycheck-next-error
-	  :desc "Window"                :nv "w" #'evil-window-next
-	  :desc "Smart jump"            :nv "l" #'smart-forward)
-
 	(:desc "search" :prefix "s"
 	  :desc "search"                :nv "s" #'helm-ag
 	  :desc "resume"                :nv "r" #'helm-resume
-	  :desc "list searches"         :nv "l" #'rg-list-searches
 	  :desc "in project"            :nv "p" #'sivertsenstian/helm-project-do-ag
 	  :desc "in project (results)"  :nv "P" #'sivertsenstian/helm-project-do-ag-region-or-symbol
 	  :desc "Swoop"                 :nv "f" #'sivertsenstian/helm-swoop-region-or-symbol
@@ -166,18 +142,16 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)
 
 	(:desc "error" :prefix "e"
-	  :desc "next"                  :nv "n" #'flycheck-next-error
-	  :desc "previous"              :nv "p" #'flycheck-previous-error
-	  :desc "next"                  :nv "]" #'flycheck-next-error
-	  :desc "previous"              :nv "[" #'flycheck-previous-error)
+	  :desc "next"                  :nv "j" #'flycheck-next-error
+	  :desc "previous"              :nv "k" #'flycheck-previous-error)
 
 	(:desc "buffer" :prefix "b"
 	  :desc "New empty buffer"        :n "n" #'evil-buffer-new
-	  :desc "Switch buffer"           :n "b" #'switch-to-buffer
 	  :desc "Kill buffer"             :n "k" #'kill-this-buffer
 	  :desc "Save buffer"             :n "s" #'save-buffer
 	  :desc "Save buffers"            :n "S" #'save-some-buffers
-	  :desc "Bury buffer"             :n "z" #'bury-buffer
+	  :desc "Revert buffer"           :n "r" #'revert-buffer
+	  :desc "Evaluate buffer"         :n "E" #'eval-buffer
 	  :desc "Next buffer"             :n "]" #'next-buffer
 	  :desc "Previous buffer"         :n "[" #'previous-buffer)
 
@@ -202,18 +176,20 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'helm-projectile-find-file
 	  :desc "Find other file"           :n "a" #'helm-projectile-find-other-file
-	  :desc "Recent files"              :n "r" #'helm-recentf
-	  :desc "Recent project files"      :n "R" #'helm-projectile-recentf)
+	  :desc "Recent files"              :n "R" #'helm-recentf
+	  :desc "Recent project files"      :n "r" #'helm-projectile-recentf)
 
 	(:desc "git" :prefix "g"
 	  :desc "Git status"            :n  "s" #'magit-status
 	  :desc "Git blame"             :n  "b" #'magit-blame
 	  :desc "Git time machine"      :n  "t" #'git-timemachine-toggle
-	  :desc "Git stage hunk"        :n  "S" #'git-gutter:stage-hunk
-	  :desc "Git revert hunk"       :n  "r" #'git-gutter:revert-hunk
+	  :desc "Git stage hunk"        :n  "S" #'git-gutter+-stage-hunks
+	  :desc "Git revert hunk"       :n  "r" #'git-gutter+-revert-hunk
 	  :desc "Git revert buffer"     :n  "R" #'vc-revert
-	  :desc "Next hunk"             :nv "]" #'git-gutter:next-hunk
-	  :desc "Previous hunk"         :nv "[" #'git-gutter:previous-hunk)
+	  :desc "Git show hunk inline"  :n  "i" #'git-gutter+-show-hunk-inline-at-point
+	  :desc "Git show hunk"         :n  "I" #'git-gutter+-show-hunk
+	  :desc "Next hunk"             :nv "]" #'git-gutter+-next-hunk
+	  :desc "Previous hunk"         :nv "[" #'git-gutter+-previous-hunk)
 
 	(:desc "help" :prefix "h"
 	  :n "h" help-map
@@ -229,7 +205,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Unhighlight search"    :nv "s" #'evil-search-highlight-persist-remove-all
 	  :desc "Unhighlight symbol"    :nv "u" #'unhighlight-regexp)
 
-	(:desc "Jump" :prefix "j"
+	(:desc "jump" :prefix "j"
 	  :desc "to char"               :nv "j" #'avy-goto-char
 	  :desc "to word"               :nv "w" #'avy-goto-word-1
 	  :desc "to line above"         :nv "K" #'avy-goto-line-above
@@ -244,14 +220,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Run cmd in project root" :nv "!" #'projectile-run-shell-command-in-root
 	  :desc "Switch project"          :n  "p" #'projectile-switch-project
 	  :desc "Recent project files"    :n  "r" #'projectile-recentf
-	  :desc "search in project"           :nv "s" #'helm-projectile-ag
-	  :desc "search in project (results)" :nv "S" #'helm-ag-project-root
+	  :desc "search in project"           :nv "s" #'sivertsenstian/helm-project-do-ag
+	  :desc "search in project (results)" :nv "S" #'sivertsenstian/helm-project-do-ag-region-or-symbol
 	  :desc "Invalidate cache"        :n  "x" #'projectile-invalidate-cache)
 
 	(:desc "quit" :prefix "q"
 	  :desc "Reload"                 :n "r" #'sivertsenstian/reload-init
-	  :desc "Quit"                   :n "q" #'evil-save-and-quit
-	  :desc "Quit (forget session)"  :n "Q" #'+workspace/kill-session-and-quit)
+	  :desc "Quit"                   :n "q" #'evil-save-and-quit)
 
 	(:desc "toggle" :prefix "t"
 	  :desc "Flycheck"               :n "f" #'flycheck-mode
@@ -264,22 +239,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 
       ;; --- Personal vim-esque bindings ------------------
-      :n  "]b" #'next-buffer
-      :n  "[b" #'previous-buffer
       :nv "gj" #'evil-avy-goto-char
+      :nv "gw" #'evil-avy-goto-word-1
       :nv "gJ" #'evil-avy-goto-line-below
       :nv "gK" #'evil-avy-goto-line-above
-      ;; repeat in visual mode (FIXME buggy)
       :v  "."  #'evil-repeat
-      ;; don't leave visual mode after shifting
-      :v  "<"  #'+evil/visual-dedent  ; vnoremap < <gv
-      :v  ">"  #'+evil/visual-indent  ; vnoremap > >gv
-      ;; paste from recent yank register (which isn't overwritten)
-      :v  "C-p" "\"0p"
-
-      :nv "C-a" #'evil-numbers/inc-at-pt
-      :nv "C-x" #'evil-numbers/dec-at-pt
-
+      :nv "C-a" #'org-increase-number-at-point
+      :nv "C-M-a" #'org-decrease-number-at-point
 
       ;; --- Plugin bindings ------------------------------
       ;; company-mode (vim-like omnicompletion)
@@ -310,21 +276,21 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  "C-s"        (λ! (company-search-abort) (company-filter-candidates))
 	  [escape]     #'company-search-abort))
 
-	  ;;helm
-	  (:after helm
-	   (:map helm-map
-	    "C-j" #'helm-next-line
-		"C-k" #'helm-previous-line))
+      ;;helm
+      (:after helm
+	(:map helm-map
+	  "C-j" #'helm-next-line
+	  "C-k" #'helm-previous-line))
       ;; evil
       (:after evil
-	(:map evil-window-map ; prefix "C-w"
+	(:map evil-window-map		; prefix "C-w"
 	  ;; Navigation
 	  "C-h"     #'evil-window-left
 	  "C-j"     #'evil-window-down
 	  "C-k"     #'evil-window-up
 	  "C-l"     #'evil-window-right
 	  "w"       #'ace-window
-	  "_"		#'ace-delete-other-windows
+	  "_"	    #'ace-delete-other-windows
 	  "s"       #'ace-swap-window
 	  "d"       #'ace-delete-window
 	  "u"       #'winner-undo
@@ -379,10 +345,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :o  "s"  #'evil-surround-edit
       :o  "S"  #'evil-Surround-edit
 
-      ;; expand-region
-      :v  "v"  #'er/expand-region
-      :v  "V"  #'er/contract-region
-
       ;; flycheck
       :m  "]e" #'flycheck-next-error
       :m  "[e" #'flycheck-previous-error
@@ -393,10 +355,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:n "j"   #'flycheck-error-list-next-error
 	:n "k"   #'flycheck-error-list-previous-error
 	:n "RET" #'flycheck-error-list-goto-error)
-
-      ;; git-gutter
-      :m  "]d" #'git-gutter:next-hunk
-      :m  "[d" #'git-gutter:previous-hunk
 
       ;; git-timemachine
       (:after git-timemachine

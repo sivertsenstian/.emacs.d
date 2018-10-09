@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t; -*-
-;----------------------------------------------------------------------------
+;; -*- lexical-binding: t; -*- ;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - HYDRA MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
 (use-package hydra
@@ -19,19 +18,20 @@
     "
       Paste from killring: _j_:next, _k_:previous, _l_:
 "
-    ("j" (yank-pop 1) "next")
-    ("k" (yank-pop -1) "previous")
-    ("l" helm-show-kill-ring "list"))
+    ("j" evil-paste-pop "next")
+    ("k" evil-paste-pop-next "prev")
+    ("p" evil-paste-after nil)
+    ("P" evil-paste-before nil)
+    ("l" helm-show-kill-ring "list" :color blue))
 
-  (defhydra hydra--move (:hint t :color red)
+  (defhydra hydra--paste (:hint t :color red)
     "
-      Move: _h_:beginning, _l_:end, _j_:down, _k_:up, _m_: mark
+      Paste from killring: _j_:next, _k_:previous, _l_:
 "
-    ("h" evil-first-non-blank "beginning" :color blue)
-    ("l" evil-end-of-line "end" :color blue)
-    ("j" evil-scroll-down "down")
-    ("k" evil-scroll-up "up")
-    ("m" evil-goto-mark "mark" :color blue)))
+    ("M-p" evil-paste nil)
+    ("j" evil-paste-pop "next")
+    ("k" evil-paste-pop-next "previous")
+    ("l" helm-show-kill-ring "list")))
 
 ;; export
 (provide 'init-hydra)
