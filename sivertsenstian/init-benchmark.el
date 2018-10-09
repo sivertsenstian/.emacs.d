@@ -18,7 +18,6 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
                        (list feature require-start-time time)
                        t))))))
 
-
 (define-derived-mode sanityinc/require-times-mode tabulated-list-mode "Require-Times"
   "Show times taken to `require' packages."
   (setq tabulated-list-format
