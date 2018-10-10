@@ -86,7 +86,8 @@
   (clojure/fancify-symbols 'clojurescript-mode)
   (clojure-align-forms-automatically)
   (eldoc-mode)
-  (subword-mode))
+  (subword-mode)
+  (lispy-mode))
 
 
 (use-package clj-refactor
