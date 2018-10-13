@@ -44,16 +44,19 @@
   :mode ("\\.cljs$" . clojurescript-mode)
   :config
   (setq cider-repl-history-file "~/.emacs.d/cider.history.log"
+	clojure-align-forms-automatically t
 	cider-repl-pop-to-buffer-on-connect nil
 	cider-repl-use-clojure-font-lock t
 	cider-repl-use-pretty-printing t
 	cider-prompt-for-symbol nil
-	cider-show-error-buffer nil)
+	cider-show-error-buffer nil
+	cider-repl-display-help-banner nil)
 
   (map! :map clojure-mode-map
 	(:localleader
 	  :nv "'" #'cider-jack-in
 	  :nv "SPC" #'clojure-align
+	  :nv "f" #'cider-format-buffer
 	  (:desc "cider" :prefix "c"
 	    :nv "e" #'cider-eval-last-sexp
 	    :nv "f" #'cider-eval-defun-at-point
@@ -84,10 +87,16 @@
 
   (clojure/fancify-symbols 'clojure-mode)
   (clojure/fancify-symbols 'clojurescript-mode)
-  (clojure-align-forms-automatically)
   (eldoc-mode)
   (subword-mode)
-  (lispy-mode))
+  (lispy-mode)
+
+  (defun format-before-save-hook ()
+    (when
+	(or (eq major-mode 'clojure-mode)
+	    (eq major-mode 'clojurescript-mode))
+      (message "formatting buffer!")))
+  (add-hook 'before-save-hook #'format-before-save-hook))
 
 
 (use-package clj-refactor
