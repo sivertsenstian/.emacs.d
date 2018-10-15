@@ -19,4 +19,20 @@
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces))
 
+(use-package helm-spotify-plus
+  :after helm
+  :straight t
+  :init
+  (map! (:leader
+	  (:desc "music"          :prefix "u"
+	    :desc "play/pause "   :n "SPC" #'helm-spotify-plus-toggle-play-pause
+	    :desc "next"          :n "j" #'helm-spotify-plus-next
+	    :desc "previous"      :n "k" #'helm-spotify-plus-previous
+	    :desc "search"        :n "s" #'helm-spotify-plus)))
+  :commands (helm-spotify-plus
+	     helm-spotify-plus-next
+	     helm-spotify-plus-previous
+	     helm-spotify-plus-toggle-play-pause))
+
+
 (provide 'init-linux)
