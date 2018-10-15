@@ -93,8 +93,9 @@
 (use-package flycheck
   :commands (flycheck-mode flycheck-list-errors flycheck-buffer)
   :straight t
-  :config
+  :init
   (global-flycheck-mode)
+  :config
   (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
 (use-package flycheck-pos-tip
