@@ -172,6 +172,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "file" :prefix "f"
 	  :desc "Find file"                 :n "f" #'helm-find-files
+	  :desc "Write file"                :n "w" #'write-file
+	  :desc "Rename file"               :n "W" #'set-visited-file-name
 	  :desc "Save file"                 :n "s" #'save-buffer
 	  :desc "Save files"                :n "S" #'save-some-buffers
 	  :desc "Find file in project"      :n "p" #'helm-projectile-find-file
