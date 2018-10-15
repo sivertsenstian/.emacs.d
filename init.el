@@ -79,8 +79,9 @@
 (use-package init-css)
 (use-package init-clojure)
 (use-package init-elm)
-(use-package init-javascript)
+(use-package init-web)
 (use-package init-csharp)
+(use-package init-rust)
 
 ;; init windows or linux stuff based on system-type
 (if (eq system-type 'windows-nt)
