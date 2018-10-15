@@ -50,7 +50,8 @@
 	cider-repl-use-pretty-printing t
 	cider-prompt-for-symbol nil
 	cider-show-error-buffer nil
-	cider-repl-display-help-banner nil)
+	cider-repl-display-help-banner nil
+	clojure-align-forms-automatically t)
 
   (map! :map clojure-mode-map
 	(:localleader
