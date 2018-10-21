@@ -13,14 +13,6 @@
 	which-key-min-display-lines 5)
   (which-key-mode))
 
-(defun simulate-key-press (key)
-  "Pretend that KEY was pressed.
-KEY must be given in `kbd' notation."
-  `(lambda ()
-     (interactive)
-     (setq prefix-arg current-prefix-arg)
-     (setq unread-command-events (listify-key-sequence (read-kbd-macro ,key)))))
-
   ;; esc quits
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
@@ -53,6 +45,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :gnvime "M-x" #'helm-M-x
       :gnvime "A-x" #'helm-M-x
 
+      ;; Shortcut local leader
+ ;;     :n "," (λ! (interactive) (execute-kbd-macro (kbd "<space> m"))) ;;?????
+      
       ;; Text-scaling
       "M-="       (λ! (text-scale-set 0))
       "M-+"       #'text-scale-increase
@@ -70,9 +65,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :n  "]b" #'next-buffer
       :n  "[b" #'previous-buffer
       :n  "]w" #'evil-window-next
-      :n  "[h" #'git-gutter+-previous-hunk
-      :n  "]h" #'git-gutter+-next-hunk
       :n  "[w" #'evil-window-prev
+      :n  "[d" #'git-gutter+-previous-hunk
+      :n  "]d" #'git-gutter+-next-hunk
+      :n  "]f" #'other-frame
+      :n  "[f" #'other-frame
       :m  "gd" #'smart-jump-go
       :m  "gb" #'smart-jump-back
       :m  "gh" #'smart-jump-references
@@ -80,14 +77,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       :en "C-f"   #'helm-swoop
       :en "M-f"   #'helm-multi-swoop-projectile
       ;; Easier code navigation
+      :en "C-h"     #'evil-first-non-blank
+      :en "C-l"     #'evil-end-of-line
       :en "C-M-k"   #'evil-backward-section-begin
       :en "C-M-j"   #'evil-forward-section-begin
-      :en "C-k"   #'evil-backward-paragraph
-      :en "C-j"   #'evil-forward-paragraph
-
-      :en "C-h"   #'evil-first-non-blank
-      :en "C-l"   #'evil-end-of-line
-      :en ","     #'(simulate-key-press "SPC m")
+      :en "C-k"     #'evil-backward-paragraph
+      :en "C-j"     #'evil-forward-paragraph
+      ;; Easier window navigation
+      :en "M-h"   #'evil-window-left
+      :en "M-j"   #'evil-window-down
+      :en "M-k"   #'evil-window-up
+      :en "M-l"   #'evil-window-right
 
       ;; --- <leader> -------------------------------------
       (:leader
@@ -100,9 +100,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "search"                  :n "/"   #'isearch-forward
 	:desc "search symbol"           :n "*"   #'sivertsenstian/helm-project-do-ag
 	:desc "window"                  :n "w"   evil-window-map
-	:desc "shell"                   :n "!"   #'powershell
+	:desc "frame"                   :n "W"   ctl-x-5-map
 	:desc "winum-select-window-0"   :n "0"   #'winum-select-window-0-or-10
 	:desc "zoom"                    :n "z"   #'hydra--text-zoom/body 
+	:desc "resize"                  :n "r"   #'hydra--resize/body 
 	:n "1" #'winum-select-window-1
 	:n "2" #'winum-select-window-2
 	:n "3" #'winum-select-window-3
@@ -171,6 +172,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Jump to references"         :n  "r" #'smart-jump-find-references-with-rg)
 
 	(:desc "file" :prefix "f"
+	  :desc "Browse project"          :n  "." #'projectile-dired
 	  :desc "Find file"                 :n "f" #'helm-find-files
 	  :desc "Write file"                :n "w" #'write-file
 	  :desc "Rename file"               :n "W" #'set-visited-file-name
@@ -198,11 +200,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  (:desc "define" :prefix "d"
 	    :desc "Describe function"     :n  "f" #'describe-function
 	    :desc "Describe key"          :n  "k" #'describe-key
-	    :desc "Describe variable"     :n  "v" #'describe-variable
-	    :desc "Describe at point"     :n  "." #'helpful-at-point
-	    :desc "Find definition"       :n  "d" #'+lookup/definition
-	    :desc "Find references"       :n  "r" #'+lookup/references
-	    :desc "Find documentation"    :n  "h" #'+lookup/documentation)
+	    :desc "Describe variable"     :n  "v" #'describe-variable)
 	  :desc "Highlight symbol"      :nv "h" #'highlight-symbol-at-point
 	  :desc "Unhighlight search"    :nv "s" #'evil-search-highlight-persist-remove-all
 	  :desc "Unhighlight symbol"    :nv "u" #'unhighlight-regexp)
@@ -217,7 +215,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "to definition"         :nv "d" #'evil-goto-definition)
 
 	(:desc "project" :prefix "p"
-	  :desc "Browse project"          :n  "." #'+default/browse-project
+	  :desc "Browse project"          :n  "." #'projectile-dired
 	  :desc "Find file in project"    :n  "f" #'helm-projectile-find-file
 	  :desc "Run cmd in project root" :nv "!" #'projectile-run-shell-command-in-root
 	  :desc "Switch project"          :n  "p" #'projectile-switch-project
@@ -228,6 +226,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 	(:desc "quit" :prefix "q"
 	  :desc "Reload"                 :n "r" #'sivertsenstian/reload-init
+	  :desc "Frame"                  :n "f" #'delete-frame
+	  :desc "Other frames"           :n "F" #'delete-other-frames
 	  :desc "Quit"                   :n "q" #'evil-save-and-quit)
 
 	(:desc "toggle" :prefix "t"

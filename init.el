@@ -20,8 +20,7 @@
   (load bootstrap-file nil 'nomessage))
 ;;manually load use-package with straight
 (straight-use-package 'use-package)
-(setq straight-cache-autoloads t
-      straight-check-for-modifications 'never)
+(setq straight-cache-autoloads t)
 (use-package init-benchmark) ;; Measure startup time
 ;;----------------------------------------------------------------------------
 ;; Adjust garbage collection thresholds during startup, and thereafter
@@ -87,9 +86,13 @@
 (if (eq system-type 'windows-nt)
     (progn
       (use-package init-windows)
-      (use-package init-powershell))
+      (use-package init-powershell
+	:config
+	(map! (:leader :desc "shell" :n "!"   #'powershell))))
   (progn (use-package init-linux)
-	 (use-package init-shell)))
+	 (use-package init-shell
+	   :config
+	   (map! (:leader :desc "shell" :n "!"   #'shell)))))
 
 
 

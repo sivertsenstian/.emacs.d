@@ -41,6 +41,7 @@
 (use-package clojure-mode
   :straight t
   :mode "\\.clj$"
+  :mode ("\\.cljc$" . clojurec-mode)
   :mode ("\\.cljs$" . clojurescript-mode)
   :config
   (setq cider-repl-history-file "~/.emacs.d/cider.history.log"
@@ -58,6 +59,8 @@
 	  :nv "'" #'cider-jack-in
 	  :nv "SPC" #'clojure-align
 	  :nv "f" #'cider-format-buffer
+	  (:desc "repl" :prefix "r"
+	    :nv "c" #'cider-find-and-clear-repl-output)
 	  (:desc "cider" :prefix "c"
 	    :nv "e" #'cider-eval-last-sexp
 	    :nv "f" #'cider-eval-defun-at-point
@@ -88,6 +91,7 @@
 
   (clojure/fancify-symbols 'clojure-mode)
   (clojure/fancify-symbols 'clojurescript-mode)
+  (clojure/fancify-symbols 'clojurec-mode)
   (eldoc-mode)
   (subword-mode)
   (lispy-mode)
