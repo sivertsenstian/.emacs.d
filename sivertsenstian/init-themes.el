@@ -119,6 +119,13 @@
   ;; highlight the minibuffer when it is activated:
   (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 
+(use-package eyebrowse
+  :straight t
+  :config
+  (setq    eyebrowse-mode-line-separator " "
+           eyebrowse-new-workspace       t)
+  (eyebrowse-mode t))
+
 ;; THEMES
 (use-package doom-themes
   :preface (defvar region-fg nil)
