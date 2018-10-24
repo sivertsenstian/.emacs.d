@@ -33,13 +33,14 @@
 	  :n  "f" #'tide-fix
 	  (:desc "html" :prefix "h"
 	    :n "r" #'rjsx-rename-tag-at-point
-	    :n "t" #'js2-mode-toggle-element)))
+	    :n "t" #'js2-mode-toggle-element)
+	  (:desc "modes" :prefix "m" :n "a" #'angular-mode)))
   (setq js2-basic-offset 2)
   (define-key evil-insert-state-map (kbd "C-d") nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
 
 (use-package tide
-  :after (:any web-mode rjsx-mode typescript-mode)
+  :after (:any web-mode rjsx-mode typescript-mode angular-mode)
   :straight t
   :config
   (setq company-tooltip-align-annotations t
@@ -47,12 +48,12 @@
         tide-always-show-documentation t)
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
   (flycheck-add-mode 'typescript-tslint 'ng2-ts-mode)
+  (flycheck-add-mode 'javascript-eslint 'angular-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
 
@@ -104,6 +105,16 @@
 	  :nv "j" #'ng2-html-goto-binding
 	  :nv "c" #'ng2-open-counterpart)))
 
+(use-package angular-mode
+  :straight t
+  :defer t
+  :config
+  (electric-pair-mode)
+  (electric-quote-mode)
+  (map! :map angular-mode
+	(:localleader
+	  (:desc "modes" :prefix "m" :n "r" #'rjsx-mode))))
+
 (use-package typescript-mode
   :mode "\\.ts$"
   :straight t
@@ -123,6 +134,7 @@
 (use-package emmet-mode
   :straight t
   :config
+  (add-hook 'angular-html-mode #'emmet-mode)
   (add-hook 'ng2-html-mode-hook #'emmet-mode)
   (add-hook 'rjsx-mode-hook #'emmet-mode)
   (add-hook 'less-css-mode #'emmet-mode))
