@@ -78,13 +78,11 @@
 	    (helm-do-ag dir)
 	  (message "error: Not in a project."))))
 
-    (defun sivertsenstian/helm-project-do-ag-region-or-symbol ()
-      "Search in current project with `ag' using a default input."
+    (defun sivertsenstian/helm-project-do-ag-this-file ()
+      "Search in current project with `ag'."
       (interactive)
-      (let ((dir (projectile-project-root)))
-	(if dir
-	    (sivertsenstian//helm-do-ag-region-or-symbol 'helm-do-ag dir)
-	  (message "error: Not in a project.")))))
+      (sivertsenstian//helm-do-ag-region-or-symbol 'helm-do-ag-this-file dir))
+    )
   :init
   (custom-set-variables
    '(helm-ag-base-command "rg --no-heading --vimgrep --smart-case")

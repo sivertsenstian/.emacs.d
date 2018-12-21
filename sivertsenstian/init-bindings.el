@@ -7,10 +7,12 @@
   :defer t
   :config
   (setq which-key-sort-order 'which-key-prefix-then-key-order
+	which-key-idle-delay 0.5
 	which-key-sort-uppercase-first nil
 	which-key-add-column-padding 1
 	which-key-max-display-columns nil
 	which-key-min-display-lines 5)
+  (which-key-setup-side-window-bottom)
   (which-key-mode))
 
   ;; esc quits
@@ -97,6 +99,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	:desc "Browse files"            :n "."   #'dired
 	:desc "Browse buffers"          :n ","   #'helm-mini
 	:desc "Jump to mark"            :n "RET" #'evil-goto-mark
+	:desc "search backwards"        :n "?"   #'isearch-backward
 	:desc "search"                  :n "/"   #'isearch-forward
 	:desc "search symbol"           :n "*"   #'sivertsenstian/helm-project-do-ag
 	:desc "window"                  :n "w"   evil-window-map
@@ -132,12 +135,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Indent sexp"          :nv "TAB" #'prog-indent-sexp)
 
 	(:desc "search" :prefix "s"
-	  :desc "search"                :nv "s" #'helm-ag
 	  :desc "resume"                :nv "r" #'helm-resume
 	  :desc "in project"            :nv "p" #'sivertsenstian/helm-project-do-ag
-	  :desc "in project (results)"  :nv "P" #'sivertsenstian/helm-project-do-ag-region-or-symbol
-	  :desc "Swoop"                 :nv "f" #'sivertsenstian/helm-swoop-region-or-symbol
-	  :desc "Swoop project"         :nv "F" #'helm-multi-swoop-projectile
+	  :desc "in current buffer"     :nv "b" #'helm-do-ag-this-file
+	  :desc "Swoop"                 :nv "s" #'sivertsenstian/helm-swoop-region-or-symbol
+	  :desc "Swoop project"         :nv "S" #'helm-multi-swoop-projectile
 	  :desc "Imenu"                 :nv "j" #'helm-imenu
 	  :desc "Imenu across buffers"  :nv "J" #'helm-imenu-anywhere
 	  :desc "Browse kill ring"      :nv "k" #'helm-show-kill-ring)

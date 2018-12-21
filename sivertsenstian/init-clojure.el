@@ -67,7 +67,9 @@
 	    :n  "B" #'cider-switch-to-repl-buffer
 	    :n  "b" #'cider-eval-buffer
 	    :n  "n" #'cider-repl-set-ns
-	    :n  "j" #'cider-find-var
+	    :n  "v" #'cider-find-var
+	    :n  "j" #'cider-find-dwim
+	    :n  "J" #'cider-find-dwim-other-window
 	    :n  "d" #'cider-doc
 	    :nv "m" #'cider-macroexpand-1
 	    :n  "p" #'cider-eval-sexp-at-point

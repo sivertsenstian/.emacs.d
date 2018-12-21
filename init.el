@@ -48,6 +48,7 @@
 
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
+(setq create-lockfiles nil)  ; stop creating .#lock files
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
   backup-by-copying t    ; Don't delink hardlinks
   version-control t      ; Use version numbers on backups
@@ -103,18 +104,21 @@
  ;; If there is more than one, they won't work right.
  '(cider-annotate-completion-candidates t)
  '(cider-completion-use-context t)
- '(flycheck-check-syntax-automatically '(save mode-enabled))
+ '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(font-lock-maximum-size 1024000)
- '(helm-ag-base-command "rg --no-heading --vimgrep")
- '(helm-ag-insert-at-point 'symbol)
+ '(helm-ag-base-command "rg --no-heading --vimgrep --smart-case")
+ '(helm-ag-insert-at-point (quote symbol))
  '(jit-lock-chunk-size 1000)
  '(safe-local-variable-values
-   '((elm-package-json . "elm.json")
+   (quote
+    ((elm-package-json . "elm.json")
      (elm-compile-arguments "--output=elm.js" "--debug")
      (elm-reactor-arguments "--port" "8000")
      (projectile-project-compile-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
      (projectile-project-compilation-cmd . "\"$(cygpath -u \"$(../../tools/vswhere.exe -latest -products \"*\" -requires Microsoft.Component.MSBuild -property installationPath)\")\"/MSBuild/15.0/Bin/MSBuild.exe IRIS.OpenLab.sln //v:Minimal //nologo //p:Configuration=Release //p:Platform=x86")
      (cider-lein-parameters . "with-profile +dirac repl :headless :host ::"))))
+ '(sml/mode-width 0)
+ '(sml/vc-mode-show-backend t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
