@@ -33,8 +33,7 @@
   (interactive)
   (tide-setup)
   (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;;testing 1
+  (tide-format-before-save)
   (setq tide-completion-detailed t))
 
 (use-package tide
@@ -46,7 +45,6 @@
         tide-always-show-documentation t)
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (flycheck-add-mode 'typescript-tslint 'web-mode)

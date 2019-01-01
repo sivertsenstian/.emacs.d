@@ -13,7 +13,13 @@
 (display-time-mode)
 (set-default 'truncate-lines t)
 (set-window-fringes (minibuffer-window) 0 0 nil) ;;Disable fringes in the minibuffer window.
-(global-display-line-numbers-mode)
+
+(if (version< emacs-version "26")
+    (use-package nlinum
+      :straight t
+      :config
+      (global-nlinum-mode 1))
+  (global-display-line-numbers-mode))
 
 (setq-default
  bidi-display-reordering nil ; disable bidirectional text for tiny performance boost

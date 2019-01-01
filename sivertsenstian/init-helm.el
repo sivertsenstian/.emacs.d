@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+; -*- lexical-binding: t; -*-
 ;;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - HELM ++ MODULES INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
@@ -37,7 +37,9 @@
   :defer t
   :config
   (projectile-global-mode)
-  (setq projectile-indexing-method 'turbo-alien
+  (setq projectile-indexing-method 'hybrid
+	projectile-generic-command "fd . -0"
+	projectile-git-command "fd . -0"
 	projectile-enable-caching t
 	projectile-completion-system 'helm))
 

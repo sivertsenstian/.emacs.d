@@ -6,8 +6,9 @@
   "Set up Tide mode."
   (interactive)
   (tide-setup)
-  (eldoc-mode +1)
+  (tide-format-before-save)
   (tide-hl-identifier-mode +1)
+  (eldoc-mode +1)
   (electric-pair-mode)
   (electric-quote-mode)
   (setq tide-completion-detailed t))
@@ -46,7 +47,9 @@
   (setq company-tooltip-align-annotations t
 	tide-completion-detailed t
         tide-always-show-documentation t)
+
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
+
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
@@ -63,15 +66,13 @@
 (use-package prettier-js
   :after add-node-modules-path
   :straight t
-  :hook (rjsx-mode . add-node-modules-path)
+  :hook (rjsx-mode . add-node-modules-path) ;;use project prettier
   :hook (rjsx-mode . prettier-js-mode)
-  :hook (typescript-mode . add-node-modules-path)
-  :hook (typescript-mode . prettier-js-mode)
-  :hook (ng2-ts-mode . add-node-modules-path)
+  :hook (ng2-ts-mod . add-node-modules-path) ;;use project prettier
   :hook (ng2-ts-mode . prettier-js-mode)
-  :hook (ng2-html-mode . add-node-modules-path)
+  :hook (ng2-html-mode . add-node-modules-path) ;;use project prettier
   :hook (ng2-html-mode . prettier-js-mode)
-  :hook (less-css-mode . add-node-modules-path)
+  :hook (less-css-mode . add-node-modules-path) ;;use project prettier
   :hook (less-css-mode . prettier-js-mode))
 
 (use-package js2-refactor
@@ -82,11 +83,7 @@
 
 (use-package ng2-mode
   :straight t
-  :after (typescript-mode company)
-  :hook (typescript-mode . ng2-mode)
   :config
-  (electric-pair-mode)
-  (electric-quote-mode)
   (map! :map ng2-ts-mode-map
 	(:localleader
 	  :n  "j" #'tide-jump-to-definition
@@ -100,10 +97,12 @@
 	  :n  "f" #'tide-fix
 	  :n  "n" #'ng2-ts-goto-fn
 	  :n  "c" #'ng2-open-counterpart))
-  (map! :map ng2-html-mode-map
+  (map! :map ng2-html-map
 	(:localleader
 	  :nv "j" #'ng2-html-goto-binding
-	  :nv "c" #'ng2-open-counterpart)))
+	  :nv "c" #'ng2-open-counterpart
+	  :nv "m" #'sgml-skip-tag-forward
+	  :nv "M" #'sgml-skip-tag-backward)))
 
 (use-package angular-mode
   :straight t

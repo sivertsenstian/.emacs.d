@@ -10,7 +10,7 @@
 ;; improve projectile speed on windows, using fd for file indexing
 (setq projectile-git-command "fd . -0 --color never")
 
-(set-frame-font "Inconsolata 11" nil t) 
+(set-frame-font "Hack 11" nil t) 
 
 ;; (use-package spaceline
 ;;   :straight t

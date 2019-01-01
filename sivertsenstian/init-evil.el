@@ -36,7 +36,6 @@
   :straight t)
 
 (use-package evil-matchit
-  :commands (evilmi-jump-items evilmi-text-object global-evil-matchit-mode)
   :straight t
   :config (global-evil-matchit-mode 1)
   :init
