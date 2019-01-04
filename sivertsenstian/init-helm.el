@@ -38,8 +38,6 @@
   :config
   (projectile-global-mode)
   (setq projectile-indexing-method 'hybrid
-	projectile-generic-command "fd . -0"
-	projectile-git-command "fd . -0"
 	projectile-enable-caching t
 	projectile-completion-system 'helm))
 

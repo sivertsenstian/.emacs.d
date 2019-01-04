@@ -49,7 +49,7 @@
         tide-always-show-documentation t)
 
   (add-hook 'rjsx-mode-hook #'setup-tide-mode)
-
+  (add-hook 'angular-mode-hook #'setup-tide-mode)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
   (setq-default flycheck-disabled-checker 'javascript-jshint)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
@@ -68,7 +68,7 @@
   :straight t
   :hook (rjsx-mode . add-node-modules-path) ;;use project prettier
   :hook (rjsx-mode . prettier-js-mode)
-  :hook (ng2-ts-mod . add-node-modules-path) ;;use project prettier
+  :hook (ng2-ts-mode . add-node-modules-path) ;;use project prettier
   :hook (ng2-ts-mode . prettier-js-mode)
   :hook (ng2-html-mode . add-node-modules-path) ;;use project prettier
   :hook (ng2-html-mode . prettier-js-mode)
@@ -105,14 +105,32 @@
 	  :nv "M" #'sgml-skip-tag-backward)))
 
 (use-package angular-mode
+  :mode "\\.js$"
   :straight t
-  :defer t
   :config
   (electric-pair-mode)
   (electric-quote-mode)
-  (map! :map angular-mode
+  (map! :map angular-mode-map
 	(:localleader
-	  (:desc "modes" :prefix "m" :n "r" #'rjsx-mode))))
+	  :n  "j" #'tide-jump-to-definition
+	  :n  "J" #'tide-jump-to-implementation
+	  :n  "b" #'tide-jump-back
+	  :n  "d" #'tide-documentation-at-point
+	  :n  "r" #'tide-rename-symbol
+	  :n  "g" #'tide-nav
+	  :n  "i" #'tide-organize-imports
+	  :n  "u" #'tide-references
+	  :n  "f" #'tide-fix
+	  ;; :n  "n" #'ng2-ts-goto-fn
+	  ;; :n  "c" #'ng2-open-counterpart
+	  ))
+  (map! :map angular-html-mode-map
+	(:localleader
+	  ;; :nv "j" #'ng2-html-goto-binding
+	  ;; :nv "c" #'ng2-open-counterpart
+	  :nv "m" #'sgml-skip-tag-forward
+	  :nv "M" #'sgml-skip-tag-backward
+	  )))
 
 (use-package typescript-mode
   :mode "\\.ts$"
@@ -133,7 +151,7 @@
 (use-package emmet-mode
   :straight t
   :config
-  (add-hook 'angular-html-mode #'emmet-mode)
+  (add-hook 'angular-html-mode-hook #'emmet-mode)
   (add-hook 'ng2-html-mode-hook #'emmet-mode)
   (add-hook 'rjsx-mode-hook #'emmet-mode)
   (add-hook 'less-css-mode #'emmet-mode))

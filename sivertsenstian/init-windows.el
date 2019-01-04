@@ -8,9 +8,10 @@
       inhibit-compacting-font-caches nil)
 
 ;; improve projectile speed on windows, using fd for file indexing
-(setq projectile-git-command "fd . -0 --color never")
+(setq projectile-generic-command "fd . -0 -t f --color never"
+      projectile-git-command "fd . -0 -t f --color never")
 
-(set-frame-font "Hack 11" nil t) 
+(set-frame-font "Hack 10" nil t) 
 
 ;; (use-package spaceline
 ;;   :straight t
