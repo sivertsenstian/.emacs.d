@@ -15,8 +15,9 @@
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (which-key-mode))
 
-(use-package magit-todos
-  :straight t)
+;; not working on windows..
+;; (use-package magit-todos
+;;   :straight t)
 
 ;; TODO: Do somethign
 (use-package git-gutter+

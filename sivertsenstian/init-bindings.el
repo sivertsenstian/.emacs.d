@@ -15,6 +15,12 @@
   (which-key-setup-side-window-bottom)
   (which-key-mode))
 
+;; Show current file name in minibuffer
+(defun show-file-name ()
+  "Insert the full path file name into the current buffer."
+  (interactive)
+  (message(buffer-file-name (window-buffer (minibuffer-selected-window)))))
+
   ;; esc quits
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
@@ -149,6 +155,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "previous"              :nv "k" #'flycheck-previous-error)
 
 	(:desc "buffer" :prefix "b"
+	  :desc "File location"           :n "l" (λ! (show-file-name))
 	  :desc "New empty buffer"        :n "n" #'evil-buffer-new
 	  :desc "Kill buffer"             :n "k" #'kill-this-buffer
 	  :desc "Save buffer"             :n "s" #'save-buffer
