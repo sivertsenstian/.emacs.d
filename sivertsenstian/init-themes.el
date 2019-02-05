@@ -149,5 +149,9 @@
   
   )
 
+(use-package cyberpunk-theme
+  :defer t
+  :straight t)
+
 ;; export
 (provide 'init-themes)
