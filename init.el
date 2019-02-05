@@ -63,8 +63,10 @@
 (use-package init-evil)
 (use-package init-themes
   :config
-  (load-theme 'doom-one t)
-  (solaire-mode-swap-bg))
+  (load-theme 'kaolin-ocean t)
+  ;; (load-theme 'doom-one t)
+  ;; (solaire-mode-swap-bg)
+  )
 (use-package init-syntax)
 (use-package init-bindings)
 (use-package init-files)
@@ -109,6 +111,7 @@
  '(helm-ag-base-command "rg --no-heading --vimgrep --smart-case")
  '(helm-ag-insert-at-point (quote symbol))
  '(jit-lock-chunk-size 1000)
+ '(magit-diff-section-arguments (quote ("--ignore-space-change" "--no-ext-diff")))
  '(safe-local-variable-values
    (quote
     ((elm-package-json . "elm.json")
@@ -131,5 +134,6 @@
  '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
  '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
  '(evil-goggles-yank-face ((t (:inherit diff-changed))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "dark slate gray" :foreground "IndianRed1"))))
  '(powerline-active1 ((t (:background "#373844" :foreground "#f8f8f2"))))
  '(powerline-active2 ((t (:background "#373844" :foreground "#f8f8f2")))))

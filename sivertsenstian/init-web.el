@@ -70,8 +70,11 @@
   :hook (web-mode . prettier-js-mode)
   :hook (typescript-mode . add-node-modules-path) ;;use project prettier
   :hook (typescript-mode . prettier-js-mode)
+  :hook (scss-mode . add-node-modules-path) ;;use project prettier
+  :hook (scss-mode . prettier-js-mode)
   :hook (less-css-mode . add-node-modules-path) ;;use project prettier
-  :hook (less-css-mode . prettier-js-mode))
+  :hook (less-css-mode . prettier-js-mode)
+  )
 
 (use-package typescript-mode
   :mode ("\\.ts$" "\\.js$")

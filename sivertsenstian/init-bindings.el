@@ -240,6 +240,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Quit"                   :n "q" #'evil-save-and-quit)
 
 	(:desc "toggle" :prefix "t"
+	  :desc "Dired sidebar"          :n "." #'dired-sidebar-toggle-sidebar
 	  :desc "Flycheck"               :n "f" #'flycheck-mode
 	  :desc "Truncate lines"         :n "t" #'toggle-truncate-lines
 	  :desc "Frame fullscreen"       :n "F" #'toggle-frame-fullscreen

@@ -138,5 +138,16 @@
   :defer t
   :straight t)
 
+(use-package kaolin-themes
+  :defer t
+  :straight t
+  :config
+  (setq kaolin-themes-bold nil       ; If nil, disable the bold style.        
+	kaolin-themes-italic nil    ; If nil, disable the italic style.      
+	kaolin-themes-underline nil) ; If nil, disable the underline style.
+
+  
+  )
+
 ;; export
 (provide 'init-themes)
