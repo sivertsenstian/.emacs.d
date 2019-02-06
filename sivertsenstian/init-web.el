@@ -25,6 +25,11 @@
   (interactive)
   (find-file (ng2--counterpart-name (buffer-file-name))))
 
+(defun ng2-open-counterpart-other-window ()
+  "Opens the corresponding template or component file to this one in the other window."
+  (interactive)
+  (find-file-other-window (ng2--counterpart-name (buffer-file-name))))
+
 (defun setup-tide-mode ()
   "Set up Tide mode."
   (interactive)
@@ -85,23 +90,120 @@
 
   (map! :map typescript-mode-map
 	(:localleader
-	  :n  "j" #'tide-jump-to-definition
-	  :n  "J" #'tide-jump-to-implementation
-	  :n  "b" #'tide-jump-back
-	  :n  "d" #'tide-documentation-at-point
-	  :n  "r" #'tide-rename-symbol
-	  :n  "g" #'tide-nav
-	  :n  "i" #'tide-organize-imports
-	  :n  "u" #'tide-references
-	  :n  "f" #'tide-fix
-	  :n  "o" #'ng2-open-counterpart)))
+	  :desc "jump to definition"      :n  "j" #'tide-jump-to-definition
+	  :desc "jump to implementation " :n  "J" #'tide-jump-to-implementation
+	  :desc "jump back"               :n  "b" #'tide-jump-back
+	  :desc "documentation at point"  :n  "d" #'tide-documentation-at-point
+	  :desc "rename symbol"           :n  "r" #'tide-rename-symbol
+	  :desc "navigate to"             :n  "g" #'tide-nav
+	  :desc "organize imports"        :n  "i" #'tide-organize-imports
+	  :desc "references"              :n  "u" #'tide-references
+	  :desc "fix"                     :n  "f" #'tide-fix
+	  :desc "angular comp. template"  :n  "o" #'ng2-open-counterpart
+	  :desc "angular comp. template other" :n  "O" #'ng2-open-counterpart-other-window
+
+	  ;; :desc "typescript jack-in"    :nv #'run-ts
+	  (:desc "repl" :prefix "c"
+	    :n "e" #'ts-send-last-sexp
+	    :n "E" #'ts-send-last-sexp-and-go
+	    :n "b" #'ts-send-last-buffer
+	    :n "B" #'ts-send-last-buffer-and-go
+	    :n "l" #'ts-load-file-and-go)
+	  )))
+	  
+
+(use-package ts-comint
+  :after typescript-mode
+  :straight t)
 
 (use-package emmet-mode
   :straight t
   :config
-  (add-hook 'html-mode #'emmet-mode)
   (add-hook 'web-mode #'emmet-mode)
   (add-hook 'less-css-mode #'emmet-mode))
+
+(use-package web-mode
+  :straight t
+  :after company
+  :mode ("\\.html$")
+  :config
+  (setq web-mode-enable-html-entities-fontification t
+        web-mode-auto-close-style 2)
+
+  (add-to-list 'company-backends #'company-web-html)
+  (map! :map web-mode-map
+        (:localleader
+          :desc "Rehighlight buffer"          :n "h" #'web-mode-buffer-highlight
+          :desc "Indent buffer"               :n "i" #'web-mode-buffer-indent
+	  :desc "Open component"              :n "o" #'ng2-open-counterpart
+	  :desc "Open component other window" :n "O" #'ng2-open-counterpart-other-window
+
+          (:desc "attributes" :prefix "a"
+            "b" #'web-mode-attribute-beginning
+            "e" #'web-mode-attribute-end
+            "i" #'web-mode-attribute-insert
+            "n" #'web-mode-attribute-next
+            "s" #'web-mode-attribute-select
+            "k" #'web-mode-attribute-kill
+            "p" #'web-mode-attribute-previous
+            "p" #'web-mode-attribute-transpose)
+
+          (:desc "block" :prefix "b"
+            "b" #'web-mode-block-beginning
+            "c" #'web-mode-block-close
+            "e" #'web-mode-block-end
+            "k" #'web-mode-block-kill
+            "n" #'web-mode-block-next
+            "p" #'web-mode-block-previous
+            "s" #'web-mode-block-select)
+
+          (:desc "dom" :prefix "d"
+            "a" #'web-mode-dom-apostrophes-replace
+            "d" #'web-mode-dom-errors-show
+            "e" #'web-mode-dom-entities-encode
+            "n" #'web-mode-dom-normalize
+            "q" #'web-mode-dom-quotes-replace
+            "t" #'web-mode-dom-traverse
+            "x" #'web-mode-dom-xpath)
+
+          (:desc "element" :prefix "e"
+            "/" #'web-mode-element-close
+            "a" #'web-mode-element-content-select
+            "b" #'web-mode-element-beginning
+            "c" #'web-mode-element-clone
+            "d" #'web-mode-element-child
+            "e" #'web-mode-element-end
+            "f" #'web-mode-element-children-fold-or-unfold
+            "i" #'web-mode-element-insert
+            "k" #'web-mode-element-kill
+            "m" #'web-mode-element-mute-blanks
+            "n" #'web-mode-element-next
+            "p" #'web-mode-element-previous
+            "r" #'web-mode-element-rename
+            "s" #'web-mode-element-select
+            "t" #'web-mode-element-transpose
+            "u" #'web-mode-element-parent
+            "v" #'web-mode-element-vanish
+            "w" #'web-mode-element-wrap)
+
+          (:desc "tag" :prefix "t"
+	    "a" #'web-mode-tag-attributes-sort
+	    "b" #'web-mode-tag-beginning
+	    "e" #'web-mode-tag-end
+	    "m" #'web-mode-tag-match
+	    "n" #'web-mode-tag-next
+	    "p" #'web-mode-tag-previous
+	    "s" #'web-mode-tag-select))
+
+        :g  "M-/" #'web-mode-comment-or-uncomment
+        :i  "SPC" #'self-insert-command
+        :n  "za"  #'web-mode-fold-or-unfold
+        :nv "]a"  #'web-mode-attribute-next
+        :nv "[a"  #'web-mode-attribute-previous
+        :nv "]t"  #'web-mode-tag-next
+        :nv "[t"  #'web-mode-tag-previous
+        :nv "]T"  #'web-mode-element-child
+        :nv "[T"  #'web-mode-element-parent))
 
 ;; export
 (provide 'init-web) 

@@ -12,6 +12,13 @@
   :commands (magit-status magit-blame)
   :straight t
   :config
+  ;; turn off auto-show diff in commits, C-c C-d
+  (remove-hook 'server-switch-hook 'magit-commit-diff)
+  ;; disable built in vc - for performance
+  (setq vc-handled-backends nil)
+  ;; only refresh current buffer (performance)
+  (setq magit-refresh-status-buffer nil)
+
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (which-key-mode))
 
