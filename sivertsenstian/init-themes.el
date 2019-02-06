@@ -153,5 +153,9 @@
   :defer t
   :straight t)
 
+(use-package seti-theme
+  :defer t
+  :straight t)
+
 ;; export
 (provide 'init-themes)
