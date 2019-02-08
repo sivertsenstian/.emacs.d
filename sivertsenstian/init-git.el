@@ -12,21 +12,8 @@
   :commands (magit-status magit-blame)
   :straight t
   :config
-  ;; turn off auto-show diff in commits, C-c C-d
-  (remove-hook 'server-switch-hook 'magit-commit-diff)
-  ;; disable built in vc - for performance
-  (setq vc-handled-backends nil)
-  ;; only refresh current buffer (performance)
-  (setq magit-refresh-status-buffer nil)
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  (which-key-mode))
-
-;; not working on windows..
-;; (use-package magit-todos
-;;   :straight t)
-
-;; TODO: Do somethign
 (use-package git-gutter+
  :straight t
  :config
@@ -47,6 +34,14 @@
   :commands (git-timemachine git-timemachine-toggle)
   :defer t
   :straight t)
+
+(use-package evil-goggles
+  :after evil
+  :straight t
+  :config
+  (setq evil-goggles-blocking-duration 0.100)
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces))
 
 ;; export
 (provide 'init-git)

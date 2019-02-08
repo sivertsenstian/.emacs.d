@@ -136,7 +136,9 @@
 (use-package doom-themes
   :preface (defvar region-fg nil)
   :defer t
-  :straight t)
+  :straight t
+  :config
+  (solaire-mode))
 
 (use-package kaolin-themes
   :defer t
@@ -145,8 +147,6 @@
   (setq kaolin-themes-bold nil       ; If nil, disable the bold style.        
 	kaolin-themes-italic nil    ; If nil, disable the italic style.      
 	kaolin-themes-underline nil) ; If nil, disable the underline style.
-
-  
   )
 
 (use-package cyberpunk-theme

@@ -63,10 +63,7 @@
 (use-package init-evil)
 (use-package init-themes
   :config
-  (load-theme 'kaolin-ocean t)
-  ;; (load-theme 'doom-one t)
-  ;; (solaire-mode-swap-bg)
-  )
+  (load-theme 'doom-molokai t))
 (use-package init-syntax)
 (use-package init-bindings)
 (use-package init-files)

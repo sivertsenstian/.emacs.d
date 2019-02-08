@@ -39,13 +39,6 @@
   :straight t
   :config (setq aw-background t))
 
-(use-package popwin
- :straight t
- :config
- (popwin-mode 1)
- (push '(rg-mode :stick t) popwin:special-display-config)
- (push "*Kill Ring*" popwin:special-display-config))
-
 (use-package winum
  :straight t
  :init
