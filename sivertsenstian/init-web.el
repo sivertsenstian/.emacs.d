@@ -46,7 +46,7 @@
   :straight t)
 
 (use-package tide
-  :after (:any web-mode typescript-mode html-mode)
+  :after (:any web-mode typescript-mode)
   :straight t
   :config
   (setq company-tooltip-align-annotations t
@@ -122,9 +122,12 @@
   (add-hook 'web-mode #'emmet-mode)
   (add-hook 'less-css-mode #'emmet-mode))
 
+(use-package company-web
+  :straight t)
+
 (use-package web-mode
   :straight t
-  :after company
+  :after (company-web company)
   :mode ("\\.html$")
   :config
   (setq web-mode-enable-html-entities-fontification t
