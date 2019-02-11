@@ -56,6 +56,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       ;; Shortcut local leader
  ;;     :n "," (λ! (interactive) (execute-kbd-macro (kbd "<space> m"))) ;;?????
       
+      ;; Unbind annoying keys
+      :nvmo "gu" nil ;;evil downcase
+      :nvmo "gU" nil ;;evil upcase
+      :v    "u" nil ;;evil downcase 
+      
       ;; Text-scaling
       "M-="       (λ! (text-scale-set 0))
       "M-+"       #'text-scale-increase
