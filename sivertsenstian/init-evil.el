@@ -97,5 +97,11 @@
   :config
   (evil-multiedit-default-keybinds))
 
+(use-package evil-mc
+  :after evil
+  :straight t
+  :config
+  (global-evil-mc-mode  1))
+
 ;; export
 (provide 'init-evil)
