@@ -69,8 +69,6 @@
 (use-package prettier-js
   :after add-node-modules-path
   :straight t
-  :hook (html-mode . add-node-modules-path) ;;use project prettier
-  :hook (html-mode . prettier-js-mode)
   :hook (web-mode . add-node-modules-path) ;;use project prettier
   :hook (web-mode . prettier-js-mode)
   :hook (typescript-mode . add-node-modules-path) ;;use project prettier

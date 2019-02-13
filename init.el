@@ -63,7 +63,8 @@
 (use-package init-evil)
 (use-package init-themes
   :config
-  (load-theme 'doom-molokai t))
+  (load-theme 'doom-one t)
+  (solaire-mode-swap-bg))
 (use-package init-syntax)
 (use-package init-bindings)
 (use-package init-files)
