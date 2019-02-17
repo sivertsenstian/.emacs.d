@@ -106,6 +106,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (:leader
 	;; Most commonly used
 	:desc "Find file in project"    :n "SPC" #'projectile-find-file
+	:desc "Start eshell"            :n "!"   #'eshell
 	:desc "Switch buffer"           :n "TAB" (λ! (switch-to-buffer (other-buffer (current-buffer) 1)))
 	:desc "Browse files"            :n "."   #'dired
 	:desc "Browse buffers"          :n ","   #'helm-mini
@@ -207,7 +208,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Git show hunk inline"  :n  "i" #'git-gutter+-show-hunk-inline-at-point
 	  :desc "Git show hunk"         :n  "I" #'git-gutter+-show-hunk
 	  :desc "Next hunk"             :nv "]" #'git-gutter+-next-hunk
-	  :desc "Previous hunk"         :nv "[" #'git-gutter+-previous-hunk)
+	  :desc "Previous hunk"         :nv "[" #'git-gutter+-previous-hunk
+	  :desc "Undo"                  :nv "u" #'git-undo
+	  :desc "Message"               :nv "m" #'git-messenger:popup-message
+	  (:desc "Git link"             :prefix  "l"
+	    :desc "line"                :nv "l" #'git-link
+	    :desc "commit"              :nv "c" #'git-link-commit
+	    :desc "home"                :nv "h" #'git-link-homepage))
 
 	(:desc "help" :prefix "h"
 	  :n "h" help-map

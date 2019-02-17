@@ -35,6 +35,21 @@
   :defer t
   :straight t)
 
+(use-package git-link 
+  :commands (git-link git-link-commit git-link-homepage)
+  :defer t
+  :straight t) 
+
+(use-package git-undo 
+  :commands (git-link git-link-commit git-link-homepage)
+  :defer t
+  :straight t) 
+
+(use-package git-messenger 
+  :commands (git-messenger git-messenger:popup-message)
+  :defer t
+  :straight t) 
+
 (use-package evil-goggles
   :after evil
   :straight t
