@@ -74,6 +74,13 @@
       show-paren-when-point-inside-paren t)
 (show-paren-mode 1)
 
+;; make indentation commands use space only (never tab character)
+(setq-default indent-tabs-mode nil)
+;; set default tab char's display width to 4 spaces
+(setq-default tab-width 2)
+;; make tab key do indent first then completion.
+(setq-default tab-always-indent 'complete)
+
 ;;; More reliable inter-window border
 ;; The native border "consumes" a pixel of the fringe on righter-most splits,
 ;; `window-divider' does not. Available since Emacs 25.1.
