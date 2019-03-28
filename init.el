@@ -109,7 +109,6 @@
  '(helm-ag-base-command "rg --no-heading --vimgrep --smart-case")
  '(helm-ag-insert-at-point (quote symbol))
  '(jit-lock-chunk-size 1000)
- '(magit-diff-section-arguments (quote ("--ignore-space-change" "--no-ext-diff")))
  '(safe-local-variable-values
    (quote
     ((elm-package-json . "elm.json")

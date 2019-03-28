@@ -18,3 +18,4 @@ prescient-save.el
 session.*
 .#recentf
 eshell/
+transient/
