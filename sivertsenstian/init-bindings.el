@@ -149,6 +149,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	(:desc "search" :prefix "s"
 	  :desc "resume"                :nv "r" #'helm-resume
 	  :desc "in project"            :nv "p" #'sivertsenstian/helm-project-do-ag
+    :desc "deadgrep"              :nv "d" #'deadgrep
 	  :desc "in current buffer"     :nv "b" #'helm-do-ag-this-file
 	  :desc "Swoop"                 :nv "s" #'sivertsenstian/helm-swoop-region-or-symbol
 	  :desc "Swoop project"         :nv "S" #'helm-multi-swoop-projectile

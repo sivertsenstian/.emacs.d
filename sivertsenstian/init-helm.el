@@ -115,5 +115,8 @@
   :commands helm-themes
   :straight t)
 
+(use-package deadgrep
+  :straight t)
+
 ;; export
 (provide 'init-helm)
