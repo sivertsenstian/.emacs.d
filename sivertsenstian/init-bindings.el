@@ -7,11 +7,11 @@
   :defer t
   :config
   (setq which-key-sort-order 'which-key-prefix-then-key-order
-	which-key-idle-delay 0.5
-	which-key-sort-uppercase-first nil
-	which-key-add-column-padding 1
-	which-key-max-display-columns nil
-	which-key-min-display-lines 5)
+        which-key-idle-delay 0.5
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-max-display-columns nil
+        which-key-min-display-lines 5)
   (which-key-setup-side-window-bottom)
   (which-key-mode))
 

@@ -82,6 +82,7 @@
 (use-package init-web)
 (use-package init-csharp)
 ;; (use-package init-rust)
+(use-package init-arduino)
 
 ;; init windows or linux stuff based on system-type
 (if (eq system-type 'windows-nt)

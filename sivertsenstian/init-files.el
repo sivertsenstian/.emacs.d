@@ -22,16 +22,14 @@
   (add-hook 'dired-initial-position-hook 'dired-k)
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
 
-(use-package dired-sidebar
-  :commands (dired-sidebar-toggle-sidebar)
-  :straight t
-  :config
-  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+(use-package treemacs
+  :straight t)
 
-  (setq dired-sidebar-subtree-line-prefix ">>")
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t))
+(use-package treemacs-evil
+  :straight t)
+
+(use-package treemacs-projectile
+  :straight t)
 
 ;; export
 (provide 'init-files)

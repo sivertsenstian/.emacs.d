@@ -145,7 +145,10 @@
   :defer t
   :straight t
   :config
-  (solaire-mode))
+  (solaire-mode)
+
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config))
 
 (use-package kaolin-themes
   :defer t
