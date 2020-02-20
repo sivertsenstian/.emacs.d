@@ -260,7 +260,28 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "New frame"              :n "N" #'make-frame
 	  :desc "Indent guides"          :n "i" #'highlight-indentation-mode
 	  :desc "Indent guides (column)" :n "I" #'highlight-indentation-current-column-mode
-	  :desc "Theme"                  :n "T" #'helm-themes))
+	  :desc "Theme"                  :n "T" #'helm-themes)
+
+  (:desc "eyebrowse" :prefix "`"
+	  :desc "next"                  :nv "j" #'eyebrowse-prev-window-config
+	  :desc "previous"              :nv "k" #'eyebrowse-next-window-config
+    :desc "create"                :nv "c" #'eyebrowse-create-window-config
+    :desc "last"                  :nv "TAB" #'eyebrowse-last-window-config
+    :desc "rename"                :nv "r"  #'eyebrowse-rename-window-config
+    :desc "switch"                :nv "RETURN" #'eyebrowse-switch-to-window-config
+    :desc "select config 0..9"    :n "0"   #'eyebrowse-switch-to-window-config-0
+    :n "1" #'eyebrowse-switch-to-window-config-1
+    :n "2" #'eyebrowse-switch-to-window-config-2
+    :n "3" #'eyebrowse-switch-to-window-config-3
+    :n "4" #'eyebrowse-switch-to-window-config-4
+    :n "5" #'eyebrowse-switch-to-window-config-5
+    :n "6" #'eyebrowse-switch-to-window-config-6
+    :n "7" #'eyebrowse-switch-to-window-config-7
+    :n "8" #'eyebrowse-switch-to-window-config-8
+    :n "9" #'eyebrowse-switch-to-window-config-9)
+  )
+
+	
 
 
       ;; --- Personal vim-esque bindings ------------------
