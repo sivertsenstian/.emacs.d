@@ -264,10 +264,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  :desc "Theme"                  :n "T" #'helm-themes)
 
   (:desc "eyebrowse" :prefix "`"
-	  :desc "next"                  :nv "j" #'eyebrowse-prev-window-config
-	  :desc "previous"              :nv "k" #'eyebrowse-next-window-config
+	  :desc "next"                  :nv "k" #'eyebrowse-prev-window-config
+	  :desc "previous"              :nv "j" #'eyebrowse-next-window-config
     :desc "create"                :nv "c" #'eyebrowse-create-window-config
-    :desc "last"                  :nv "TAB" #'eyebrowse-last-window-config
+    :desc "last"                  :nv "`" #'eyebrowse-last-window-config
     :desc "rename"                :nv "r"  #'eyebrowse-rename-window-config
     :desc "switch"                :nv "RETURN" #'eyebrowse-switch-to-window-config
     :desc "select config 0..9"    :n "0"   #'eyebrowse-switch-to-window-config-0

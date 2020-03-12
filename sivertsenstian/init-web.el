@@ -89,27 +89,27 @@
   (setq-default typescript-indent-level 4)
 
   (map! :map typescript-mode-map
-	(:localleader
-	  :desc "jump to definition"      :n  "j" #'tide-jump-to-definition
-	  :desc "jump to implementation " :n  "J" #'tide-jump-to-implementation
-	  :desc "jump back"               :n  "b" #'tide-jump-back
-	  :desc "documentation at point"  :n  "d" #'tide-documentation-at-point
-	  :desc "rename symbol"           :n  "r" #'tide-rename-symbol
-	  :desc "navigate to"             :n  "g" #'tide-nav
-	  :desc "organize imports"        :n  "i" #'tide-organize-imports
-	  :desc "references"              :n  "u" #'tide-references
-	  :desc "fix"                     :n  "f" #'tide-fix
-	  :desc "angular comp. template"  :n  "o" #'ng2-open-counterpart
-	  :desc "angular comp. template other" :n  "O" #'ng2-open-counterpart-other-window
+        (:localleader
+          :desc "jump to definition"      :n  "j" #'tide-jump-to-definition
+          :desc "jump to implementation " :n  "J" #'tide-jump-to-implementation
+          :desc "jump back"               :n  "b" #'tide-jump-back
+          :desc "documentation at point"  :n  "d" #'tide-documentation-at-point
+          :desc "rename symbol"           :n  "r" #'tide-rename-symbol
+          :desc "navigate to"             :n  "g" #'tide-nav
+          :desc "organize imports"        :n  "i" #'tide-organize-imports
+          :desc "references"              :n  "u" #'tide-references
+          :desc "fix"                     :n  "f" #'tide-fix
+          :desc "angular comp. template"  :n  "o" #'ng2-open-counterpart
+          :desc "angular comp. template other" :n  "O" #'ng2-open-counterpart-other-window
 
-	  ;; :desc "typescript jack-in"    :nv #'run-ts
-	  (:desc "repl" :prefix "c"
-	    :n "e" #'ts-send-last-sexp
-	    :n "E" #'ts-send-last-sexp-and-go
-	    :n "b" #'ts-send-last-buffer
-	    :n "B" #'ts-send-last-buffer-and-go
-	    :n "l" #'ts-load-file-and-go)
-	  )))
+          ;; :desc "typescript jack-in"    :nv #'run-ts
+          (:desc "repl" :prefix "c"
+            :n "e" #'ts-send-last-sexp
+            :n "E" #'ts-send-last-sexp-and-go
+            :n "b" #'ts-send-last-buffer
+            :n "B" #'ts-send-last-buffer-and-go
+            :n "l" #'ts-load-file-and-go)
+          )))
 	  
 
 (use-package ts-comint
