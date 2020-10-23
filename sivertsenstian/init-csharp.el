@@ -11,7 +11,7 @@
 
 (use-package omnisharp
   :straight t
-  :after (csharp-mode company)  
+  :after (:all csharp-mode company)
   :hook (csharp-mode . omnisharp-mode)
   :preface
   (setq omnisharp-auto-complete-want-documentation nil
