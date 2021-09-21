@@ -45,13 +45,19 @@
   :config
   (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
-(use-package flycheck-pos-tip
+;; (use-package flycheck-pos-tip
+;;   :after flycheck
+;;   :straight t
+;;   :config
+;;   (setq flycheck-pos-tip-timeout 10
+;;         flycheck-display-errors-delay 0.5)
+;;   (flycheck-pos-tip-mode))
+
+(use-package flycheck-popup-tip
   :after flycheck
   :straight t
   :config
-  (setq flycheck-pos-tip-timeout 10
-        flycheck-display-errors-delay 0.5)
-  (flycheck-pos-tip-mode))
+  (flycheck-popup-tip-mode))
 
 (use-package browse-kill-ring
   :commands (browse-kill-ring

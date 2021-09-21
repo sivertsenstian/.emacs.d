@@ -57,13 +57,18 @@
   (add-hook 'web-mode-hook #'setup-tide-mode)
 
   (setq-default flycheck-disabled-checker 'javascript-jshint)
-  (flycheck-add-next-checker
-   'javascript-eslint
-   'javascript-tide
-   'append)
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+  ;; (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+  ;; (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+  )
 
 (use-package add-node-modules-path
   :straight t)
@@ -85,8 +90,8 @@
   :mode ("\\.ts$" "\\.js$")
   :straight t
   :config
-  (setq js2-basic-offset 4) 
-  (setq-default typescript-indent-level 4)
+  (setq js2-basic-offset 2) 
+  (setq-default typescript-indent-level 2)
 
   (map! :map typescript-mode-map
         (:localleader
@@ -151,7 +156,9 @@
                 (setup-tide-mode))))
 
   ;; enable typescript-tslint checker
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;; (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+  ;; (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 
   (map! :map web-mode-map
 	(:localleader

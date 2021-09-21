@@ -2,6 +2,11 @@
 ;;----------------------------------------------------------------------------
 ;; SIVERTSENSTIAN - EVIL MODULE INIT AND CONFIGURATION
 ;;----------------------------------------------------------------------------
+(use-package undo-tree
+  :straight t
+  :config
+  (global-undo-tree-mode))
+
 (use-package evil
  :after evil-leader
  :straight t
@@ -9,7 +14,9 @@
  (evil-mode 1)
  (add-to-list 'evil-insert-state-modes 'shell-mode)
  (add-to-list 'evil-insert-state-modes 'dashboard-mode)
- (add-to-list 'evil-insert-state-modes 'git-timemachine-mode))
+ (add-to-list 'evil-insert-state-modes 'git-timemachine-mode)
+ :config
+ (evil-set-undo-system 'undo-tree))
 
 (use-package evil-leader
  :straight t

@@ -64,7 +64,7 @@
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-line-column 120) ;; limit line length
 (setq whitespace-style '(face lines-tail))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 

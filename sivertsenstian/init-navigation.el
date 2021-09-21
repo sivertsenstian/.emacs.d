@@ -20,8 +20,7 @@
 	     smart-jump-find-references-with-rg)
   :straight t
   :config
-  (smart-jump-setup-default-registers)
-  (smart-jump-register :modes '(clojure-mode)))
+  (smart-jump-setup-default-registers))
 
 (use-package dumb-jump
   :commands (dumb-jump-go
